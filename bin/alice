@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+# Script variables
+command=""
+verbose=0
+
+# Global constants
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+TMP="$DIR/../.tmp"
+PROTODIR="$DIR/../proto/"
+
+# Show help
+show_help() {
+cat << EOF
+Usage: ${0##*/} [-vh] [command]
+
+    -v                      Verbose mode
+    -h                      Show this output
+
+Commands:
+
+    update-proto            Update protocol buffer files
+EOF
+}
+
+# Download protobuf files
+update_proto() {
+    if [ ! -e $TMP ]; then
+        mkdir $TMP
+    fi
+
+    cd $TMP
+
+    if [ ! -e ".git" ]; then
+        git init
+        git remote add -f origin "https://github.com/SteamRE/SteamKit.git"
+        git config core.sparsecheckout true
+
+        echo "Resources/Protobufs/dota/" >> .git/info/sparse-checkout
+        echo "Resources/Protobufs/dota_s2/" >> .git/info/sparse-checkout
+    fi
+
+    git pull origin master
+    cp -pa Resources/Protobufs/dota/* "$PROTODIR/Source1"
+    cp -pa Resources/Protobufs/dota_s2/client/* "$PROTODIR/Source2"
+}
+
+# Get all options
+while getopts "hve:" opt; do
+    case "$opt" in
+        h)
+            show_help
+            exit 0
+            ;;
+        v)  verbose=1
+            ;;
+        '?')
+            show_help >&2
+            exit 1
+            ;;
+    esac
+done
+shift "$((OPTIND-1))" # Shift off the options and optional --.
+
+# Get command
+if [ $# == 0 ]; then
+    echo "Missing command"
+    exit 1
+else
+    command=$1
+fi
+
+case "$command" in
+    update-proto)
+        update_proto
+        ;;
+    *)
+        echo "Unkown command: $command"
+        exit 1
+        ;;
+esac
