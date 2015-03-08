@@ -1,0 +1,3 @@
+[submodule "vendors/catch"]
+	path = vendors/catch
+	url = https://github.com/philsquared/Catch
