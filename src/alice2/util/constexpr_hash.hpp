@@ -32,7 +32,7 @@ namespace alice {
         static constexpr unsigned long long constexpr_hash_prime = 1099511628211ULL;
 
         /** Hashes a single character at compile time */
-        constexpr unsigned long long hash_single(char c, const char* remain, unsigned long long value) {
+        constexpr unsigned long long hash_single( char c, const char* remain, unsigned long long value ) {
             return c == 0
                 ? value
                 : hash_single(remain[0], remain + 1, (value ^ c) * constexpr_hash_prime);
@@ -58,8 +58,8 @@ namespace alice {
     }
 
     /** User defined literal to allow "str"_chash-style invocation */
-    constexpr long long operator"" _chash( const char* str, size_t n ) {
-        return constexpr_hash( str );
+    constexpr unsigned long long operator"" _chash( const char* str, size_t n ) {
+        return constexpr_hash(str);
     }
 }
 
