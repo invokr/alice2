@@ -1,5 +1,5 @@
 /**
- * @file noncopyable.hpp
+ * @file noncopyable.cpp
  * @author Robin Dietrich <me (at) invokr (dot) org>
  * @version 1.0
  *
@@ -20,9 +20,6 @@
  *    limitations under the License.
  */
 
-#ifndef _UTIL_NONCOPYABLE_TEST_HPP_
-#define _UTIL_NONCOPYABLE_TEST_HPP_
-
 #include <type_traits>
 #include <catch.hpp>
 #include "../../../src/alice2/util/noncopyable.hpp"
@@ -35,7 +32,5 @@ TEST_CASE( "noncopyable", "[util/noncopyable.hpp]" ) {
     REQUIRE( std::is_copy_constructible<test>::value == false );
     REQUIRE( std::is_trivially_copy_constructible<test>::value == false );
     REQUIRE( std::is_copy_assignable<test>::value == false );
-    REQUIRE( std::is_trivially_copy_assignable<test>::value == false );
+    REQUIRE( std::is_trivially_copy_assignable<test>::value == false ); 
 }
-
-#endif /* _UTIL_NONCOPYABLE_TEST_HPP_ */
