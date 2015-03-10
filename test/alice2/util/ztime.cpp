@@ -1,5 +1,5 @@
 /**
- * @file ztime.hpp
+ * @file ztime.cpp
  * @author Robin Dietrich <me (at) invokr (dot) org>
  * @version 1.0
  *
@@ -19,9 +19,6 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
-#ifndef _UTIL_ZTIME_TEST_HPP_
-#define _UTIL_ZTIME_TEST_HPP_
 
 #include <chrono>
 #include <thread>
@@ -43,5 +40,3 @@ TEST_CASE( "ztime nanosecond resolution", "[util/ztime.hpp]" ) {
     REQUIRE( ztime1 != ztime2 );
     REQUIRE( ztime1 != 0 );
 }
-
-#endif /* _UTIL_ZTIME_TEST_HPP_ */
