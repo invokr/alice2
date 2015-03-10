@@ -26,7 +26,7 @@
 
 using namespace alice;
 
-ALICE_CREATE_EXCEPTION(MyException, "MyMessage"); 
+ALICE_CREATE_EXCEPTION(MyException, "MyMessage");
 
 TEST_CASE( "Exception handling", "[util/exception.hpp]" ) {
     // Check the base object
@@ -36,19 +36,19 @@ TEST_CASE( "Exception handling", "[util/exception.hpp]" ) {
 
     // Check the exception without any parameters
     MyException e2;
-    REQUIRE(strcmp(e2.what(), "MyMessage") == 0);
+    REQUIRE(strcmp(e2.what(), "MyMessage: ") == 0);
 
     // Throw and catch an exception and see if the data matches
     try {
         throw MyException();
     } catch (MyException &e3) {
-        REQUIRE(strcmp(e3.what(), "MyMessage") == 0);
+        REQUIRE(strcmp(e3.what(), "MyMessage: ") == 0);
     }
 
     // Add some data and throw
     try {
         ALICE_THROW(MyException, "Anything" << "Goes" << 123);
     } catch (MyException &e4) {
-        REQUIRE(strcmp(e4.what(), "MyMessageAnythingGoes123") == 0);
+        REQUIRE(strcmp(e4.what(), "MyMessage: AnythingGoes123") == 0);
     }
 }

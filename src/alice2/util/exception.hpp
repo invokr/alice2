@@ -27,11 +27,15 @@
 #include <sstream>
 #include <memory>
 #include <utility>
+#include <iostream>
 
+/// Creates a new exception called __name whos what()
+/// method returns __msg by default.
 #define ALICE_CREATE_EXCEPTION(__name, __msg)   \
 struct __name : virtual alice::exception {      \
     virtual const char* what() const throw() {  \
         msg = std::string(__msg);               \
+        msg.append(": ");                       \
         msg.append(this->data());               \
         return msg.c_str();                     \
     }                                           \
@@ -39,12 +43,25 @@ private:                                        \
     mutable std::string msg;                    \
 };
 
+/// Throws an exception created with ALICE_CREATE_EXCEPTION.
 #define ALICE_THROW(__exception, __data) \
 do {                                     \
     __exception e;                       \
     e << __data;                         \
     throw e;                             \
 } while(0)
+
+// Conditional block when we want to disable exceptions
+#ifdef ALICE_NO_EXCEPTIONS
+#undef ALICE_THROW
+#define ALICE_THROW(__exception, __data)                                \
+    do {                                                                \
+        std::cout << "Exception " << #__exception << "thrown in line "  \
+                  << __FILE__ << " : " << __LINE__ << std::endl;        \
+        std::cout << __data << std::endl;                               \
+        exit(1);                                                        \
+    } while(0)
+#endif /* ALICE_NO_EXCEPTIONS */
 
 namespace alice {
     /** Exception class that forwards parameters to the handler */
