@@ -1,5 +1,5 @@
 /**
- * @file constexpr_hash.hpp
+ * @file constexpr_hash.cpp
  * @author Robin Dietrich <me (at) invokr (dot) org>
  * @version 1.0
  *
@@ -20,9 +20,6 @@
  *    limitations under the License.
  */
 
-#ifndef _UTIL_CONSTEXPR_HASH_TEST_HPP_
-#define _UTIL_CONSTEXPR_HASH_TEST_HPP_
-
 #include <cstring>
 #include <catch.hpp>
 
@@ -40,5 +37,3 @@ TEST_CASE( "constexpr_hash equality", "[util/constexpr_hash.hpp]" ) {
     REQUIRE( hash2 == hash3 );
     REQUIRE( hash1 != 0 );
 }
-
-#endif /* _UTIL_CONSTEXPR_HASH_TEST_HPP_ */
