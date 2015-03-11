@@ -65,6 +65,7 @@ shift "$((OPTIND-1))" # Shift off the options and optional --.
 # Get command
 if [ $# == 0 ]; then
     echo "Missing command"
+    show_help
     exit 1
 else
     command=$1
@@ -76,6 +77,7 @@ case "$command" in
         ;;
     *)
         echo "Unkown command: $command"
+        show_help
         exit 1
         ;;
 esac
