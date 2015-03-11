@@ -30,3 +30,6 @@
 # Temp files
 .tmp
 build
+
+# Placeholder directories
+src/alice2/proto
