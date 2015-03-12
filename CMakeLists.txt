@@ -17,6 +17,12 @@ MESSAGE ( STATUS "Target system is " ${CMAKE_SYSTEM} " with processor " ${CMAKE_
 MESSAGE ( STATUS "Compiler identified as " ${CMAKE_CXX_COMPILER_ID} )
 
 #------------------------------------------------------------
+# Compiler Setup
+#------------------------------------------------------------
+
+SET ( CMAKE_CXX_FLAGS "-O3 --std=c++11 -fPIC -Wall" )
+
+#------------------------------------------------------------
 # Include and configure all libraries
 #------------------------------------------------------------
 
@@ -75,3 +81,17 @@ SET_TARGET_PROPERTIES(alice_proto1_static PROPERTIES OUTPUT_NAME alice_proto1)
 ADD_LIBRARY( alice_proto2 SHARED ${PROTO_SOURCES_2} )
 ADD_LIBRARY( alice_proto2_static STATIC ${PROTO_SOURCES_2} )
 SET_TARGET_PROPERTIES(alice_proto2_static PROPERTIES OUTPUT_NAME alice_proto2)
+
+#------------------------------------------------------------
+# Build unit test
+#------------------------------------------------------------
+
+add_executable ( alice_test
+    ${CMAKE_SOURCE_DIR}/test/test.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/constexpr_hash.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/delegate.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/exception.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/noncopyable.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/varint.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/ztime.cpp
+)
