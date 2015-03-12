@@ -27,7 +27,6 @@
 #include <sstream>
 #include <memory>
 #include <utility>
-#include <iostream>
 
 /// Creates a new exception called __name whos what()
 /// method returns __msg by default.
@@ -54,6 +53,7 @@ do {                                     \
 // Conditional block when we want to disable exceptions
 #ifdef ALICE_NO_EXCEPTIONS
 #undef ALICE_THROW
+#include <iostream>
 #define ALICE_THROW(__exception, __data)                                \
     do {                                                                \
         std::cout << "Exception " << #__exception << "thrown in line "  \
