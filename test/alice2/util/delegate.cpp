@@ -28,27 +28,40 @@
 
 using namespace alice;
 
-class mTest1 {
-public:
-    mTest1() {
-
-    }
-    mTest1(const mTest1&& m) {
-        // Include this to make sure perfect forwarding works
-        REQUIRE("Delegate Perfect Forwarding" == 0);
-    }
-
-    mTest1(mTest1&&) = default;
-
-    int add(int x, int y, mTest1 m) {
-        return x + y;
-    }
-};
-
+// Normal test
 TEST_CASE( "delegate", "[util/delegate.hpp]" ) {
-    mTest1 t1;
-    mTest1 t2;
-    auto d = delegate<int (int, int, mTest1)>::fromMember<mTest1, &mTest1::add>(&t1);
+    class mTest1 {
+    public:
+        int add(int x, int y) {
+            return x + y;
+        }
+    };
 
-    REQUIRE(d(1, 2, std::move(t2)) == 3);
+    mTest1 t1;
+    auto d = delegate<int (int, int)>::fromMember<mTest1, &mTest1::add>(&t1);
+    REQUIRE(d(1, 2) == 3);
+}
+
+// See if move constructor is prefered over the copy constructor when moving
+TEST_CASE( "delegate_perfect_forwarding", "[util/delegate.hpp]" ) {
+    class mTest2 {
+    public:
+        mTest2() {}
+
+        mTest2(const mTest2& m) {
+            #pragma unused(m)
+            REQUIRE("Perfect forwarding for delegates not working" == 0);
+        }
+
+        mTest2(mTest2&&) = default;
+
+        int add(int x, int y, mTest2 m) {
+            #pragma unused(m)
+            return x + y;
+        }
+    };
+
+    mTest2 t2;
+    auto d = delegate<int (int, int, mTest2)>::fromMember<mTest2, &mTest2::add>(&t2);
+    REQUIRE(d(4, 5, std::move(t2)) == 9);
 }
