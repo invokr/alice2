@@ -38,7 +38,12 @@ IF ( UNIX )
     INCLUDE_DIRECTORIES( ${SNAPPY_INCLUDE_DIR} )
 ENDIF ( )
 
-include_directories( ${CMAKE_SOURCE_DIR}/src ${CMAKE_SOURCE_DIR}/vendors/catch/single_include )
+INCLUDE_DIRECTORIES(
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/vendors/catch/single_include
+    ${CMAKE_SOURCE_DIR}/vendors/sparsehash/src/
+)
+
 
 #------------------------------------------------------------
 # Generate protobuffer files and target
@@ -86,7 +91,7 @@ SET_TARGET_PROPERTIES(alice_proto2_static PROPERTIES OUTPUT_NAME alice_proto2)
 # Build unit test
 #------------------------------------------------------------
 
-add_executable ( alice_test
+ADD_EXECUTABLE ( alice_test
     ${CMAKE_SOURCE_DIR}/test/test.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/constexpr_hash.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/delegate.cpp
