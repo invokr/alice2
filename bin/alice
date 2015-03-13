@@ -41,8 +41,21 @@ update_proto() {
     fi
 
     git pull origin master
-    cp -pa Resources/Protobufs/dota/* "$PROTODIR/Source1"
-    cp -pa Resources/Protobufs/dota_s2/client/* "$PROTODIR/Source2"
+    cp -pa Resources/Protobufs/dota/*.proto "$PROTODIR/Source1"
+    for f in "$PROTODIR/Source1/"*.proto; do
+        echo 'package alice.ps1;'$'\n'"$(cat $f)" > $f
+
+        # To make this work under *bsd and linux, we need to use a tmp file
+        sed -E "s/^(.[	]{0,}[repeated|optional|required]{1,}.\.)/\1alice\.ps1\./g" $f > $f.tmp
+        rm $f && mv $f.tmp $f
+    done
+
+    cp -pa Resources/Protobufs/dota_s2/client/*.proto "$PROTODIR/Source2"
+    for f in "$PROTODIR/Source2/"*.proto; do
+        echo 'package alice.ps2;'$'\n'"$(cat $f)" > $f
+        sed -E "s/^(.[	]{0,}[repeated|optional|required]{1,}.\.)/\1alice\.ps2\./g" $f > $f.tmp
+        rm $f && mv $f.tmp $f
+    done
 }
 
 # Get all options
