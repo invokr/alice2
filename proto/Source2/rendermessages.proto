@@ -1,3 +1,4 @@
+package alice.ps2;
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
@@ -63,10 +64,10 @@ message CRadiusData {
 		optional double vertical = 2;
 	}
 
-	optional .CRadiusData.CCornerRadius top_left = 1;
-	optional .CRadiusData.CCornerRadius top_right = 2;
-	optional .CRadiusData.CCornerRadius bottom_right = 3;
-	optional .CRadiusData.CCornerRadius bottom_left = 4;
+	optional .alice.ps2.CRadiusData.CCornerRadius top_left = 1;
+	optional .alice.ps2.CRadiusData.CCornerRadius top_right = 2;
+	optional .alice.ps2.CRadiusData.CCornerRadius bottom_right = 3;
+	optional .alice.ps2.CRadiusData.CCornerRadius bottom_left = 4;
 }
 
 message CBorderData {
@@ -76,10 +77,10 @@ message CBorderData {
 		optional uint32 color = 3;
 	}
 
-	optional .CBorderData.CBorderSide top = 1;
-	optional .CBorderData.CBorderSide right = 2;
-	optional .CBorderData.CBorderSide bottom = 3;
-	optional .CBorderData.CBorderSide left = 4;
+	optional .alice.ps2.CBorderData.CBorderSide top = 1;
+	optional .alice.ps2.CBorderData.CBorderSide right = 2;
+	optional .alice.ps2.CBorderData.CBorderSide bottom = 3;
+	optional .alice.ps2.CBorderData.CBorderSide left = 4;
 }
 
 message CBorderImageData {
@@ -94,10 +95,10 @@ message CBorderImageData {
 	optional double right_slice_pixels = 4;
 	optional double bottom_slice_pixels = 5;
 	optional double left_slice_pixels = 6;
-	optional .CBorderImageData.CBorderWidthData top_width = 7;
-	optional .CBorderImageData.CBorderWidthData right_width = 8;
-	optional .CBorderImageData.CBorderWidthData bottom_width = 9;
-	optional .CBorderImageData.CBorderWidthData left_width = 10;
+	optional .alice.ps2.CBorderImageData.CBorderWidthData top_width = 7;
+	optional .alice.ps2.CBorderImageData.CBorderWidthData right_width = 8;
+	optional .alice.ps2.CBorderImageData.CBorderWidthData bottom_width = 9;
+	optional .alice.ps2.CBorderImageData.CBorderWidthData left_width = 10;
 	optional double top_outset_pixels = 11;
 	optional double right_outset_pixels = 12;
 	optional double bottom_outset_pixels = 13;
@@ -155,10 +156,10 @@ message CMsgPushCompositingLayer {
 	optional double desaturation = 35;
 	optional uint32 opacity_mask_texture_id = 36;
 	optional double opacity_mask_opacity = 37;
-	optional .CBorderData border = 38;
-	optional .CBorderImageData border_image = 39;
-	optional .CRadiusData border_radius = 40;
-	optional .CBoxShadowData box_shadow = 41;
+	optional .alice.ps2.CBorderData border = 38;
+	optional .alice.ps2.CBorderImageData border_image = 39;
+	optional .alice.ps2.CRadiusData border_radius = 40;
+	optional .alice.ps2.CBoxShadowData box_shadow = 41;
 	optional double gaussianblur_passes = 42;
 	optional double gaussianblur_stddevhor = 43;
 	optional double gaussianblur_stddevver = 44;
@@ -197,7 +198,7 @@ message CMsgAnimationData {
 	optional float cubic_bezier_3 = 8;
 	optional uint32 direction = 9;
 	optional float iteration = 10;
-	repeated .CMsgAnimationFrameData frames = 11;
+	repeated .alice.ps2.CMsgAnimationFrameData frames = 11;
 }
 
 message CMsgAnimationFrameData {
@@ -213,17 +214,17 @@ message CMsgAnimationFrameData {
 
 message CMsgPointWithTransition {
 	message AnimationFrameData {
-		optional .CMsgPoint data = 1;
+		optional .alice.ps2.CMsgPoint data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgPointWithTransition.AnimationFrameData animation_frame_data = 1012;
+		optional .alice.ps2.CMsgPointWithTransition.AnimationFrameData animation_frame_data = 1012;
 	}
 
-	optional .CMsgPoint base = 1;
-	optional .CMsgPoint transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgPoint base = 1;
+	optional .alice.ps2.CMsgPoint transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgColor {
@@ -232,13 +233,13 @@ message CMsgColor {
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgColor.AnimationFrameData animation_frame_data = 1001;
+		optional .alice.ps2.CMsgColor.AnimationFrameData animation_frame_data = 1001;
 	}
 
 	optional uint32 base = 1;
 	optional uint32 transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgColorStop {
@@ -247,38 +248,38 @@ message CMsgColorStop {
 }
 
 message CMsgLinearGradient {
-	optional .CMsgPoint start_position = 1;
-	optional .CMsgPoint end_position = 2;
-	repeated .CMsgColorStop color_stop = 3;
+	optional .alice.ps2.CMsgPoint start_position = 1;
+	optional .alice.ps2.CMsgPoint end_position = 2;
+	repeated .alice.ps2.CMsgColorStop color_stop = 3;
 }
 
 message CMsgRadialGradient {
-	optional .CMsgPoint center_position = 1;
-	optional .CMsgPoint offset_distance = 2;
-	optional .CMsgPoint radii = 3;
-	repeated .CMsgColorStop color_stop = 4;
+	optional .alice.ps2.CMsgPoint center_position = 1;
+	optional .alice.ps2.CMsgPoint offset_distance = 2;
+	optional .alice.ps2.CMsgPoint radii = 3;
+	repeated .alice.ps2.CMsgColorStop color_stop = 4;
 }
 
 message CMsgParticle {
-	optional .CMsgPoint particle_position = 1;
+	optional .alice.ps2.CMsgPoint particle_position = 1;
 	optional float particle_size = 2;
 	optional float particle_sharpness = 3;
 	optional uint32 color_rgba = 4;
 }
 
 message CMsgParticleSystem {
-	optional .CMsgPoint base_position = 1;
-	optional .CMsgPoint base_position_variance = 2;
+	optional .alice.ps2.CMsgPoint base_position = 1;
+	optional .alice.ps2.CMsgPoint base_position_variance = 2;
 	optional double particle_size = 3;
 	optional double particle_size_variance = 4;
 	optional double particles_per_second = 5;
 	optional double particles_per_second_variance = 6;
 	optional double particle_lifespan_seconds = 7;
 	optional double particle_lifespan_seconds_variance = 8;
-	optional .CMsgPoint particle_initial_velocity = 9;
-	optional .CMsgPoint particle_initial_velocity_variance = 10;
-	optional .CMsgPoint gravity_acceleration = 11;
-	optional .CMsgPoint gravity_acceleration_particle_variance = 12;
+	optional .alice.ps2.CMsgPoint particle_initial_velocity = 9;
+	optional .alice.ps2.CMsgPoint particle_initial_velocity_variance = 10;
+	optional .alice.ps2.CMsgPoint gravity_acceleration = 11;
+	optional .alice.ps2.CMsgPoint gravity_acceleration_particle_variance = 12;
 	optional uint32 color_start_rgba = 13;
 	optional uint32 color_start_rgba_variance = 14;
 	optional uint32 color_end_rgba = 15;
@@ -289,55 +290,55 @@ message CMsgParticleSystem {
 	optional float particle_sharpness_variance = 20;
 	optional float particle_flicker = 21;
 	optional float particle_flicker_variance = 22;
-	optional .CMsgPoint particle_velocity_min = 23;
-	optional .CMsgPoint particle_velocity_max = 24;
-	repeated .CMsgParticle particles = 50;
+	optional .alice.ps2.CMsgPoint particle_velocity_min = 23;
+	optional .alice.ps2.CMsgPoint particle_velocity_max = 24;
+	repeated .alice.ps2.CMsgParticle particles = 50;
 }
 
 message CMsgFillBrush {
 	optional double opacity = 1;
 	optional uint32 color_rgba = 2;
-	optional .CMsgLinearGradient linear_gradient = 3;
-	optional .CMsgRadialGradient radial_gradient = 4;
-	optional .CMsgParticleSystem particle_system = 5;
+	optional .alice.ps2.CMsgLinearGradient linear_gradient = 3;
+	optional .alice.ps2.CMsgRadialGradient radial_gradient = 4;
+	optional .alice.ps2.CMsgParticleSystem particle_system = 5;
 }
 
 message CMsgFillBrushCollection {
 	message AnimationFrameData {
-		repeated .CMsgFillBrush data = 1;
+		repeated .alice.ps2.CMsgFillBrush data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgFillBrushCollection.AnimationFrameData animation_frame_data = 1007;
+		optional .alice.ps2.CMsgFillBrushCollection.AnimationFrameData animation_frame_data = 1007;
 	}
 
-	repeated .CMsgFillBrush base = 1;
-	repeated .CMsgFillBrush transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	repeated .alice.ps2.CMsgFillBrush base = 1;
+	repeated .alice.ps2.CMsgFillBrush transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgRenderFillBrushCollection {
-	repeated .CMsgFillBrush fill_brush = 1;
+	repeated .alice.ps2.CMsgFillBrush fill_brush = 1;
 }
 
 message CMsgPanelPosition {
 	message AnimationFrameData {
-		optional .CMsgPoint data = 1;
+		optional .alice.ps2.CMsgPoint data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgPanelPosition.AnimationFrameData animation_frame_data = 1011;
+		optional .alice.ps2.CMsgPanelPosition.AnimationFrameData animation_frame_data = 1011;
 	}
 
-	optional .CMsgPoint base = 1;
-	optional .CMsgPoint transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
-	optional .CMsgPoint scroll_offset = 5;
-	optional .CMsgPoint scroll_offset_target = 6;
-	optional .CMsgTransitionData scroll_transition_x = 7;
-	optional .CMsgTransitionData scroll_transition_y = 8;
+	optional .alice.ps2.CMsgPoint base = 1;
+	optional .alice.ps2.CMsgPoint transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgPoint scroll_offset = 5;
+	optional .alice.ps2.CMsgPoint scroll_offset_target = 6;
+	optional .alice.ps2.CMsgTransitionData scroll_transition_x = 7;
+	optional .alice.ps2.CMsgTransitionData scroll_transition_y = 8;
 }
 
 message CMsgOpacity {
@@ -346,13 +347,13 @@ message CMsgOpacity {
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgOpacity.AnimationFrameData animation_frame_data = 1004;
+		optional .alice.ps2.CMsgOpacity.AnimationFrameData animation_frame_data = 1004;
 	}
 
 	optional double base = 1;
 	optional double transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgRotate2D {
@@ -361,13 +362,13 @@ message CMsgRotate2D {
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgRotate2D.AnimationFrameData animation_frame_data = 1014;
+		optional .alice.ps2.CMsgRotate2D.AnimationFrameData animation_frame_data = 1014;
 	}
 
 	optional double base = 1;
 	optional double transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgOpacityMaskData {
@@ -377,17 +378,17 @@ message CMsgOpacityMaskData {
 
 message CMsgOpacityMask {
 	message AnimationFrameData {
-		optional .CMsgOpacityMaskData data = 1;
+		optional .alice.ps2.CMsgOpacityMaskData data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgOpacityMask.AnimationFrameData animation_frame_data = 1013;
+		optional .alice.ps2.CMsgOpacityMask.AnimationFrameData animation_frame_data = 1013;
 	}
 
-	optional .CMsgOpacityMaskData base = 1;
-	optional .CMsgOpacityMaskData transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgOpacityMaskData base = 1;
+	optional .alice.ps2.CMsgOpacityMaskData transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgDesaturation {
@@ -396,13 +397,13 @@ message CMsgDesaturation {
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgDesaturation.AnimationFrameData animation_frame_data = 1005;
+		optional .alice.ps2.CMsgDesaturation.AnimationFrameData animation_frame_data = 1005;
 	}
 
 	optional double base = 1;
 	optional double transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgGaussianValues {
@@ -413,17 +414,17 @@ message CMsgGaussianValues {
 
 message CMsgGaussianBlur {
 	message AnimationFrameData {
-		optional .CMsgGaussianValues data = 1;
+		optional .alice.ps2.CMsgGaussianValues data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgGaussianBlur.AnimationFrameData animation_frame_data = 1008;
+		optional .alice.ps2.CMsgGaussianBlur.AnimationFrameData animation_frame_data = 1008;
 	}
 
-	optional .CMsgGaussianValues base = 1;
-	optional .CMsgGaussianValues transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgGaussianValues base = 1;
+	optional .alice.ps2.CMsgGaussianValues transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsg3DTransformPerspective {
@@ -432,28 +433,28 @@ message CMsg3DTransformPerspective {
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsg3DTransformPerspective.AnimationFrameData animation_frame_data = 1003;
+		optional .alice.ps2.CMsg3DTransformPerspective.AnimationFrameData animation_frame_data = 1003;
 	}
 
 	optional double base = 1;
 	optional double transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsg3DTransformPerspectiveOrigin {
 	message AnimationFrameData {
-		optional .CMsgPoint data = 1;
+		optional .alice.ps2.CMsgPoint data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsg3DTransformPerspectiveOrigin.AnimationFrameData animation_frame_data = 1002;
+		optional .alice.ps2.CMsg3DTransformPerspectiveOrigin.AnimationFrameData animation_frame_data = 1002;
 	}
 
-	optional .CMsgPoint base = 1;
-	optional .CMsgPoint transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgPoint base = 1;
+	optional .alice.ps2.CMsgPoint transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgTransformOriginData {
@@ -466,83 +467,83 @@ message CMsgTransformOriginData {
 
 message CMsg3DTransformOrigin {
 	message AnimationFrameData {
-		optional .CMsgTransformOriginData data = 1;
+		optional .alice.ps2.CMsgTransformOriginData data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsg3DTransformOrigin.AnimationFrameData animation_frame_data = 1015;
+		optional .alice.ps2.CMsg3DTransformOrigin.AnimationFrameData animation_frame_data = 1015;
 	}
 
-	optional .CMsgTransformOriginData base = 1;
-	optional .CMsgTransformOriginData transition = 2;
-	optional .CMsgTransitionData transition_data = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgTransformOriginData base = 1;
+	optional .alice.ps2.CMsgTransformOriginData transition = 2;
+	optional .alice.ps2.CMsgTransitionData transition_data = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsg3DTransformMatrix {
 	message AnimationFrameData {
-		optional .CMsgMatrix4x4 data = 1;
+		optional .alice.ps2.CMsgMatrix4x4 data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsg3DTransformMatrix.AnimationFrameData animation_frame_data = 1000;
+		optional .alice.ps2.CMsg3DTransformMatrix.AnimationFrameData animation_frame_data = 1000;
 	}
 
-	optional .CMsgMatrix4x4 base = 1;
-	optional .CMsgTransitionData transition_data = 2;
-	optional .CMsgMatrix4x4 transition = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CMsgMatrix4x4 base = 1;
+	optional .alice.ps2.CMsgTransitionData transition_data = 2;
+	optional .alice.ps2.CMsgMatrix4x4 transition = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgBorderRadius {
 	message AnimationFrameData {
-		optional .CRadiusData data = 1;
+		optional .alice.ps2.CRadiusData data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgBorderRadius.AnimationFrameData animation_frame_data = 1006;
+		optional .alice.ps2.CMsgBorderRadius.AnimationFrameData animation_frame_data = 1006;
 	}
 
-	optional .CRadiusData base = 1;
-	optional .CMsgTransitionData transition_data = 2;
-	optional .CRadiusData transition = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CRadiusData base = 1;
+	optional .alice.ps2.CMsgTransitionData transition_data = 2;
+	optional .alice.ps2.CRadiusData transition = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgBorder {
 	message AnimationFrameData {
-		optional .CBorderData data = 1;
+		optional .alice.ps2.CBorderData data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgBorder.AnimationFrameData animation_frame_data = 1009;
+		optional .alice.ps2.CMsgBorder.AnimationFrameData animation_frame_data = 1009;
 	}
 
-	optional .CBorderData base = 1;
-	optional .CMsgTransitionData transition_data = 2;
-	optional .CBorderData transition = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CBorderData base = 1;
+	optional .alice.ps2.CMsgTransitionData transition_data = 2;
+	optional .alice.ps2.CBorderData transition = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgBoxShadow {
 	message AnimationFrameData {
-		optional .CBoxShadowData data = 1;
+		optional .alice.ps2.CBoxShadowData data = 1;
 	}
 
 	extend .CMsgAnimationFrameData {
-		optional .CMsgBoxShadow.AnimationFrameData animation_frame_data = 1010;
+		optional .alice.ps2.CMsgBoxShadow.AnimationFrameData animation_frame_data = 1010;
 	}
 
-	optional .CBoxShadowData base = 1;
-	optional .CMsgTransitionData transition_data = 2;
-	optional .CBoxShadowData transition = 3;
-	repeated .CMsgAnimationData animations = 4;
+	optional .alice.ps2.CBoxShadowData base = 1;
+	optional .alice.ps2.CMsgTransitionData transition_data = 2;
+	optional .alice.ps2.CBoxShadowData transition = 3;
+	repeated .alice.ps2.CMsgAnimationData animations = 4;
 }
 
 message CMsgPushClipLayer {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
-	optional .CRadiusData border_radius = 3;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CRadiusData border_radius = 3;
 }
 
 message CMsgPopClipLayer {
@@ -554,22 +555,22 @@ message CMsgPushAAndTContext {
 	optional double height = 4;
 	optional bool chilren_have_transforms = 5;
 	optional float zindex = 6;
-	optional .CMsgPanelPosition panel_position = 7;
-	optional .CMsg3DTransformMatrix transform_matrix = 8;
-	optional .CMsg3DTransformOrigin transform_origin = 9;
-	optional .CMsg3DTransformPerspective transform_perspective = 10;
-	optional .CMsg3DTransformPerspectiveOrigin transform_perspective_origin = 11;
-	optional .CMsgOpacity opacity = 12;
-	optional .CMsgColor wash_color = 13;
-	optional .CMsgDesaturation desaturation = 14;
-	optional .CMsgOpacityMask opacity_mask = 15;
-	optional .CMsgBorderRadius border_radius = 16;
-	optional .CMsgGaussianBlur gaussian_blur = 17;
-	optional .CMsgBorder border = 18;
-	optional .CBorderImageData border_image = 19;
-	optional .CMsgBoxShadow box_shadow = 20;
-	optional .CMsgPointWithTransition scale_2d_centered = 21;
-	optional .CMsgRotate2D rotate_2d_centered = 22;
+	optional .alice.ps2.CMsgPanelPosition panel_position = 7;
+	optional .alice.ps2.CMsg3DTransformMatrix transform_matrix = 8;
+	optional .alice.ps2.CMsg3DTransformOrigin transform_origin = 9;
+	optional .alice.ps2.CMsg3DTransformPerspective transform_perspective = 10;
+	optional .alice.ps2.CMsg3DTransformPerspectiveOrigin transform_perspective_origin = 11;
+	optional .alice.ps2.CMsgOpacity opacity = 12;
+	optional .alice.ps2.CMsgColor wash_color = 13;
+	optional .alice.ps2.CMsgDesaturation desaturation = 14;
+	optional .alice.ps2.CMsgOpacityMask opacity_mask = 15;
+	optional .alice.ps2.CMsgBorderRadius border_radius = 16;
+	optional .alice.ps2.CMsgGaussianBlur gaussian_blur = 17;
+	optional .alice.ps2.CMsgBorder border = 18;
+	optional .alice.ps2.CBorderImageData border_image = 19;
+	optional .alice.ps2.CMsgBoxShadow box_shadow = 20;
+	optional .alice.ps2.CMsgPointWithTransition scale_2d_centered = 21;
+	optional .alice.ps2.CMsgRotate2D rotate_2d_centered = 22;
 	optional bool suppress_clip_to_bounds = 23;
 	optional int32 needs_full_repaint = 24;
 	optional bool wants_hit_test = 25;
@@ -592,50 +593,50 @@ message CMsgEndPaintLast {
 }
 
 message CMsgDrawFilledRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
-	optional .CMsgFillBrushCollection fill_brush_collection = 3;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgFillBrushCollection fill_brush_collection = 3;
 	optional uint32 antialiasing = 4;
 }
 
 message CMsgRenderFilledRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
-	optional .CMsgRenderFillBrushCollection fill_brush_collection = 3;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgRenderFillBrushCollection fill_brush_collection = 3;
 	optional uint32 antialiasing = 4;
 }
 
 message CMsgDrawTexturedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
 	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
+	optional .alice.ps2.CMsgPoint texture_top_left = 4;
+	optional .alice.ps2.CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
 }
 
 message CMsgDrawDoubleBufferedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
 	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
+	optional .alice.ps2.CMsgPoint texture_top_left = 4;
+	optional .alice.ps2.CMsgPoint texture_bottom_right = 5;
 }
 
 message CMsgDrawYUV420DoubleBufferedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
 	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
+	optional .alice.ps2.CMsgPoint texture_top_left = 4;
+	optional .alice.ps2.CMsgPoint texture_bottom_right = 5;
 }
 
 message CMsgRenderTexturedRect {
-	optional .CMsgPoint top_left = 1;
-	optional .CMsgPoint bottom_right = 2;
+	optional .alice.ps2.CMsgPoint top_left = 1;
+	optional .alice.ps2.CMsgPoint bottom_right = 2;
 	optional uint32 texture_id = 3;
-	optional .CMsgPoint texture_top_left = 4;
-	optional .CMsgPoint texture_bottom_right = 5;
+	optional .alice.ps2.CMsgPoint texture_top_left = 4;
+	optional .alice.ps2.CMsgPoint texture_bottom_right = 5;
 	optional int32 texture_serial = 6 [default = 0];
 }
 
@@ -651,13 +652,13 @@ message CMsgTextFormat {
 	optional int32 font_style = 4 [default = -1];
 	optional bool underline = 5;
 	optional bool strikethrough = 6;
-	optional .CMsgFillBrushCollection fill_brush_collection = 7;
+	optional .alice.ps2.CMsgFillBrushCollection fill_brush_collection = 7;
 }
 
 message CMsgTextRangeFormat {
 	optional uint32 start_index = 1;
 	optional uint32 end_index = 2;
-	optional .CMsgTextFormat format = 3;
+	optional .alice.ps2.CMsgTextFormat format = 3;
 }
 
 message CMsgRenderTextFormat {
@@ -667,36 +668,35 @@ message CMsgRenderTextFormat {
 	optional int32 font_style = 4 [default = -1];
 	optional bool underline = 5;
 	optional bool strikethrough = 6;
-	optional .CMsgRenderFillBrushCollection fill_brush_collection = 7;
+	optional .alice.ps2.CMsgRenderFillBrushCollection fill_brush_collection = 7;
 }
 
 message CMsgRenderTextRangeFormat {
 	optional uint32 start_index = 1;
 	optional uint32 end_index = 2;
-	optional .CMsgRenderTextFormat format = 3;
+	optional .alice.ps2.CMsgRenderTextFormat format = 3;
 }
 
 message CMsgDrawTextRegion {
 	optional bytes wtext = 2;
-	optional .CMsgTextFormat default_format = 3;
+	optional .alice.ps2.CMsgTextFormat default_format = 3;
 	optional uint32 text_align = 4;
 	optional uint32 line_height = 5;
-	optional .CMsgPoint top_left = 6;
-	optional .CMsgPoint bottom_right = 7;
+	optional .alice.ps2.CMsgPoint top_left = 6;
+	optional .alice.ps2.CMsgPoint bottom_right = 7;
 	optional bool wrapping = 8;
 	optional bool ellipsis = 9;
-	repeated .CMsgTextRangeFormat range_formats = 10;
+	repeated .alice.ps2.CMsgTextRangeFormat range_formats = 10;
 }
 
 message CMsgRenderTextRegion {
 	optional bytes wtext = 2;
-	optional .CMsgRenderTextFormat default_format = 3;
+	optional .alice.ps2.CMsgRenderTextFormat default_format = 3;
 	optional uint32 text_align = 4;
 	optional uint32 line_height = 5;
-	optional .CMsgPoint top_left = 6;
-	optional .CMsgPoint bottom_right = 7;
+	optional .alice.ps2.CMsgPoint top_left = 6;
+	optional .alice.ps2.CMsgPoint bottom_right = 7;
 	optional bool wrapping = 8;
 	optional bool ellipsis = 9;
-	repeated .CMsgRenderTextRangeFormat range_formats = 10;
+	repeated .alice.ps2.CMsgRenderTextRangeFormat range_formats = 10;
 }
-

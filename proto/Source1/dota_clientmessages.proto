@@ -1,3 +1,4 @@
+package alice.ps1;
 import "dota_commonmessages.proto";
 
 option optimize_for = SPEED;
@@ -48,11 +49,11 @@ enum EDotaClientMessages {
 }
 
 message CDOTAClientMsg_MapPing {
-	optional .CDOTAMsg_LocationPing location_ping = 1;
+	optional .alice.ps1.CDOTAMsg_LocationPing location_ping = 1;
 }
 
 message CDOTAClientMsg_ItemAlert {
-	optional .CDOTAMsg_ItemAlert item_alert = 1;
+	optional .alice.ps1.CDOTAMsg_ItemAlert item_alert = 1;
 }
 
 message CDOTAClientMsg_EnemyItemAlert {
@@ -73,7 +74,7 @@ message CDOTAClientMsg_GlyphAlert {
 }
 
 message CDOTAClientMsg_MapLine {
-	optional .CDOTAMsg_MapLine mapline = 1;
+	optional .alice.ps1.CDOTAMsg_MapLine mapline = 1;
 }
 
 message CDOTAClientMsg_AspectRatio {
@@ -126,19 +127,19 @@ message CDOTAClientMsg_SwapAccept {
 }
 
 message CDOTAClientMsg_WorldLine {
-	optional .CDOTAMsg_WorldLine worldline = 1;
+	optional .alice.ps1.CDOTAMsg_WorldLine worldline = 1;
 }
 
 message CDOTAClientMsg_RequestGraphUpdate {
 }
 
 message CDOTAClientMsg_ChatWheel {
-	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional .alice.ps1.EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
 	optional uint32 param_hero_id = 2;
 }
 
 message CDOTAClientMsg_SendStatPopup {
-	optional .CDOTAMsg_SendStatPopup statpopup = 1;
+	optional .alice.ps1.CDOTAMsg_SendStatPopup statpopup = 1;
 }
 
 message CDOTAClientMsg_BeginLastHitChallenge {
@@ -152,7 +153,7 @@ message CDOTAClientMsg_UpdateQuickBuyItem {
 }
 
 message CDOTAClientMsg_UpdateQuickBuy {
-	repeated .CDOTAClientMsg_UpdateQuickBuyItem items = 1;
+	repeated .alice.ps1.CDOTAClientMsg_UpdateQuickBuyItem items = 1;
 }
 
 message CDOTAClientMsg_UpdateCoachListen {
@@ -160,7 +161,7 @@ message CDOTAClientMsg_UpdateCoachListen {
 }
 
 message CDOTAClientMsg_CoachHUDPing {
-	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
+	optional .alice.ps1.CDOTAMsg_CoachHUDPing hud_ping = 1;
 }
 
 message CDOTAClientMsg_RecordVote {
@@ -203,7 +204,7 @@ message CAdditionalEquipSlotClientMsg {
 }
 
 message CDOTAClientMsg_FreeInventory {
-	repeated .CAdditionalEquipSlotClientMsg equips = 1;
+	repeated .alice.ps1.CAdditionalEquipSlotClientMsg equips = 1;
 }
 
 message CDOTAClientMsg_HeroStatueLike {

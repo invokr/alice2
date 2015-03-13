@@ -1,3 +1,4 @@
+package alice.ps1;
 import "steammessages.proto";
 import "dota_gcmessages_common.proto";
 import "econ_gcmessages.proto";
@@ -70,21 +71,21 @@ message CMsgDismissLootGreevilResponse {
 message CMsgPoorNetworkConditions {
 	message Player {
 		optional uint32 account_id = 1;
-		optional .ENetworkDisconnectionReason disconnect_reason = 2 [default = NETWORK_DISCONNECT_INVALID];
+		optional .alice.ps1.ENetworkDisconnectionReason disconnect_reason = 2 [default = NETWORK_DISCONNECT_INVALID];
 		optional uint32 num_bad_intervals = 3;
 		optional uint32 peak_loss_pct = 4;
 	}
 
-	optional .EPoorNetworkConditionsType detection_type = 1 [default = k_EPoorNetworkConditions_None];
-	repeated .CMsgPoorNetworkConditions.Player players = 2;
+	optional .alice.ps1.EPoorNetworkConditionsType detection_type = 1 [default = k_EPoorNetworkConditions_None];
+	repeated .alice.ps1.CMsgPoorNetworkConditions.Player players = 2;
 }
 
 message CMsgConnectedPlayers {
 	message Player {
 		optional fixed64 steam_id = 1;
 		optional uint32 hero_id = 2;
-		optional .CMsgLeaverState leaver_state = 3;
-		optional .ENetworkDisconnectionReason disconnect_reason = 4 [default = NETWORK_DISCONNECT_INVALID];
+		optional .alice.ps1.CMsgLeaverState leaver_state = 3;
+		optional .alice.ps1.ENetworkDisconnectionReason disconnect_reason = 4 [default = NETWORK_DISCONNECT_INVALID];
 	}
 
 	enum SendReason {
@@ -101,14 +102,14 @@ message CMsgConnectedPlayers {
 		MASS_DISCONNECT = 11;
 	}
 
-	repeated .CMsgConnectedPlayers.Player connected_players = 1;
-	repeated .CMsgConnectedPlayers.Player disconnected_players = 7;
-	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
+	repeated .alice.ps1.CMsgConnectedPlayers.Player connected_players = 1;
+	repeated .alice.ps1.CMsgConnectedPlayers.Player disconnected_players = 7;
+	optional .alice.ps1.DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 tower_state = 4;
 	optional bool first_blood_happened = 6;
 	optional bool legacy_mass_disconnect = 9;
-	optional .CMsgPoorNetworkConditions poor_network_conditions = 10;
-	optional .CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
+	optional .alice.ps1.CMsgPoorNetworkConditions poor_network_conditions = 10;
+	optional .alice.ps1.CMsgConnectedPlayers.SendReason send_reason = 8 [default = INVALID];
 }
 
 message CMsgGameServerInfo {
@@ -125,7 +126,7 @@ message CMsgGameServerInfo {
 	optional uint32 server_steamdatagram_port = 21;
 	optional string server_key = 5;
 	optional bool server_hibernation = 6;
-	optional .CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
+	optional .alice.ps1.CMsgGameServerInfo.ServerType server_type = 7 [default = UNSPECIFIED];
 	optional uint32 server_region = 8;
 	optional float server_loadavg = 9;
 	optional float server_tv_broadcast_time = 10;
@@ -143,11 +144,11 @@ message CMsgGameServerInfo {
 
 message CMsgLeaverDetected {
 	optional fixed64 steam_id = 1;
-	optional .DOTALeaverStatus_t leaver_status = 2 [default = DOTA_LEAVER_NONE];
-	optional .CMsgLeaverState leaver_state = 4;
+	optional .alice.ps1.DOTALeaverStatus_t leaver_status = 2 [default = DOTA_LEAVER_NONE];
+	optional .alice.ps1.CMsgLeaverState leaver_state = 4;
 	optional uint32 server_cluster = 5;
-	optional .ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
-	optional .CMsgPoorNetworkConditions poor_network_conditions = 7;
+	optional .alice.ps1.ENetworkDisconnectionReason disconnect_reason = 6 [default = NETWORK_DISCONNECT_INVALID];
+	optional .alice.ps1.CMsgPoorNetworkConditions poor_network_conditions = 7;
 }
 
 message CMsgLeaverDetectedResponse {
@@ -216,12 +217,12 @@ message CMsgGameMatchSignOut {
 			optional uint32 claimed_denies = 29;
 			optional uint32 claimed_misses = 30;
 			optional uint32 misses = 31;
-			repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 32;
-			repeated .CMatchAdditionalUnitInventory additional_units_inventory = 33;
+			repeated .alice.ps1.CMatchPlayerAbilityUpgrade ability_upgrades = 32;
+			repeated .alice.ps1.CMatchAdditionalUnitInventory additional_units_inventory = 33;
 			optional uint32 net_worth = 34;
 		}
 
-		repeated .CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
+		repeated .alice.ps1.CMsgGameMatchSignOut.CTeam.CPlayer players = 1;
 	}
 
 	message CAdditionalSignoutMsg {
@@ -234,7 +235,7 @@ message CMsgGameMatchSignOut {
 	optional bool good_guys_win = 3;
 	optional fixed32 date = 4;
 	repeated uint32 num_players = 5;
-	repeated .CMsgGameMatchSignOut.CTeam teams = 6;
+	repeated .alice.ps1.CMsgGameMatchSignOut.CTeam teams = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
 	optional uint32 cluster = 10;
@@ -242,14 +243,14 @@ message CMsgGameMatchSignOut {
 	optional uint32 first_blood_time = 12;
 	optional float game_balance = 13;
 	optional uint32 event_score = 14;
-	repeated .CMatchHeroSelectEvent picks_bans = 15;
-	repeated .CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
-	repeated .CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
+	repeated .alice.ps1.CMatchHeroSelectEvent picks_bans = 15;
+	repeated .alice.ps1.CMsgDOTAFantasyPlayerStats fantasy_stats = 16;
+	repeated .alice.ps1.CMsgEconPlayerStrangeCountAdjustment player_strange_count_adjustments = 17;
 	optional bool automatic_surrender = 18;
 	optional uint32 server_version = 19;
 	optional bool legacy_mass_disconnect = 21;
-	optional .CMsgPoorNetworkConditions poor_network_conditions = 35;
-	repeated .CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
+	optional .alice.ps1.CMsgPoorNetworkConditions poor_network_conditions = 35;
+	repeated .alice.ps1.CMsgGameMatchSignOut.CAdditionalSignoutMsg additional_msgs = 20;
 	optional sint32 average_networth_delta = 22;
 	optional sint32 networth_delta_min10 = 23;
 	optional sint32 networth_delta_min20 = 24;
@@ -268,19 +269,19 @@ message CMsgGameMatchSignOut {
 message CMsgSignOutDraftInfo {
 	optional uint32 radiant_captain_account_id = 1;
 	optional uint32 dire_captain_account_id = 2;
-	repeated .CMatchHeroSelectEvent picks_bans = 3;
+	repeated .alice.ps1.CMatchHeroSelectEvent picks_bans = 3;
 }
 
 message CMsgSignOutBotInfo {
 	message CMsgBotSlotDifficulty {
 		optional uint32 slot = 1;
-		optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+		optional .alice.ps1.DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
 	}
 
 	optional bool allow_cheats = 1;
-	optional .DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
+	optional .alice.ps1.DOTABotDifficulty bot_difficulty = 2 [default = BOT_DIFFICULTY_PASSIVE];
 	optional bool created_lobby = 3;
-	repeated .CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
+	repeated .alice.ps1.CMsgSignOutBotInfo.CMsgBotSlotDifficulty bot_slot_difficulties = 4;
 }
 
 message CMsgSignOutCommunicationSummary {
@@ -301,7 +302,7 @@ message CMsgSignOutCommunicationSummary {
 		optional uint32 voice_mutes = 14;
 	}
 
-	repeated .CMsgSignOutCommunicationSummary.PlayerCommunication players = 1;
+	repeated .alice.ps1.CMsgSignOutCommunicationSummary.PlayerCommunication players = 1;
 }
 
 message CMsgGameMatchSignoutResponse {
@@ -312,10 +313,10 @@ message CMsgGameMatchSignoutResponse {
 
 	optional uint64 match_id = 1;
 	optional fixed32 replay_salt = 2;
-	repeated .CLobbyTimedRewardDetails timed_reward_details = 3;
-	repeated .CDOTALobbyMember xp_reward_details = 4;
+	repeated .alice.ps1.CLobbyTimedRewardDetails timed_reward_details = 3;
+	repeated .alice.ps1.CDOTALobbyMember xp_reward_details = 4;
 	optional uint32 leagueid = 5;
-	repeated .CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
+	repeated .alice.ps1.CMsgGameMatchSignoutResponse.CAdditionalSignoutMsg additional_msgs = 6;
 }
 
 message CMsgGameMatchSignOutPermissionRequest {
@@ -340,7 +341,7 @@ message CMsgGameChatLog {
 	}
 
 	optional uint64 match_id = 1;
-	repeated .CMsgGameChatLog.CChatLine lines = 2;
+	repeated .alice.ps1.CMsgGameChatLog.CChatLine lines = 2;
 }
 
 message CMsgDOTALiveScoreboardUpdate {
@@ -371,7 +372,7 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional uint32 level = 11;
 			optional float gold_per_min = 12;
 			optional float xp_per_min = 13;
-			optional .CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state = 14 [default = k_EDOTAUltimateStateNotLearned];
+			optional .alice.ps1.CMsgDOTALiveScoreboardUpdate.Team.Player.DOTAUltimateState ultimate_state = 14 [default = k_EDOTAUltimateStateNotLearned];
 			optional float ultimate_cooldown = 15;
 			optional uint32 item0 = 16;
 			optional uint32 item1 = 17;
@@ -384,10 +385,10 @@ message CMsgDOTALiveScoreboardUpdate {
 			optional float position_x = 24;
 			optional float position_y = 25;
 			optional uint32 net_worth = 26;
-			repeated .CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility abilities = 27;
+			repeated .alice.ps1.CMsgDOTALiveScoreboardUpdate.Team.Player.HeroAbility abilities = 27;
 		}
 
-		repeated .CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
+		repeated .alice.ps1.CMsgDOTALiveScoreboardUpdate.Team.Player players = 1;
 		optional uint32 score = 2;
 		optional uint32 tower_state = 3;
 		optional uint32 barracks_state = 4;
@@ -399,8 +400,8 @@ message CMsgDOTALiveScoreboardUpdate {
 	optional uint32 tournament_game_id = 2;
 	optional float duration = 3;
 	optional int32 hltv_delay = 4;
-	optional .CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
-	optional .CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
+	optional .alice.ps1.CMsgDOTALiveScoreboardUpdate.Team team_good = 5;
+	optional .alice.ps1.CMsgDOTALiveScoreboardUpdate.Team team_bad = 6;
 	optional uint32 roshan_respawn_timer = 7;
 	optional uint32 league_id = 8;
 	optional uint64 match_id = 9;
@@ -437,7 +438,7 @@ message CMsgDOTARequestBatchPlayerResourcesResponse {
 		optional bool low_priority = 6;
 	}
 
-	repeated .CMsgDOTARequestBatchPlayerResourcesResponse.Result results = 6;
+	repeated .alice.ps1.CMsgDOTARequestBatchPlayerResourcesResponse.Result results = 6;
 }
 
 message CMsgDOTAPlayerFailedToConnect {
@@ -476,7 +477,7 @@ message CMsgGCBanStatusResponse {
 message CMsgTournamentItemEvent {
 	optional fixed32 killer_account_id = 1;
 	optional fixed32 victim_account_id = 2;
-	optional .DOTA_TournamentEvents event_type = 3 [default = TE_FIRST_BLOOD];
+	optional .alice.ps1.DOTA_TournamentEvents event_type = 3 [default = TE_FIRST_BLOOD];
 	optional int32 tv_delay = 4;
 	optional int32 dota_time = 5;
 	optional float replay_time = 6;
@@ -488,7 +489,7 @@ message CMsgTournamentItemEvent {
 }
 
 message CMsgTournamentItemEventResponse {
-	optional .DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
+	optional .alice.ps1.DOTA_TournamentEvents event_type = 1 [default = TE_FIRST_BLOOD];
 	optional uint32 viewers_granted = 6;
 }
 
@@ -516,7 +517,7 @@ message CMsgGameServerSaveGameResult {
 		TooBig = 3;
 	}
 
-	optional .CMsgGameServerSaveGameResult.Result result = 1 [default = SaveSuccessful];
+	optional .alice.ps1.CMsgGameServerSaveGameResult.Result result = 1 [default = SaveSuccessful];
 }
 
 message CMsgGameServerGetLoadGame {
@@ -555,7 +556,7 @@ message CMsgDOTAAwardEventPoints {
 		optional uint32 trade_ban_time = 5;
 	}
 
-	repeated .CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
+	repeated .alice.ps1.CMsgDOTAAwardEventPoints.AwardPoints award_points = 1;
 	optional uint64 match_id = 2;
 	optional uint32 event_id = 4;
 }
@@ -568,7 +569,7 @@ message CMsgServerToGCSignoutAwardAdditionalDrops {
 		optional bool randomize_reward = 4;
 	}
 
-	repeated .CMsgServerToGCSignoutAwardAdditionalDrops.AdditionalDrops drops = 1;
+	repeated .alice.ps1.CMsgServerToGCSignoutAwardAdditionalDrops.AdditionalDrops drops = 1;
 	optional uint64 match_id = 2;
 }
 
@@ -578,7 +579,7 @@ message CMsgDOTAUpdateTI4HeroQuest {
 		optional uint32 hero_id = 2;
 	}
 
-	repeated .CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
+	repeated .alice.ps1.CMsgDOTAUpdateTI4HeroQuest.Player players = 1;
 	optional fixed32 match_start_time = 2;
 	optional uint64 match_id = 3;
 }
@@ -590,7 +591,7 @@ message CMsgDOTAFrostivusTimeElapsed {
 	}
 
 	optional uint32 seconds = 1;
-	repeated .CMsgDOTAFrostivusTimeElapsed.User users = 2;
+	repeated .alice.ps1.CMsgDOTAFrostivusTimeElapsed.User users = 2;
 	optional uint64 match_id = 3;
 }
 
@@ -622,7 +623,7 @@ message CMsgServerGetEventPointsResponse {
 	}
 
 	optional uint32 event_id = 1;
-	repeated .CMsgServerGetEventPointsResponse.Points points = 2;
+	repeated .alice.ps1.CMsgServerGetEventPointsResponse.Points points = 2;
 }
 
 message CMsgServerGrantSurveyPermission {
@@ -635,7 +636,7 @@ message CMsgServerGrantSurveyPermission {
 		optional uint64 extra_data_32 = 6;
 	}
 
-	repeated .CMsgServerGrantSurveyPermission.Survey surveys = 1;
+	repeated .alice.ps1.CMsgServerGrantSurveyPermission.Survey surveys = 1;
 }
 
 message CMsgServerGrantSurveyPermissionResponse {
@@ -655,7 +656,7 @@ message CMsgServerToGCMatchConnectionStats {
 	optional uint64 match_id = 1;
 	optional uint32 region_id = 2;
 	optional uint32 league_id = 3;
-	repeated .CMsgServerToGCMatchConnectionStats.Player players = 4;
+	repeated .alice.ps1.CMsgServerToGCMatchConnectionStats.Player players = 4;
 	optional uint32 cluster_id = 5;
 }
 
@@ -670,12 +671,12 @@ message CSerializedCombatLog {
 			required string value = 2;
 		}
 
-		repeated .CSerializedCombatLog.Dictionary.DictString strings = 1;
+		repeated .alice.ps1.CSerializedCombatLog.Dictionary.DictString strings = 1;
 	}
 
 	optional uint32 version = 1;
-	optional .CSerializedCombatLog.Dictionary dictionary = 2;
-	repeated .CMsgDOTACombatLogEntry entries = 3;
+	optional .alice.ps1.CSerializedCombatLog.Dictionary dictionary = 2;
+	repeated .alice.ps1.CMsgDOTACombatLogEntry entries = 3;
 }
 
 message CMsgServerToGCGetAdditionalEquips {
@@ -685,10 +686,10 @@ message CMsgServerToGCGetAdditionalEquips {
 message CMsgServerToGCGetAdditionalEquipsResponse {
 	message CUserEquips {
 		optional uint32 account_id = 1;
-		repeated .CAdditionalEquipSlot equips = 2;
+		repeated .alice.ps1.CAdditionalEquipSlot equips = 2;
 	}
 
-	repeated .CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
+	repeated .alice.ps1.CMsgServerToGCGetAdditionalEquipsResponse.CUserEquips equips = 1;
 }
 
 message CMsgServerToGCGetProfileCard {
@@ -696,7 +697,7 @@ message CMsgServerToGCGetProfileCard {
 }
 
 message CMsgServerToGCGetProfileCardResponse {
-	repeated .CMsgDOTAProfileCard cards = 1;
+	repeated .alice.ps1.CMsgDOTAProfileCard cards = 1;
 }
 
 message CMsgServerToGCVictoryPredictions {
@@ -706,12 +707,12 @@ message CMsgServerToGCVictoryPredictions {
 		repeated uint64 item_ids = 5;
 	}
 
-	repeated .CMsgServerToGCVictoryPredictions.Record records = 1;
+	repeated .alice.ps1.CMsgServerToGCVictoryPredictions.Record records = 1;
 }
 
 message CMsgSuspiciousActivity {
 	optional uint32 account_id = 1;
-	optional .ESuspiciousActivity activity = 2 [default = k_ESuspiciousActivity_VAC_MultipleInstances];
+	optional .alice.ps1.ESuspiciousActivity activity = 2 [default = k_ESuspiciousActivity_VAC_MultipleInstances];
 	optional sint32 intdata1 = 3;
 	optional sint32 intdata2 = 4;
 	optional uint32 time = 5;
@@ -736,7 +737,7 @@ message CMsgSignOutAssassinMiniGameInfo {
 }
 
 message CMsgServerToGCGetIngameEventData {
-	optional .EIngameEvent event = 1 [default = k_EIngameEvent_OraclePA];
+	optional .alice.ps1.EIngameEvent event = 1 [default = k_EIngameEvent_OraclePA];
 }
 
 message CMsgGCToServerIngameEventDataOraclePA {
@@ -751,7 +752,7 @@ message CMsgServerToGCKillSummaries {
 	}
 
 	optional uint32 ingameevent_id = 1;
-	repeated .CMsgServerToGCKillSummaries.KillSummary summaries = 2;
+	repeated .alice.ps1.CMsgServerToGCKillSummaries.KillSummary summaries = 2;
 }
 
 message CMsgGCToServerPredictionResult {
@@ -764,18 +765,17 @@ message CMsgGCToServerPredictionResult {
 		optional uint32 item_def = 1;
 		optional uint32 num_correct = 2;
 		optional uint32 num_fails = 3;
-		optional .CMsgGCToServerPredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
+		optional .alice.ps1.CMsgGCToServerPredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
 		repeated uint32 granted_item_defs = 6;
 	}
 
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 2;
 	optional bool correct = 3;
-	repeated .CMsgGCToServerPredictionResult.Prediction predictions = 4;
+	repeated .alice.ps1.CMsgGCToServerPredictionResult.Prediction predictions = 4;
 }
 
 message CMsgServerToGCLockCharmTrading {
 	optional uint32 account_id = 1;
 	optional uint64 item_id = 2;
 }
-

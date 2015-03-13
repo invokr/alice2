@@ -1,3 +1,4 @@
+package alice.ps1;
 import "google/protobuf/descriptor.proto";
 
 option optimize_for = SPEED;
@@ -9,7 +10,7 @@ extend .google.protobuf.FieldOptions {
 
 extend .google.protobuf.ServiceOptions {
 	optional string service_description = 50000;
-	optional .EProtoExecutionSite service_execution_site = 50008 [default = k_EProtoExecutionSiteUnknown];
+	optional .alice.ps1.EProtoExecutionSite service_execution_site = 50008 [default = k_EProtoExecutionSiteUnknown];
 }
 
 extend .google.protobuf.MethodOptions {

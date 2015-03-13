@@ -1,3 +1,4 @@
+package alice.ps2;
 import "dota_gcmessages_common.proto";
 
 option optimize_for = SPEED;
@@ -16,13 +17,13 @@ message CMsgGCPlayerInfo {
 		optional bool is_locked = 9;
 	}
 
-	repeated .CMsgGCPlayerInfo.PlayerInfo player_infos = 1;
+	repeated .alice.ps2.CMsgGCPlayerInfo.PlayerInfo player_infos = 1;
 }
 
 message CMsgDOTACreateFantasyLeagueRequest {
 	optional string league_name = 1;
 	optional uint64 league_logo = 2;
-	optional .Fantasy_Selection_Mode selection_mode = 3 [default = FANTASY_SELECTION_INVALID];
+	optional .alice.ps2.Fantasy_Selection_Mode selection_mode = 3 [default = FANTASY_SELECTION_INVALID];
 	optional uint32 team_count = 4;
 }
 
@@ -35,7 +36,7 @@ message CMsgDOTACreateFantasyLeagueResponse {
 		ERROR_CREATION_DISABLED = 4;
 	}
 
-	optional .CMsgDOTACreateFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTACreateFantasyLeagueResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgFantasyLeagueScoring {
@@ -65,10 +66,10 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint32 fantasy_league_id = 1;
 	optional uint32 commissioner_account_id = 2;
 	optional string fantasy_league_name = 3;
-	optional .Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_INVALID];
+	optional .alice.ps2.Fantasy_Selection_Mode selection_mode = 4 [default = FANTASY_SELECTION_INVALID];
 	optional uint32 team_count = 5;
 	optional uint64 logo = 6;
-	optional .CMsgFantasyLeagueScoring scoring = 7;
+	optional .alice.ps2.CMsgFantasyLeagueScoring scoring = 7;
 	optional uint32 draft_time = 12;
 	optional uint32 draft_pick_time = 13;
 	optional uint32 season_start = 15;
@@ -81,7 +82,7 @@ message CMsgDOTAFantasyLeagueInfo {
 	optional uint32 slot_4 = 22;
 	optional uint32 slot_5 = 23;
 	optional uint32 bench_slots = 24;
-	repeated .CMsgDOTAFantasyLeagueInfo.OwnerInfo owner_info = 25;
+	repeated .alice.ps2.CMsgDOTAFantasyLeagueInfo.OwnerInfo owner_info = 25;
 	repeated uint32 players = 26;
 	optional uint32 time_zone = 27;
 	optional uint32 season = 28;
@@ -90,7 +91,7 @@ message CMsgDOTAFantasyLeagueInfo {
 
 message CMsgDOTAFantasyLeagueEditInfoRequest {
 	optional uint32 fantasy_league_id = 1;
-	optional .CMsgDOTAFantasyLeagueInfo edit_info = 2;
+	optional .alice.ps2.CMsgDOTAFantasyLeagueInfo edit_info = 2;
 }
 
 message CMsgDOTAFantasyLeagueEditInfoResponse {
@@ -100,7 +101,7 @@ message CMsgDOTAFantasyLeagueEditInfoResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyLeagueEditInfoResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueEditInfoResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyLeagueFindRequest {
@@ -119,7 +120,7 @@ message CMsgDOTAFantasyLeagueFindResponse {
 		ERROR_LEAGUE_LOCKED = 6;
 	}
 
-	optional .CMsgDOTAFantasyLeagueFindResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueFindResponse.EResult result = 1 [default = SUCCESS];
 	optional string fantasy_league_name = 2;
 	optional string commissioner_name = 3;
 }
@@ -135,7 +136,7 @@ message CMsgDOTAFantasyLeagueInfoResponse {
 		ERROR_BAD_LEAGUE_ID = 2;
 	}
 
-	optional .CMsgDOTAFantasyLeagueInfoResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueInfoResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyLeagueMatchupsRequest {
@@ -151,7 +152,7 @@ message CMsgDOTAFantasyLeagueMatchupsResponse {
 	}
 
 	message WeeklyMatchups {
-		repeated .CMsgDOTAFantasyLeagueMatchupsResponse.Matchup matchup = 1;
+		repeated .alice.ps2.CMsgDOTAFantasyLeagueMatchupsResponse.Matchup matchup = 1;
 		optional uint32 start_time = 2;
 		optional uint32 end_time = 3;
 	}
@@ -163,9 +164,9 @@ message CMsgDOTAFantasyLeagueMatchupsResponse {
 		ERROR_NO_PERMISSION = 3;
 	}
 
-	optional .CMsgDOTAFantasyLeagueMatchupsResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueMatchupsResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_league_id = 2;
-	repeated .CMsgDOTAFantasyLeagueMatchupsResponse.WeeklyMatchups weekly_matchups = 3;
+	repeated .alice.ps2.CMsgDOTAFantasyLeagueMatchupsResponse.WeeklyMatchups weekly_matchups = 3;
 }
 
 message CMsgDOTAEditFantasyTeamRequest {
@@ -184,7 +185,7 @@ message CMsgDOTAEditFantasyTeamResponse {
 		ERROR_NO_PERMISSION = 4;
 	}
 
-	optional .CMsgDOTAEditFantasyTeamResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAEditFantasyTeamResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyTeamInfoRequestByFantasyLeagueID {
@@ -196,7 +197,7 @@ message CMsgDOTAFantasyTeamInfoRequestByOwnerAccountID {
 }
 
 message CMsgDOTAFantasyTeamInfoResponse {
-	repeated .CMsgDOTAFantasyTeamInfo results = 1;
+	repeated .alice.ps2.CMsgDOTAFantasyTeamInfo results = 1;
 }
 
 message CMsgDOTAFantasyTeamInfo {
@@ -241,9 +242,9 @@ message CMsgDOTAFantasyTeamScoreResponse {
 		ERROR_OWNER_NOT_IN_LEAGUE = 3;
 	}
 
-	optional .CMsgDOTAFantasyTeamScoreResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamScoreResponse.EResult result = 1 [default = SUCCESS];
 	optional float fantasy_team_score = 2;
-	repeated .CMsgDOTAFantasyTeamScoreResponse.CMsgPlayerScore fantasy_player_score = 3;
+	repeated .alice.ps2.CMsgDOTAFantasyTeamScoreResponse.CMsgPlayerScore fantasy_player_score = 3;
 }
 
 message CMsgDOTAFantasyTeamStandingsRequest {
@@ -277,8 +278,8 @@ message CMsgDOTAFantasyTeamStandingsResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyTeamStandingsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyTeamStandingsResponse.CMsgTeamScore team_scores = 3;
+	optional .alice.ps2.CMsgDOTAFantasyTeamStandingsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyTeamStandingsResponse.CMsgTeamScore team_scores = 3;
 }
 
 message CMsgDOTAFantasyPlayerScoreRequest {
@@ -297,7 +298,7 @@ message CMsgDOTAFantasyPlayerScoreResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyPlayerScoreResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyPlayerScoreResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_league_id = 2;
 	optional uint32 player_account_id = 3;
 	optional string player_name = 4;
@@ -327,17 +328,17 @@ message CMsgDOTAFantasyPlayerStandingsResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyPlayerStandingsResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyPlayerStandingsResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_league_id = 2;
 	optional uint32 role = 3;
-	repeated .CMsgDOTAFantasyPlayerStandingsResponse.CMsgPlayerScore player_scores = 4;
+	repeated .alice.ps2.CMsgDOTAFantasyPlayerStandingsResponse.CMsgPlayerScore player_scores = 4;
 }
 
 message CMsgDOTAFantasyPlayerInfoRequest {
 }
 
 message CMsgDOTAFantasyPlayerInfoResponse {
-	optional .CMsgGCPlayerInfo msg = 1;
+	optional .alice.ps2.CMsgGCPlayerInfo msg = 1;
 }
 
 message CMsgDOTAFantasyLeagueCreateRequest {
@@ -361,7 +362,7 @@ message CMsgDOTAFantasyLeagueCreateResponse {
 		ERROR_NO_TICKET = 7;
 	}
 
-	optional .CMsgDOTAFantasyLeagueCreateResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueCreateResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_league_id = 2;
 }
 
@@ -388,7 +389,7 @@ message CMsgDOTAFantasyTeamCreateResponse {
 		ERROR_LEAGUE_LOCKED = 10;
 	}
 
-	optional .CMsgDOTAFantasyTeamCreateResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamCreateResponse.EResult result = 1 [default = SUCCESS];
 	optional uint32 fantasy_team_index = 2;
 }
 
@@ -400,7 +401,7 @@ message CMsgDOTAFantasyLeagueEditInvitesRequest {
 
 	optional uint32 fantasy_league_id = 1;
 	optional string password = 2;
-	repeated .CMsgDOTAFantasyLeagueEditInvitesRequest.InviteChange invite_change = 3;
+	repeated .alice.ps2.CMsgDOTAFantasyLeagueEditInvitesRequest.InviteChange invite_change = 3;
 }
 
 message CMsgDOTAFantasyLeagueEditInvitesResponse {
@@ -409,7 +410,7 @@ message CMsgDOTAFantasyLeagueEditInvitesResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgDOTAFantasyLeagueEditInvitesResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueEditInvitesResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyLeagueDraftStatusRequest {
@@ -445,7 +446,7 @@ message CMsgDOTAFantasyLeagueDraftPlayerResponse {
 		ERROR_PLAYER_NO_VALID_SLOTS = 8;
 	}
 
-	optional .CMsgDOTAFantasyLeagueDraftPlayerResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeagueDraftPlayerResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyTeamRosterSwapRequest {
@@ -465,7 +466,7 @@ message CMsgDOTAFantasyTeamRosterSwapResponse {
 		ERROR_ROSTER_LOCKED = 4;
 	}
 
-	optional .CMsgDOTAFantasyTeamRosterSwapResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamRosterSwapResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyTeamRosterAddDropRequest {
@@ -485,7 +486,7 @@ message CMsgDOTAFantasyTeamRosterAddDropResponse {
 		ERROR_TRADE_ALREADY_PENDING = 5;
 	}
 
-	optional .CMsgDOTAFantasyTeamRosterAddDropResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamRosterAddDropResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyTeamTradesRequest {
@@ -508,8 +509,8 @@ message CMsgDOTAFantasyTeamTradesResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyTeamTradesResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyTeamTradesResponse.Trade trades = 2;
+	optional .alice.ps2.CMsgDOTAFantasyTeamTradesResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyTeamTradesResponse.Trade trades = 2;
 }
 
 message CMsgDOTAFantasyTeamTradeCancelRequest {
@@ -527,7 +528,7 @@ message CMsgDOTAFantasyTeamTradeCancelResponse {
 		ERROR_NO_TRADE = 3;
 	}
 
-	optional .CMsgDOTAFantasyTeamTradeCancelResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamTradeCancelResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyTeamRosterRequest {
@@ -545,7 +546,7 @@ message CMsgDOTAFantasyTeamRosterResponse {
 		ERROR_OWNER_NOT_IN_LEAGUE = 3;
 	}
 
-	optional .CMsgDOTAFantasyTeamRosterResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyTeamRosterResponse.EResult result = 1 [default = SUCCESS];
 	repeated uint32 player_account_ids = 2;
 }
 
@@ -574,8 +575,8 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 	message PlayerStats {
 		optional uint32 account_id = 1;
 		optional uint32 weeks = 2;
-		optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_premium = 4;
-		optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_professional = 5;
+		optional .alice.ps2.CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_premium = 4;
+		optional .alice.ps2.CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerScoreAccumulator stats_professional = 5;
 	}
 
 	enum EResult {
@@ -584,8 +585,8 @@ message CMsgDOTAFantasyPlayerHisoricalStatsResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyPlayerHisoricalStatsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerStats stats = 2;
+	optional .alice.ps2.CMsgDOTAFantasyPlayerHisoricalStatsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyPlayerHisoricalStatsResponse.PlayerStats stats = 2;
 }
 
 message CMsgDOTAFantasyMessageAdd {
@@ -613,8 +614,8 @@ message CMsgDOTAFantasyMessagesResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAFantasyMessagesResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyMessagesResponse.Message messages = 2;
+	optional .alice.ps2.CMsgDOTAFantasyMessagesResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyMessagesResponse.Message messages = 2;
 	optional uint32 num_total_messages = 3;
 }
 
@@ -633,7 +634,7 @@ message CMsgDOTAFantasyRemoveOwnerResponse {
 		ERROR_NOT_A_MEMBER = 4;
 	}
 
-	optional .CMsgDOTAFantasyRemoveOwnerResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyRemoveOwnerResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyScheduledMatchesRequest {
@@ -652,8 +653,8 @@ message CMsgDOTAFantasyScheduledMatchesResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgDOTAFantasyScheduledMatchesResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyScheduledMatchesResponse.ScheduledMatchDays scheduled_match_days = 2;
+	optional .alice.ps2.CMsgDOTAFantasyScheduledMatchesResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyScheduledMatchesResponse.ScheduledMatchDays scheduled_match_days = 2;
 }
 
 message CMsgDOTAFantasyLeaveLeagueRequest {
@@ -670,7 +671,7 @@ message CMsgDOTAFantasyLeaveLeagueResponse {
 		ERROR_DRAFT_ACTIVE = 4;
 	}
 
-	optional .CMsgDOTAFantasyLeaveLeagueResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAFantasyLeaveLeagueResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAFantasyPlayerScoreDetailsRequest {
@@ -691,7 +692,7 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		optional uint32 opposing_team_id = 7;
 		optional uint64 opposing_team_logo = 8;
 		optional string opposing_team_name = 9;
-		optional .CMsgFantasyLeagueScoring stats = 10;
+		optional .alice.ps2.CMsgFantasyLeagueScoring stats = 10;
 		optional uint32 owned_by = 11;
 		optional bool benched = 12;
 	}
@@ -702,7 +703,6 @@ message CMsgDOTAFantasyPlayerScoreDetailsResponse {
 		ERROR_NOT_MEMBER = 2;
 	}
 
-	optional .CMsgDOTAFantasyPlayerScoreDetailsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFantasyPlayerScoreDetailsResponse.PlayerMatchData data = 2;
+	optional .alice.ps2.CMsgDOTAFantasyPlayerScoreDetailsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFantasyPlayerScoreDetailsResponse.PlayerMatchData data = 2;
 }
-

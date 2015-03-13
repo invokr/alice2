@@ -1,3 +1,4 @@
+package alice.ps2;
 import "steammessages.proto";
 import "gcsdk_gcmessages.proto";
 
@@ -754,7 +755,7 @@ message CSODOTAGameAccountClient {
 	optional uint32 showcase_hero_id = 40;
 	optional uint32 match_disabled_until_date = 41;
 	optional uint32 match_disabled_count = 42;
-	optional .PartnerAccountType partner_account_type = 44 [default = PARTNER_NONE];
+	optional .alice.ps2.PartnerAccountType partner_account_type = 44 [default = PARTNER_NONE];
 	optional uint32 partner_account_state = 45;
 	optional uint32 shutdownlawterminatetimestamp = 47;
 	optional uint32 low_priority_games_remaining = 48;
@@ -776,7 +777,7 @@ message CSODOTAGameAccountClient {
 }
 
 message CSODOTAPartyMember {
-	optional .PartnerAccountType partner_type = 1 [default = PARTNER_NONE];
+	optional .alice.ps2.PartnerAccountType partner_type = 1 [default = PARTNER_NONE];
 	optional bool is_coach = 2;
 }
 
@@ -792,22 +793,22 @@ message CSODOTAParty {
 	repeated fixed64 member_ids = 3;
 	optional uint32 game_modes = 4;
 	repeated fixed64 pending_invites = 5;
-	optional .CSODOTAParty.State state = 6 [default = UI];
+	optional .alice.ps2.CSODOTAParty.State state = 6 [default = UI];
 	optional uint32 effective_started_matchmaking_time = 7;
 	optional uint32 raw_started_matchmaking_time = 32;
 	optional uint32 attempt_start_time = 33;
 	optional uint32 attempt_num = 34;
 	optional uint32 matchgroups = 11;
 	optional uint32 low_priority_account_id = 19;
-	optional .MatchType match_type = 21 [default = MATCH_TYPE_CASUAL];
-	optional .DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
+	optional .alice.ps2.MatchType match_type = 21 [default = MATCH_TYPE_CASUAL];
+	optional .alice.ps2.DOTABotDifficulty bot_difficulty = 22 [default = BOT_DIFFICULTY_PASSIVE];
 	optional uint32 team_id = 23;
 	optional uint32 match_disabled_until_date = 24;
 	optional uint32 match_disabled_account_id = 25;
 	optional uint32 matchmaking_max_range_minutes = 26;
 	optional uint32 matchlanguages = 27;
 	optional uint32 map_preference = 38;
-	repeated .CSODOTAPartyMember members = 29;
+	repeated .alice.ps2.CSODOTAPartyMember members = 29;
 	optional uint32 open_guild_id = 30;
 	repeated uint32 common_guilds = 31;
 	optional uint32 low_priority_games_remaining = 35;
@@ -824,7 +825,7 @@ message CSODOTAPartyInvite {
 	optional uint64 group_id = 1 [(key_field) = true];
 	optional fixed64 sender_id = 2;
 	optional string sender_name = 3;
-	repeated .CSODOTAPartyInvite.PartyMember members = 4;
+	repeated .alice.ps2.CSODOTAPartyInvite.PartyMember members = 4;
 	optional uint32 team_id = 5;
 	optional bool low_priority_status = 6;
 	optional bool as_coach = 7;
@@ -836,7 +837,7 @@ message CMsgDOTAPartyMemberSetCoach {
 
 message CDOTASaveGame {
 	message Player {
-		optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+		optional .alice.ps2.DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 		optional string name = 2;
 		optional string hero = 3;
 	}
@@ -850,20 +851,20 @@ message CDOTASaveGame {
 		optional uint32 game_time = 2;
 		optional uint32 team1_score = 3;
 		optional uint32 team2_score = 4;
-		repeated .CDOTASaveGame.SaveInstance.PlayerPositions player_positions = 5;
+		repeated .alice.ps2.CDOTASaveGame.SaveInstance.PlayerPositions player_positions = 5;
 		optional uint32 save_id = 6;
 		optional uint32 save_time = 7;
 	}
 
 	optional uint32 match_id = 5;
 	optional uint32 save_time = 2;
-	repeated .CDOTASaveGame.Player players = 3;
-	repeated .CDOTASaveGame.SaveInstance save_instances = 4;
+	repeated .alice.ps2.CDOTASaveGame.Player players = 3;
+	repeated .alice.ps2.CDOTASaveGame.SaveInstance save_instances = 4;
 }
 
 message CMsgLeaverState {
 	optional uint32 lobby_state = 1;
-	optional .DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
+	optional .alice.ps2.DOTA_GameState game_state = 2 [default = DOTA_GAMERULES_STATE_INIT];
 	optional bool leaver_detected = 3;
 	optional bool first_blood_happened = 4;
 	optional bool discard_match_results = 5;
@@ -879,24 +880,24 @@ message CDOTALobbyMember {
 
 	optional fixed64 id = 1 [(key_field) = true];
 	optional uint32 hero_id = 2;
-	optional .DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .alice.ps2.DOTA_GC_TEAM team = 3 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional string name = 6;
 	optional uint32 slot = 7;
 	optional uint64 party_id = 12;
 	optional uint32 meta_level = 13;
 	optional uint32 meta_xp = 14;
 	optional uint32 meta_xp_awarded = 15;
-	optional .DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
+	optional .alice.ps2.DOTALeaverStatus_t leaver_status = 16 [default = DOTA_LEAVER_NONE];
 	optional uint32 leaver_actions = 28;
 	optional uint32 channel = 17;
 	optional uint32 prize_def_index = 18;
 	repeated uint32 disabled_hero_id = 20;
-	optional .PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
+	optional .alice.ps2.PartnerAccountType partner_account_type = 21 [default = PARTNER_NONE];
 	repeated uint32 enabled_hero_id = 22;
-	optional .DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .alice.ps2.DOTA_GC_TEAM coach_team = 23 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 nexon_pc_bang_no = 24;
 	optional string nexon_pc_bang_name = 25;
-	repeated .CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
+	repeated .alice.ps2.CDOTALobbyMember.CDOTALobbyMemberXPBonus xp_bonuses = 27;
 	optional sint32 rank_change = 29;
 	optional bool cameraman = 30;
 }
@@ -964,35 +965,35 @@ message CSODOTALobby {
 	}
 
 	optional uint64 lobby_id = 1 [(key_field) = true];
-	repeated .CDOTALobbyMember members = 2;
-	repeated .CDOTALobbyMember left_members = 7;
+	repeated .alice.ps2.CDOTALobbyMember members = 2;
+	repeated .alice.ps2.CDOTALobbyMember left_members = 7;
 	optional fixed64 leader_id = 11;
 	optional fixed64 server_id = 6 [default = 0];
 	optional uint32 game_mode = 3;
 	repeated fixed64 pending_invites = 10;
-	optional .CSODOTALobby.State state = 4 [default = UI];
+	optional .alice.ps2.CSODOTALobby.State state = 4 [default = UI];
 	optional string connect = 5;
-	optional .CSODOTALobby.LobbyType lobby_type = 12 [default = INVALID];
+	optional .alice.ps2.CSODOTALobby.LobbyType lobby_type = 12 [default = INVALID];
 	optional bool allow_cheats = 13;
 	optional bool fill_with_bots = 14;
 	optional bool intro_mode = 15;
 	optional string game_name = 16;
-	repeated .CLobbyTeamDetails team_details = 17;
+	repeated .alice.ps2.CLobbyTeamDetails team_details = 17;
 	optional uint32 tutorial_lesson = 18;
 	optional uint32 tournament_id = 19;
 	optional uint32 tournament_game_id = 20;
 	optional uint32 server_region = 21 [default = 0];
-	optional .DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
+	optional .alice.ps2.DOTA_GameState game_state = 22 [default = DOTA_GAMERULES_STATE_INIT];
 	optional uint32 num_spectators = 23;
 	optional uint32 matchgroup = 25;
-	optional .DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
+	optional .alice.ps2.DOTA_CM_PICK cm_pick = 28 [default = DOTA_CM_RANDOM];
 	optional uint32 match_id = 30;
 	optional bool allow_spectating = 31 [default = true];
-	optional .DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
-	optional .DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
-	repeated .CLobbyTimedRewardDetails timed_reward_details = 38;
+	optional .alice.ps2.DOTABotDifficulty bot_difficulty = 36 [default = BOT_DIFFICULTY_HARD];
+	optional .alice.ps2.DOTAGameVersion game_version = 37 [default = GAME_VERSION_CURRENT];
+	repeated .alice.ps2.CLobbyTimedRewardDetails timed_reward_details = 38;
 	optional string pass_key = 39;
-	repeated .DOTABotDifficulty bot_slot_difficulty = 41;
+	repeated .alice.ps2.DOTABotDifficulty bot_slot_difficulty = 41;
 	optional uint32 leagueid = 42;
 	optional uint32 penalty_level_radiant = 43 [default = 0];
 	optional uint32 penalty_level_dire = 44 [default = 0];
@@ -1003,17 +1004,17 @@ message CSODOTALobby {
 	optional uint32 loot_generated = 49;
 	optional uint32 loot_awarded = 50;
 	optional bool allchat = 51 [default = false];
-	optional .LobbyDotaTVDelay dota_tv_delay = 53 [default = LobbyDotaTV_10];
+	optional .alice.ps2.LobbyDotaTVDelay dota_tv_delay = 53 [default = LobbyDotaTV_10];
 	optional string custom_game_mode = 54;
 	optional string custom_map_name = 55;
 	optional uint32 custom_difficulty = 56;
 	optional bool lan = 57;
-	repeated .CLobbyBroadcastChannelInfo broadcast_channel_info = 58;
+	repeated .alice.ps2.CLobbyBroadcastChannelInfo broadcast_channel_info = 58;
 	optional uint32 first_leaver_accountid = 59;
 	optional uint32 series_id = 60;
 	optional bool low_priority = 61;
-	repeated .CSODOTALobby.CExtraMsg extra_messages = 62;
-	optional .CDOTASaveGame save_game = 63;
+	repeated .alice.ps2.CSODOTALobby.CExtraMsg extra_messages = 62;
+	optional .alice.ps2.CDOTASaveGame save_game = 63;
 	optional bool first_blood_happened = 65;
 	optional bool discard_match_results = 66;
 	optional bool mass_disconnect = 67;
@@ -1061,29 +1062,29 @@ message CProtoItemSocket {
 }
 
 message CProtoItemSocket_Empty {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 }
 
 message CProtoItemSocket_Effect {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 effect = 2;
 }
 
 message CProtoItemSocket_Color {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 red = 2;
 	optional uint32 green = 3;
 	optional uint32 blue = 4;
 }
 
 message CProtoItemSocket_Strange {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 strange_type = 2;
 	optional uint32 strange_value = 3;
 }
 
 message CProtoItemSocket_Spectator {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 games_viewed = 2;
 	optional uint32 corporation_id = 3;
 	optional uint32 league_id = 4;
@@ -1091,23 +1092,23 @@ message CProtoItemSocket_Spectator {
 }
 
 message CProtoItemSocket_AssetModifier {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 asset_modifier = 2;
 }
 
 message CProtoItemSocket_Autograph {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional string autograph = 2;
 	optional uint32 autograph_id = 3;
 }
 
 message CProtoItemSocket_AbilityEffect {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 	optional uint32 ability_effect = 2;
 }
 
 message CProtoItemSocket_StaticVisuals {
-	optional .CProtoItemSocket socket = 1;
+	optional .alice.ps2.CProtoItemSocket socket = 1;
 }
 
 message CMatchPlayerAbilityUpgrade {
@@ -1179,7 +1180,7 @@ message CMsgRequestOfferingsResponse {
 		optional uint64 item_id = 2;
 	}
 
-	repeated .CMsgRequestOfferingsResponse.NewYearsOffering offerings = 1;
+	repeated .alice.ps2.CMsgRequestOfferingsResponse.NewYearsOffering offerings = 1;
 	optional bool completed = 2;
 }
 
@@ -1200,7 +1201,7 @@ message CMsgPerfectWorldUserLookupResponse {
 		ERROR_NO_LINKED_STEAM_ACCOUNT_FOUND = 4;
 	}
 
-	optional .CMsgPerfectWorldUserLookupResponse.EResultCode result_code = 1 [default = SUCCESS_ACCOUNT_FOUND];
+	optional .alice.ps2.CMsgPerfectWorldUserLookupResponse.EResultCode result_code = 1 [default = SUCCESS_ACCOUNT_FOUND];
 	optional uint32 account_id = 2;
 }
 
@@ -1214,12 +1215,12 @@ message CCompendiumTimestampedData {
 }
 
 message CCompendiumGameTimeline {
-	repeated .CCompendiumTimestampedData data = 1;
+	repeated .alice.ps2.CCompendiumTimestampedData data = 1;
 	repeated string tags = 2;
 }
 
 message CCompendiumGameList {
-	repeated .CCompendiumGameTimeline games = 1;
+	repeated .alice.ps2.CCompendiumGameTimeline games = 1;
 }
 
 message CAdditionalEquipSlot {
@@ -1237,7 +1238,7 @@ message CMsgDOTARedeemItemResponse {
 }
 
 message CMsgDOTACombatLogEntry {
-	optional .DOTA_COMBATLOG_TYPES type = 1 [default = DOTA_COMBATLOG_DAMAGE];
+	optional .alice.ps2.DOTA_COMBATLOG_TYPES type = 1 [default = DOTA_COMBATLOG_DAMAGE];
 	optional uint32 target_name = 2;
 	optional uint32 target_source_name = 3;
 	optional uint32 attacker_name = 4;
@@ -1271,7 +1272,7 @@ message CMsgDOTAProfileCard {
 		}
 
 		message Stat {
-			optional .CMsgDOTAProfileCard.EStatID stat_id = 1 [default = k_eStat_SoloRank];
+			optional .alice.ps2.CMsgDOTAProfileCard.EStatID stat_id = 1 [default = k_eStat_SoloRank];
 			optional uint32 stat_score = 2;
 		}
 
@@ -1280,9 +1281,9 @@ message CMsgDOTAProfileCard {
 		}
 
 		optional uint32 slot_id = 1;
-		optional .CMsgDOTAProfileCard.Slot.Trophy trophy = 2;
-		optional .CMsgDOTAProfileCard.Slot.Stat stat = 3;
-		optional .CMsgDOTAProfileCard.Slot.Item item = 4;
+		optional .alice.ps2.CMsgDOTAProfileCard.Slot.Trophy trophy = 2;
+		optional .alice.ps2.CMsgDOTAProfileCard.Slot.Stat stat = 3;
+		optional .alice.ps2.CMsgDOTAProfileCard.Slot.Item item = 4;
 	}
 
 	enum EStatID {
@@ -1297,6 +1298,5 @@ message CMsgDOTAProfileCard {
 
 	optional uint32 account_id = 1;
 	optional uint32 background_def_index = 2;
-	repeated .CMsgDOTAProfileCard.Slot slots = 3;
+	repeated .alice.ps2.CMsgDOTAProfileCard.Slot slots = 3;
 }
-

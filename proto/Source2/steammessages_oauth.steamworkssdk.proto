@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "steammessages_unified_base.steamworkssdk.proto";
 

@@ -1,3 +1,4 @@
+package alice.ps1;
 import "steammessages_unified_base.steamworkssdk.proto";
 
 message CCloud_GetUploadServerInfo_Request {
@@ -24,7 +25,7 @@ message CCloud_UserFile {
 }
 
 message CCloud_GetFileDetails_Response {
-	optional .CCloud_UserFile details = 1;
+	optional .alice.ps1.CCloud_UserFile details = 1;
 }
 
 message CCloud_EnumerateUserFiles_Request {
@@ -35,7 +36,7 @@ message CCloud_EnumerateUserFiles_Request {
 }
 
 message CCloud_EnumerateUserFiles_Response {
-	repeated .CCloud_UserFile files = 1;
+	repeated .alice.ps1.CCloud_UserFile files = 1;
 	optional uint32 total_files = 2;
 }
 

@@ -1,3 +1,4 @@
+package alice.ps1;
 option optimize_for = SPEED;
 option cc_generic_services = false;
 
@@ -157,7 +158,7 @@ message CDOTAMsg_WorldLine {
 }
 
 message CDOTAMsg_SendStatPopup {
-	optional .EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
+	optional .alice.ps1.EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
 	repeated string stat_strings = 2;
 	repeated int32 stat_images = 3;
 }

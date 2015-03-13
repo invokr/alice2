@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 import "dota_commonmessages.proto";
@@ -42,19 +43,19 @@ enum EDotaClientMessages {
 }
 
 message CDOTAClientMsg_MapPing {
-	optional .CDOTAMsg_LocationPing location_ping = 1;
+	optional .alice.ps2.CDOTAMsg_LocationPing location_ping = 1;
 }
 
 message CDOTAClientMsg_ItemAlert {
-	optional .CDOTAMsg_ItemAlert item_alert = 1;
+	optional .alice.ps2.CDOTAMsg_ItemAlert item_alert = 1;
 }
 
 message CDOTAClientMsg_EnemyItemAlert {
-	optional .CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
+	optional .alice.ps2.CDOTAMsg_EnemyItemAlert enemy_item_alert = 1;
 }
 
 message CDOTAClientMsg_MapLine {
-	optional .CDOTAMsg_MapLine mapline = 1;
+	optional .alice.ps2.CDOTAMsg_MapLine mapline = 1;
 }
 
 message CDOTAClientMsg_AspectRatio {
@@ -107,19 +108,19 @@ message CDOTAClientMsg_SwapAccept {
 }
 
 message CDOTAClientMsg_WorldLine {
-	optional .CDOTAMsg_WorldLine worldline = 1;
+	optional .alice.ps2.CDOTAMsg_WorldLine worldline = 1;
 }
 
 message CDOTAClientMsg_RequestGraphUpdate {
 }
 
 message CDOTAClientMsg_ChatWheel {
-	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional .alice.ps2.EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
 	optional uint32 param_hero_id = 2;
 }
 
 message CDOTAClientMsg_SendStatPopup {
-	optional .CDOTAMsg_SendStatPopup statpopup = 1;
+	optional .alice.ps2.CDOTAMsg_SendStatPopup statpopup = 1;
 }
 
 message CDOTAClientMsg_BeginLastHitChallenge {
@@ -133,7 +134,7 @@ message CDOTAClientMsg_UpdateQuickBuyItem {
 }
 
 message CDOTAClientMsg_UpdateQuickBuy {
-	repeated .CDOTAClientMsg_UpdateQuickBuyItem items = 1;
+	repeated .alice.ps2.CDOTAClientMsg_UpdateQuickBuyItem items = 1;
 }
 
 message CDOTAClientMsg_UpdateCoachListen {
@@ -141,7 +142,7 @@ message CDOTAClientMsg_UpdateCoachListen {
 }
 
 message CDOTAClientMsg_CoachHUDPing {
-	optional .CDOTAMsg_CoachHUDPing hud_ping = 1;
+	optional .alice.ps2.CDOTAMsg_CoachHUDPing hud_ping = 1;
 }
 
 message CDOTAClientMsg_RecordVote {
@@ -178,10 +179,9 @@ message CAdditionalEquipSlotClientMsg {
 }
 
 message CDOTAClientMsg_FreeInventory {
-	repeated .CAdditionalEquipSlotClientMsg equips = 1;
+	repeated .alice.ps2.CAdditionalEquipSlotClientMsg equips = 1;
 }
 
 message CDOTAClientMsg_FillEmptySlotsWithBots {
 	optional bool fillwithbots = 1;
 }
-

@@ -1,3 +1,4 @@
+package alice.ps1;
 import "steammessages_unified_base.steamworkssdk.proto";
 
 message COAuthToken_ImplicitGrantNoPrompt_Request {

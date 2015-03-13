@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
@@ -110,14 +111,14 @@ message CUserMessageShake {
 }
 
 message CUserMessageShakeDir {
-	optional .CUserMessageShake shake = 1;
-	optional .CMsgVector direction = 2;
+	optional .alice.ps2.CUserMessageShake shake = 1;
+	optional .alice.ps2.CMsgVector direction = 2;
 }
 
 message CUserMessageScreenTilt {
 	optional uint32 command = 1;
 	optional bool ease_in_out = 2;
-	optional .CMsgVector angle = 3;
+	optional .alice.ps2.CMsgVector angle = 3;
 	optional float duration = 4;
 	optional float time = 5;
 }
@@ -203,7 +204,7 @@ message CUserMessageVGUIMenu {
 
 	optional string name = 1;
 	optional bool show = 2;
-	repeated .CUserMessageVGUIMenu.Keys keys = 3;
+	repeated .alice.ps2.CUserMessageVGUIMenu.Keys keys = 3;
 }
 
 message CUserMessageRumble {
@@ -240,7 +241,7 @@ message CUserMessageAmmoDenied {
 }
 
 message CUserMessageCrosshairAngle {
-	optional .CMsgQAngle angcrosshair = 1;
+	optional .alice.ps2.CMsgQAngle angcrosshair = 1;
 }
 
 message CUserMessageShowMenu {
@@ -251,7 +252,7 @@ message CUserMessageShowMenu {
 }
 
 message CUserMessageCreditsMsg {
-	optional .eRollType rolltype = 1 [default = ROLL_NONE];
+	optional .alice.ps2.eRollType rolltype = 1 [default = ROLL_NONE];
 }
 
 message CEntityMessagePlayJingle {
@@ -266,11 +267,11 @@ message CEntityMessageRemoveAllDecals {
 }
 
 message CEntityMessagePropagateForce {
-	optional .CMsgVector impulse = 1;
+	optional .alice.ps2.CMsgVector impulse = 1;
 }
 
 message CEntityMessageDoSpark {
-	optional .CMsgVector origin = 1;
+	optional .alice.ps2.CMsgVector origin = 1;
 	optional uint32 entityindex = 2;
 	optional float radius = 3;
 	optional fixed32 color = 4;
@@ -281,7 +282,7 @@ message CEntityMessageDoSpark {
 
 message CEntityMessageFixAngle {
 	optional bool relative = 1;
-	optional .CMsgQAngle angle = 2;
+	optional .alice.ps2.CMsgQAngle angle = 2;
 }
 
 message CUserMessageCameraTransition {
@@ -292,6 +293,5 @@ message CUserMessageCameraTransition {
 
 	optional uint32 camera_type = 1;
 	optional float duration = 2;
-	optional .CUserMessageCameraTransition.Transition_DataDriven params_data_driven = 3;
+	optional .alice.ps2.CUserMessageCameraTransition.Transition_DataDriven params_data_driven = 3;
 }
-

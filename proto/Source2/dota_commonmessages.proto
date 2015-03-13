@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
@@ -121,7 +122,7 @@ message CDOTAMsg_WorldLine {
 }
 
 message CDOTAMsg_SendStatPopup {
-	optional .EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
+	optional .alice.ps2.EDOTAStatPopupTypes style = 1 [default = k_EDOTA_SPT_Textline];
 	repeated string stat_strings = 2;
 	repeated int32 stat_images = 3;
 }
@@ -131,4 +132,3 @@ message CDOTAMsg_CoachHUDPing {
 	optional uint32 y = 2;
 	optional string tgtpath = 3;
 }
-

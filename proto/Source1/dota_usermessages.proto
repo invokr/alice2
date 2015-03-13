@@ -1,3 +1,4 @@
+package alice.ps1;
 import "networkbasetypes.proto";
 import "ai_activity.proto";
 import "dota_commonmessages.proto";
@@ -307,7 +308,7 @@ message CDOTAUserMsg_SwapVerify {
 }
 
 message CDOTAUserMsg_ChatEvent {
-	required .DOTA_CHAT_MESSAGE type = 1 [default = CHAT_MESSAGE_INVALID];
+	required .alice.ps1.DOTA_CHAT_MESSAGE type = 1 [default = CHAT_MESSAGE_INVALID];
 	optional uint32 value = 2;
 	optional sint32 playerid_1 = 3 [default = -1];
 	optional sint32 playerid_2 = 4 [default = -1];
@@ -330,7 +331,7 @@ message CDOTAUserMsg_BotChat {
 message CDOTAUserMsg_CombatHeroPositions {
 	optional uint32 index = 1;
 	optional int32 time = 2;
-	optional .CMsgVector2D world_pos = 3;
+	optional .alice.ps1.CMsgVector2D world_pos = 3;
 	optional int32 health = 4;
 }
 
@@ -343,10 +344,10 @@ message CDOTAUserMsg_MiniKillCamInfo {
 
 		optional uint32 attacker = 1;
 		optional int32 total_damage = 2;
-		repeated .CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability abilities = 3;
+		repeated .alice.ps1.CDOTAUserMsg_MiniKillCamInfo.Attacker.Ability abilities = 3;
 	}
 
-	repeated .CDOTAUserMsg_MiniKillCamInfo.Attacker attackers = 1;
+	repeated .alice.ps1.CDOTAUserMsg_MiniKillCamInfo.Attacker attackers = 1;
 }
 
 message CDOTAUserMsg_GlobalLightColor {
@@ -355,18 +356,18 @@ message CDOTAUserMsg_GlobalLightColor {
 }
 
 message CDOTAUserMsg_GlobalLightDirection {
-	optional .CMsgVector direction = 1;
+	optional .alice.ps1.CMsgVector direction = 1;
 	optional float duration = 2;
 }
 
 message CDOTAUserMsg_LocationPing {
 	optional uint32 player_id = 1;
-	optional .CDOTAMsg_LocationPing location_ping = 2;
+	optional .alice.ps1.CDOTAMsg_LocationPing location_ping = 2;
 }
 
 message CDOTAUserMsg_ItemAlert {
 	optional uint32 player_id = 1;
-	optional .CDOTAMsg_ItemAlert item_alert = 2;
+	optional .alice.ps1.CDOTAMsg_ItemAlert item_alert = 2;
 }
 
 message CDOTAUserMsg_EnemyItemAlert {
@@ -427,24 +428,24 @@ message CDOTAUserMsg_MinimapEvent {
 
 message CDOTAUserMsg_MapLine {
 	optional int32 player_id = 1;
-	optional .CDOTAMsg_MapLine mapline = 2;
+	optional .alice.ps1.CDOTAMsg_MapLine mapline = 2;
 }
 
 message CDOTAUserMsg_MinimapDebugPoint {
-	optional .CMsgVector location = 1;
+	optional .alice.ps1.CMsgVector location = 1;
 	optional uint32 color = 2;
 	optional int32 size = 3;
 	optional float duration = 4;
 }
 
 message CDOTAUserMsg_CreateLinearProjectile {
-	optional .CMsgVector origin = 1;
-	optional .CMsgVector2D velocity = 2;
+	optional .alice.ps1.CMsgVector origin = 1;
+	optional .alice.ps1.CMsgVector2D velocity = 2;
 	optional int32 latency = 3;
 	optional int32 entindex = 4;
 	optional int32 particle_index = 5;
 	optional int32 handle = 6;
-	optional .CMsgVector2D acceleration = 7;
+	optional .alice.ps1.CMsgVector2D acceleration = 7;
 	optional float max_speed = 8;
 }
 
@@ -469,14 +470,14 @@ message CDOTAUserMsg_SpectatorPlayerUnitOrders {
 	repeated int32 units = 3;
 	optional int32 target_index = 4;
 	optional int32 ability_index = 5;
-	optional .CMsgVector position = 6;
+	optional .alice.ps1.CMsgVector position = 6;
 	optional bool queue = 7;
 }
 
 message CDOTAUserMsg_NevermoreRequiem {
 	optional int32 entity_handle = 1;
 	optional int32 lines = 2;
-	optional .CMsgVector origin = 3;
+	optional .alice.ps1.CMsgVector origin = 3;
 }
 
 message CDOTAUserMsg_InvalidCommand {
@@ -514,14 +515,14 @@ message CDOTAUserMsg_PredictionResult {
 		optional uint32 item_def = 1;
 		optional uint32 num_correct = 2;
 		optional uint32 num_fails = 3;
-		optional .CDOTAUserMsg_PredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
+		optional .alice.ps1.CDOTAUserMsg_PredictionResult.Prediction.EResult result = 4 [default = k_eResult_ItemGranted];
 		repeated uint32 granted_item_defs = 6;
 	}
 
 	optional uint32 account_id = 1;
 	optional uint64 match_id = 2;
 	optional bool correct = 3;
-	repeated .CDOTAUserMsg_PredictionResult.Prediction predictions = 4;
+	repeated .alice.ps1.CDOTAUserMsg_PredictionResult.Prediction predictions = 4;
 }
 
 message CDOTAResponseQuerySerialized {
@@ -532,18 +533,18 @@ message CDOTAResponseQuerySerialized {
 		}
 
 		required int32 key = 1;
-		required .CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2 [default = NUMERIC];
+		required .alice.ps1.CDOTAResponseQuerySerialized.Fact.ValueType valtype = 2 [default = NUMERIC];
 		optional float val_numeric = 3;
 		optional string val_string = 4;
 	}
 
-	repeated .CDOTAResponseQuerySerialized.Fact facts = 1;
+	repeated .alice.ps1.CDOTAResponseQuerySerialized.Fact facts = 1;
 }
 
 message CDOTASpeechMatchOnClient {
 	optional int32 concept = 1;
 	optional int32 recipient_type = 2;
-	optional .CDOTAResponseQuerySerialized responsequery = 3;
+	optional .alice.ps1.CDOTAResponseQuerySerialized responsequery = 3;
 	optional sfixed32 randomseed = 4 [default = 0];
 }
 
@@ -561,14 +562,14 @@ message CDOTAUserMsg_UnitEvent {
 	}
 
 	message AddGesture {
-		optional .Activity activity = 1 [default = ACT_INVALID];
+		optional .alice.ps1.Activity activity = 1 [default = ACT_INVALID];
 		optional int32 slot = 2;
 		optional float fade_in = 3 [default = 0];
 		optional float fade_out = 4 [default = 0.1];
 	}
 
 	message RemoveGesture {
-		optional .Activity activity = 1 [default = ACT_INVALID];
+		optional .alice.ps1.Activity activity = 1 [default = ACT_INVALID];
 	}
 
 	message BloodImpact {
@@ -578,18 +579,18 @@ message CDOTAUserMsg_UnitEvent {
 	}
 
 	message FadeGesture {
-		optional .Activity activity = 1 [default = ACT_INVALID];
+		optional .alice.ps1.Activity activity = 1 [default = ACT_INVALID];
 	}
 
-	required .EDotaEntityMessages msg_type = 1 [default = DOTA_UNIT_SPEECH];
+	required .alice.ps1.EDotaEntityMessages msg_type = 1 [default = DOTA_UNIT_SPEECH];
 	required int32 entity_index = 2;
-	optional .CDOTAUserMsg_UnitEvent.Speech speech = 3;
-	optional .CDOTAUserMsg_UnitEvent.SpeechMute speech_mute = 4;
-	optional .CDOTAUserMsg_UnitEvent.AddGesture add_gesture = 5;
-	optional .CDOTAUserMsg_UnitEvent.RemoveGesture remove_gesture = 6;
-	optional .CDOTAUserMsg_UnitEvent.BloodImpact blood_impact = 7;
-	optional .CDOTAUserMsg_UnitEvent.FadeGesture fade_gesture = 8;
-	optional .CDOTASpeechMatchOnClient speech_match_on_client = 9;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.Speech speech = 3;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.SpeechMute speech_mute = 4;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.AddGesture add_gesture = 5;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.RemoveGesture remove_gesture = 6;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.BloodImpact blood_impact = 7;
+	optional .alice.ps1.CDOTAUserMsg_UnitEvent.FadeGesture fade_gesture = 8;
+	optional .alice.ps1.CDOTASpeechMatchOnClient speech_match_on_client = 9;
 }
 
 message CDOTAUserMsg_ItemPurchased {
@@ -626,29 +627,29 @@ message CDOTAUserMsg_ParticleManager {
 
 	message UpdateParticle {
 		optional int32 control_point = 1;
-		optional .CMsgVector position = 2;
+		optional .alice.ps1.CMsgVector position = 2;
 	}
 
 	message UpdateParticleFwd {
 		optional int32 control_point = 1;
-		optional .CMsgVector forward = 2;
+		optional .alice.ps1.CMsgVector forward = 2;
 	}
 
 	message UpdateParticleOrient {
 		optional int32 control_point = 1;
-		optional .CMsgVector forward = 2;
-		optional .CMsgVector right = 3;
-		optional .CMsgVector up = 4;
+		optional .alice.ps1.CMsgVector forward = 2;
+		optional .alice.ps1.CMsgVector right = 3;
+		optional .alice.ps1.CMsgVector up = 4;
 	}
 
 	message UpdateParticleFallback {
 		optional int32 control_point = 1;
-		optional .CMsgVector position = 2;
+		optional .alice.ps1.CMsgVector position = 2;
 	}
 
 	message UpdateParticleOffset {
 		optional int32 control_point = 1;
-		optional .CMsgVector origin_offset = 2;
+		optional .alice.ps1.CMsgVector origin_offset = 2;
 	}
 
 	message UpdateParticleEnt {
@@ -656,7 +657,7 @@ message CDOTAUserMsg_ParticleManager {
 		optional int32 entity_handle = 2;
 		optional int32 attach_type = 3;
 		optional int32 attachment = 4;
-		optional .CMsgVector fallback_position = 5;
+		optional .alice.ps1.CMsgVector fallback_position = 5;
 		optional bool include_wearables = 6;
 	}
 
@@ -668,24 +669,24 @@ message CDOTAUserMsg_ParticleManager {
 		optional bool should_draw = 1;
 	}
 
-	required .DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
+	required .alice.ps1.DOTA_PARTICLE_MESSAGE type = 1 [default = DOTA_PARTICLE_MANAGER_EVENT_CREATE];
 	required uint32 index = 2;
-	optional .CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
-	optional .CDOTAUserMsg_ParticleManager.CreateParticle create_particle = 4;
-	optional .CDOTAUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
-	optional .CDOTAUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticle update_particle = 7;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
-	optional .CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.ReleaseParticleIndex release_particle_index = 3;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.CreateParticle create_particle = 4;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.DestroyParticle destroy_particle = 5;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.DestroyParticleInvolving destroy_particle_involving = 6;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticle update_particle = 7;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleFwd update_particle_fwd = 8;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleOrient update_particle_orient = 9;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleFallback update_particle_fallback = 10;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleOffset update_particle_offset = 11;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleEnt update_particle_ent = 12;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleShouldDraw update_particle_should_draw = 14;
+	optional .alice.ps1.CDOTAUserMsg_ParticleManager.UpdateParticleSetFrozen update_particle_set_frozen = 15;
 }
 
 message CDOTAUserMsg_OverheadEvent {
-	required .DOTA_OVERHEAD_ALERT message_type = 1 [default = OVERHEAD_ALERT_GOLD];
+	required .alice.ps1.DOTA_OVERHEAD_ALERT message_type = 1 [default = OVERHEAD_ALERT_GOLD];
 	optional int32 value = 2;
 	optional int32 target_player_entindex = 3;
 	optional int32 target_entindex = 4;
@@ -716,11 +717,11 @@ message CDOTAUserMsg_SendGenericToolTip {
 
 message CDOTAUserMsg_WorldLine {
 	optional int32 player_id = 1;
-	optional .CDOTAMsg_WorldLine worldline = 2;
+	optional .alice.ps1.CDOTAMsg_WorldLine worldline = 2;
 }
 
 message CDOTAUserMsg_ChatWheel {
-	optional .EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
+	optional .alice.ps1.EDOTAChatWheelMessage chat_message = 1 [default = k_EDOTA_CW_Ok];
 	optional uint32 player_id = 2;
 	optional uint32 account_id = 3;
 	optional uint32 param_hero_id = 4;
@@ -771,7 +772,7 @@ message CDOTAUserMsg_AddQuestLogEntry {
 
 message CDOTAUserMsg_SendStatPopup {
 	optional int32 player_id = 1;
-	optional .CDOTAMsg_SendStatPopup statpopup = 2;
+	optional .alice.ps1.CDOTAMsg_SendStatPopup statpopup = 2;
 }
 
 message CDOTAUserMsg_SendRoshanPopup {
@@ -792,7 +793,7 @@ message CDOTAUserMsg_CustomMsg {
 
 message CDOTAUserMsg_CoachHUDPing {
 	optional uint32 player_id = 1;
-	optional .CDOTAMsg_CoachHUDPing hud_ping = 2;
+	optional .alice.ps1.CDOTAMsg_CoachHUDPing hud_ping = 2;
 }
 
 message CDOTAUserMsg_ClientLoadGridNav {
@@ -801,7 +802,7 @@ message CDOTAUserMsg_ClientLoadGridNav {
 message CDOTAUserMsg_AbilityPing {
 	optional uint32 player_id = 1;
 	optional uint32 ability_id = 2;
-	optional .DOTA_ABILITY_PING_TYPE type = 3 [default = ABILITY_PING_READY];
+	optional .alice.ps1.DOTA_ABILITY_PING_TYPE type = 3 [default = ABILITY_PING_READY];
 	optional uint32 cooldown_seconds = 4;
 	optional uint32 level = 5;
 	optional bool passive = 6;
@@ -841,7 +842,7 @@ message CDOTAUserMsg_BoosterStatePlayer {
 }
 
 message CDOTAUserMsg_BoosterState {
-	repeated .CDOTAUserMsg_BoosterStatePlayer boosted_players = 1;
+	repeated .alice.ps1.CDOTAUserMsg_BoosterStatePlayer boosted_players = 1;
 }
 
 message CDOTAUserMsg_PlayerMMR {
@@ -863,12 +864,12 @@ message CDOTAUserMsg_StatsHeroLookup {
 
 message CDOTAUserMsg_StatsHeroPositionInfo {
 	message PositionPair {
-		optional .DOTA_POSITION_CATEGORY position_category = 1 [default = DOTA_POSITION_NONE];
+		optional .alice.ps1.DOTA_POSITION_CATEGORY position_category = 1 [default = DOTA_POSITION_NONE];
 		optional uint32 position_count = 2;
 	}
 
 	optional float average_position = 1;
-	repeated .CDOTAUserMsg_StatsHeroPositionInfo.PositionPair position_details = 2;
+	repeated .alice.ps1.CDOTAUserMsg_StatsHeroPositionInfo.PositionPair position_details = 2;
 }
 
 message CDOTAUserMsg_StatsHeroMinuteDetails {
@@ -876,7 +877,7 @@ message CDOTAUserMsg_StatsHeroMinuteDetails {
 	optional uint32 hero_kills = 2;
 	optional uint32 hero_damage = 3;
 	optional uint32 tower_damage = 4;
-	optional .CDOTAUserMsg_StatsHeroPositionInfo position_info = 5;
+	optional .alice.ps1.CDOTAUserMsg_StatsHeroPositionInfo position_info = 5;
 	optional uint32 total_xp = 6;
 	optional uint32 net_worth = 7;
 	optional uint32 harvested_creep_gold = 8;
@@ -896,7 +897,7 @@ message CDOTAUserMsg_StatsTeamMinuteDetails {
 		optional uint32 value = 3;
 	}
 
-	repeated .CDOTAUserMsg_StatsHeroMinuteDetails player_stats = 1;
+	repeated .alice.ps1.CDOTAUserMsg_StatsHeroMinuteDetails player_stats = 1;
 	optional uint32 tower_kills = 2;
 	optional uint32 barrack_kills = 3;
 	optional uint32 available_lane_creep_gold = 4;
@@ -905,7 +906,7 @@ message CDOTAUserMsg_StatsTeamMinuteDetails {
 	optional uint32 balance_barracks_value = 7;
 	optional uint32 balance_gold_value = 8;
 	optional uint32 balance_xp_value = 9;
-	repeated .CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance lane_performance = 10;
+	repeated .alice.ps1.CDOTAUserMsg_StatsTeamMinuteDetails.LocationPerformance lane_performance = 10;
 }
 
 message CDOTAUserMsg_StatsPlayerKillShare {
@@ -919,7 +920,7 @@ message CDOTAUserMsg_StatsPlayerKillShare {
 
 message CDOTAUserMsg_StatsKillDetails {
 	optional uint32 victim_id = 1;
-	repeated .CDOTAUserMsg_StatsPlayerKillShare kill_shares = 2;
+	repeated .alice.ps1.CDOTAUserMsg_StatsPlayerKillShare kill_shares = 2;
 	optional uint32 damage_to_kill = 3;
 	optional uint32 effective_health = 4;
 	optional float death_time = 5;
@@ -937,16 +938,16 @@ message CDOTAUserMsg_StatsMatchDetails {
 	message CDOTAUserMsg_StatsFightDetails {
 		optional float start_time = 1;
 		optional float end_time = 2;
-		optional .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails radiant_fight_details = 3;
-		optional .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails dire_fight_details = 4;
+		optional .alice.ps1.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails radiant_fight_details = 3;
+		optional .alice.ps1.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightTeamDetails dire_fight_details = 4;
 	}
 
-	repeated .CDOTAUserMsg_StatsHeroLookup hero_lookup = 1;
-	repeated .CDOTAUserMsg_StatsTeamMinuteDetails radiant_stats = 2;
-	repeated .CDOTAUserMsg_StatsTeamMinuteDetails dire_stats = 3;
-	repeated .CDOTAUserMsg_StatsKillDetails radiant_kills = 4;
-	repeated .CDOTAUserMsg_StatsKillDetails dire_kills = 5;
-	repeated .CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails fight_details = 6;
+	repeated .alice.ps1.CDOTAUserMsg_StatsHeroLookup hero_lookup = 1;
+	repeated .alice.ps1.CDOTAUserMsg_StatsTeamMinuteDetails radiant_stats = 2;
+	repeated .alice.ps1.CDOTAUserMsg_StatsTeamMinuteDetails dire_stats = 3;
+	repeated .alice.ps1.CDOTAUserMsg_StatsKillDetails radiant_kills = 4;
+	repeated .alice.ps1.CDOTAUserMsg_StatsKillDetails dire_kills = 5;
+	repeated .alice.ps1.CDOTAUserMsg_StatsMatchDetails.CDOTAUserMsg_StatsFightDetails fight_details = 6;
 }
 
 message CDOTAUserMsg_MiniTaunt {
@@ -954,19 +955,19 @@ message CDOTAUserMsg_MiniTaunt {
 }
 
 message CMsgHeroAbilityStat {
-	optional .EHeroStatType stat_type = 1 [default = k_EHeroStatType_None];
+	optional .alice.ps1.EHeroStatType stat_type = 1 [default = k_EHeroStatType_None];
 	optional int32 int_value = 2;
 	optional float float_value = 3;
 }
 
 message CMsgCombatAnalyzerPlayerStat {
 	optional uint32 account_id = 1;
-	repeated .CMsgHeroAbilityStat hero_ability_stats = 2;
+	repeated .alice.ps1.CMsgHeroAbilityStat hero_ability_stats = 2;
 }
 
 message CMsgCombatAnalyzerStats {
 	optional uint64 match_id = 1;
-	repeated .CMsgCombatAnalyzerPlayerStat player_stats = 2;
+	repeated .alice.ps1.CMsgCombatAnalyzerPlayerStat player_stats = 2;
 }
 
 message CDOTAUserMsg_BeastChat {

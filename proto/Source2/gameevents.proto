@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "networkbasetypes.proto";
 
@@ -26,9 +27,9 @@ message CMsgVDebugGameSessionIDEvent {
 }
 
 message CMsgPlaceDecalEvent {
-	optional .CMsgVector position = 1;
-	optional .CMsgVector normal = 2;
-	optional .CMsgVector saxis = 3;
+	optional .alice.ps2.CMsgVector position = 1;
+	optional .alice.ps2.CMsgVector normal = 2;
+	optional .alice.ps2.CMsgVector saxis = 3;
 	optional uint32 decalmaterialindex = 4;
 	optional uint32 flags = 5;
 	optional fixed32 color = 6;
@@ -98,4 +99,3 @@ message CMsgSosSetLibraryStackField {
 	optional bytes data = 3;
 	optional int32 index = 4;
 }
-

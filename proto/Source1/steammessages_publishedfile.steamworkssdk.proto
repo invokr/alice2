@@ -1,3 +1,4 @@
+package alice.ps1;
 import "steammessages_unified_base.steamworkssdk.proto";
 
 message CPublishedFile_Subscribe_Request {
@@ -130,14 +131,14 @@ message PublishedFileDetails {
 	optional string image_url = 48;
 	optional string app_name = 49;
 	optional uint32 time_subscribed = 50;
-	repeated .PublishedFileDetails.Preview previews = 51;
-	repeated .PublishedFileDetails.Tag tags = 52;
-	repeated .PublishedFileDetails.Child children = 53;
-	repeated .PublishedFileDetails.KVTag kvtags = 54;
+	repeated .alice.ps1.PublishedFileDetails.Preview previews = 51;
+	repeated .alice.ps1.PublishedFileDetails.Tag tags = 52;
+	repeated .alice.ps1.PublishedFileDetails.Child children = 53;
+	repeated .alice.ps1.PublishedFileDetails.KVTag kvtags = 54;
 }
 
 message CPublishedFile_GetDetails_Response {
-	repeated .PublishedFileDetails publishedfiledetails = 1;
+	repeated .alice.ps1.PublishedFileDetails publishedfiledetails = 1;
 }
 
 message CPublishedFile_GetUserFiles_Request {
@@ -162,8 +163,8 @@ message CPublishedFile_GetUserFiles_Response {
 
 	optional uint32 total = 1;
 	optional uint32 startindex = 2;
-	repeated .PublishedFileDetails publishedfiledetails = 3;
-	repeated .CPublishedFile_GetUserFiles_Response.App apps = 4;
+	repeated .alice.ps1.PublishedFileDetails publishedfiledetails = 3;
+	repeated .alice.ps1.CPublishedFile_GetUserFiles_Response.App apps = 4;
 }
 
 message CPublishedFile_Update_Request {

@@ -1,3 +1,4 @@
+package alice.ps1;
 import "networkbasetypes.proto";
 
 option optimize_for = SPEED;
@@ -75,14 +76,14 @@ message CUserMsg_Shake {
 }
 
 message CUserMsg_ShakeDir {
-	optional .CUserMsg_Shake shake = 1;
-	optional .CMsgVector direction = 2;
+	optional .alice.ps1.CUserMsg_Shake shake = 1;
+	optional .alice.ps1.CMsgVector direction = 2;
 }
 
 message CUserMsg_Tilt {
 	optional uint32 command = 1;
 	optional bool ease_in_out = 2;
-	optional .CMsgVector angle = 3;
+	optional .alice.ps1.CMsgVector angle = 3;
 	optional float duration = 4;
 	optional float time = 5;
 }
@@ -174,7 +175,7 @@ message CUserMsg_VGUIMenu {
 
 	optional string name = 1;
 	optional bool show = 2;
-	repeated .CUserMsg_VGUIMenu.Keys keys = 3;
+	repeated .alice.ps1.CUserMsg_VGUIMenu.Keys keys = 3;
 }
 
 message CUserMsg_Geiger {
@@ -210,6 +211,6 @@ message CUserMsg_CameraTransition {
 
 	optional uint32 camera_type = 1;
 	optional float duration = 2;
-	optional .CUserMsg_CameraTransition.Transition_DataDriven params_data_driven = 3;
+	optional .alice.ps1.CUserMsg_CameraTransition.Transition_DataDriven params_data_driven = 3;
 }
 

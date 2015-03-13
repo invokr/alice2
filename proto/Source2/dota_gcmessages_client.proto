@@ -1,3 +1,4 @@
+package alice.ps2;
 import "steammessages.proto";
 import "dota_gcmessages_common.proto";
 import "gcsdk_gcmessages.proto";
@@ -186,12 +187,12 @@ message CMsgStartFindingMatch {
 	optional uint32 matchgroups = 2 [default = 4294967295];
 	optional uint32 client_version = 3;
 	optional uint32 game_modes = 4 [default = 4294967295];
-	optional .DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
-	optional .MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
+	optional .alice.ps2.DOTABotDifficulty bot_difficulty = 5 [default = BOT_DIFFICULTY_HARD];
+	optional .alice.ps2.MatchType match_type = 6 [default = MATCH_TYPE_CASUAL];
 	optional uint32 matchlanguages = 7 [default = 4294967295];
 	optional uint32 map_preference = 9;
 	optional uint32 team_id = 8;
-	optional .MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
+	optional .alice.ps2.MatchLanguages game_language_enum = 10 [default = MATCH_LANGUAGE_INVALID];
 	optional string game_language_name = 11;
 }
 
@@ -199,7 +200,7 @@ message CMsgStopFindingMatch {
 }
 
 message CMsgReadyUp {
-	optional .DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
+	optional .alice.ps2.DOTALobbyReadyState state = 1 [default = DOTALobbyReadyState_UNDECLARED];
 	optional fixed64 ready_up_key = 2;
 }
 
@@ -219,11 +220,11 @@ message CSourceTVGame {
 	optional uint32 source_tv_public_addr = 1;
 	optional uint32 source_tv_private_addr = 2;
 	optional uint32 source_tv_port = 3;
-	repeated .CSourceTVGame.Player good_players = 14;
-	repeated .CSourceTVGame.Player bad_players = 15;
-	repeated .CSourceTVGame.Player other_players = 16;
+	repeated .alice.ps2.CSourceTVGame.Player good_players = 14;
+	repeated .alice.ps2.CSourceTVGame.Player bad_players = 15;
+	repeated .alice.ps2.CSourceTVGame.Player other_players = 16;
 	optional string game_name = 7;
-	repeated .CLobbyTeamDetails team_details = 9;
+	repeated .alice.ps2.CLobbyTeamDetails team_details = 9;
 	optional uint32 num_spectators = 10;
 	optional uint32 tournament_id = 11;
 	optional uint32 tournament_game_id = 12;
@@ -232,13 +233,13 @@ message CSourceTVGame {
 	optional float game_time = 18;
 	optional fixed64 server_steamid = 19;
 	optional uint32 leagueid = 20;
-	optional .DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
+	optional .alice.ps2.DOTA_GameMode game_mode = 21 [default = DOTA_GAMEMODE_NONE];
 	optional uint32 lobby_type = 22;
 	optional uint64 custom_game_id = 24;
 }
 
 message CMsgSourceTVGamesResponse {
-	repeated .CSourceTVGame games = 1;
+	repeated .alice.ps2.CSourceTVGame games = 1;
 	optional uint32 num_total_games = 2;
 }
 
@@ -270,16 +271,16 @@ message CMsgClientSuspended {
 message CMsgPracticeLobbySetDetails {
 	optional uint64 lobby_id = 1;
 	optional string game_name = 2;
-	repeated .CLobbyTeamDetails team_details = 3;
+	repeated .alice.ps2.CLobbyTeamDetails team_details = 3;
 	optional uint32 server_region = 4;
 	optional uint32 game_mode = 5;
-	optional .DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
-	optional .DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
+	optional .alice.ps2.DOTA_CM_PICK cm_pick = 6 [default = DOTA_CM_RANDOM];
+	optional .alice.ps2.DOTABotDifficulty bot_difficulty = 9 [default = BOT_DIFFICULTY_MEDIUM];
 	optional bool allow_cheats = 10;
 	optional bool fill_with_bots = 11;
 	optional bool intro_mode = 12;
 	optional bool allow_spectating = 13;
-	optional .DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
+	optional .alice.ps2.DOTAGameVersion game_version = 14 [default = GAME_VERSION_CURRENT];
 	optional string pass_key = 15;
 	optional uint32 leagueid = 16;
 	optional uint32 penalty_level_radiant = 17;
@@ -289,7 +290,7 @@ message CMsgPracticeLobbySetDetails {
 	optional uint32 radiant_series_wins = 21;
 	optional uint32 dire_series_wins = 22;
 	optional bool allchat = 23 [default = false];
-	optional .LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
+	optional .alice.ps2.LobbyDotaTVDelay dota_tv_delay = 24 [default = LobbyDotaTV_120];
 	optional bool lan = 25;
 	optional string custom_game_mode = 26;
 	optional string custom_map_name = 27;
@@ -311,18 +312,18 @@ message CMsgPracticeLobbyCreate {
 	optional uint32 tournament_id = 4;
 	optional string pass_key = 5;
 	optional uint32 client_version = 6;
-	optional .CMsgPracticeLobbySetDetails lobby_details = 7;
-	optional .CMsgPracticeLobbyCreate.SaveGame save_game = 8;
+	optional .alice.ps2.CMsgPracticeLobbySetDetails lobby_details = 7;
+	optional .alice.ps2.CMsgPracticeLobbyCreate.SaveGame save_game = 8;
 }
 
 message CMsgPracticeLobbySetTeamSlot {
-	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .alice.ps2.DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 slot = 2;
-	optional .DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_INVALID];
+	optional .alice.ps2.DOTABotDifficulty bot_difficulty = 3 [default = BOT_DIFFICULTY_INVALID];
 }
 
 message CMsgPracticeLobbySetCoach {
-	optional .DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .alice.ps2.DOTA_GC_TEAM team = 1 [default = DOTA_GC_TEAM_GOOD_GUYS];
 }
 
 message CMsgPracticeLobbyJoinBroadcastChannel {
@@ -364,7 +365,7 @@ message CMsgPracticeLobbyListResponseEntry {
 	optional uint64 id = 1 [(key_field) = true];
 	optional uint32 tournament_id = 3;
 	optional uint32 tournament_game_id = 4;
-	repeated .CMsgPracticeLobbyListResponseEntry.CLobbyMember members = 5;
+	repeated .alice.ps2.CMsgPracticeLobbyListResponseEntry.CLobbyMember members = 5;
 	optional bool requires_pass_key = 6;
 	optional uint32 leader_account_id = 7;
 	optional uint32 guild_id = 8;
@@ -375,7 +376,7 @@ message CMsgPracticeLobbyListResponseEntry {
 
 message CMsgPracticeLobbyListResponse {
 	optional bool tournament_games = 1;
-	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 2;
+	repeated .alice.ps2.CMsgPracticeLobbyListResponseEntry lobbies = 2;
 }
 
 message CMsgPracticeLobbyJoin {
@@ -385,7 +386,7 @@ message CMsgPracticeLobbyJoin {
 }
 
 message CMsgPracticeLobbyJoinResponse {
-	optional .DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
+	optional .alice.ps2.DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
 }
 
 message CMsgFriendPracticeLobbyListRequest {
@@ -393,7 +394,7 @@ message CMsgFriendPracticeLobbyListRequest {
 }
 
 message CMsgFriendPracticeLobbyListResponse {
-	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
+	repeated .alice.ps2.CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
 message CMsgGuildmatePracticeLobbyListRequest {
@@ -401,7 +402,7 @@ message CMsgGuildmatePracticeLobbyListRequest {
 }
 
 message CMsgGuildmatePracticeLobbyListResponse {
-	repeated .CMsgPracticeLobbyListResponseEntry lobbies = 1;
+	repeated .alice.ps2.CMsgPracticeLobbyListResponseEntry lobbies = 1;
 }
 
 message CMsgJoinableCustomGameModesRequest {
@@ -415,7 +416,7 @@ message CMsgJoinableCustomGameModesResponseEntry {
 }
 
 message CMsgJoinableCustomGameModesResponse {
-	repeated .CMsgJoinableCustomGameModesResponseEntry game_modes = 1;
+	repeated .alice.ps2.CMsgJoinableCustomGameModesResponseEntry game_modes = 1;
 }
 
 message CMsgJoinableCustomLobbiesRequest {
@@ -433,7 +434,7 @@ message CMsgJoinableCustomLobbiesResponseEntry {
 }
 
 message CMsgJoinableCustomLobbiesResponse {
-	repeated .CMsgJoinableCustomLobbiesResponseEntry lobbies = 1;
+	repeated .alice.ps2.CMsgJoinableCustomLobbiesResponseEntry lobbies = 1;
 }
 
 message CMsgQuickJoinCustomLobby {
@@ -443,14 +444,14 @@ message CMsgQuickJoinCustomLobby {
 }
 
 message CMsgQuickJoinCustomLobbyResponse {
-	optional .DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
+	optional .alice.ps2.DOTAJoinLobbyResult result = 1 [default = DOTA_JOIN_RESULT_SUCCESS];
 }
 
 message CMsgBotGameCreate {
 	optional string search_key = 1;
 	optional uint32 client_version = 2;
-	optional .DOTABotDifficulty difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
-	optional .DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
+	optional .alice.ps2.DOTABotDifficulty difficulty = 3 [default = BOT_DIFFICULTY_PASSIVE];
+	optional .alice.ps2.DOTA_GC_TEAM team = 4 [default = DOTA_GC_TEAM_GOOD_GUYS];
 	optional uint32 game_mode = 5;
 }
 
@@ -506,7 +507,7 @@ message CMsgDOTATournament {
 		optional bool live_stream = 7;
 		optional string message = 9;
 		optional bool results_final = 10;
-		optional .ETournamentGameState state = 14 [default = k_ETournamentGameState_Unknown];
+		optional .alice.ps2.ETournamentGameState state = 14 [default = k_ETournamentGameState_Unknown];
 		optional uint32 node_id = 15;
 		optional uint32 start_time = 16;
 	}
@@ -518,21 +519,21 @@ message CMsgDOTATournament {
 		optional uint32 winner_node = 4;
 		optional uint32 loser_node = 5;
 		optional uint32 series_type = 7;
-		optional .ETournamentNodeState node_state = 8 [default = k_ETournamentNodeState_Unknown];
+		optional .alice.ps2.ETournamentNodeState node_state = 8 [default = k_ETournamentNodeState_Unknown];
 		optional uint32 series_id = 9;
 		optional uint32 start_time = 16;
 	}
 
-	repeated .CMsgDOTATournament.Team teams = 1;
-	repeated .CMsgDOTATournament.Game games = 2;
+	repeated .alice.ps2.CMsgDOTATournament.Team teams = 1;
+	repeated .alice.ps2.CMsgDOTATournament.Game games = 2;
 	optional uint64 gid = 3;
 	optional uint32 tournament_id = 4;
-	optional .ETournamentType tournament_type = 5 [default = k_ETournamentType_Unknown];
-	optional .ETournamentTemplate tournament_template = 6 [default = k_ETournamentTemplate_None];
+	optional .alice.ps2.ETournamentType tournament_type = 5 [default = k_ETournamentType_Unknown];
+	optional .alice.ps2.ETournamentTemplate tournament_template = 6 [default = k_ETournamentTemplate_None];
 	optional uint32 league_id = 7;
 	optional uint32 start_time = 8;
-	optional .ETournamentState state = 9 [default = k_ETournamentState_Unknown];
-	repeated .CMsgDOTATournament.Node nodes = 10;
+	optional .alice.ps2.ETournamentState state = 9 [default = k_ETournamentState_Unknown];
+	repeated .alice.ps2.CMsgDOTATournament.Node nodes = 10;
 }
 
 message CMsgDOTATournamentRequest {
@@ -542,7 +543,7 @@ message CMsgDOTATournamentRequest {
 
 message CMsgDOTATournamentResponse {
 	optional uint32 result = 1 [default = 2];
-	optional .CMsgDOTATournament tournament = 2;
+	optional .alice.ps2.CMsgDOTATournament tournament = 2;
 }
 
 message CMsgDOTAClearTournamentGame {
@@ -597,8 +598,8 @@ message CMsgDOTAMatch {
 		optional uint32 claimed_denies = 44;
 		optional uint32 claimed_misses = 45;
 		optional uint32 misses = 46;
-		repeated .CMatchPlayerAbilityUpgrade ability_upgrades = 47;
-		repeated .CMatchAdditionalUnitInventory additional_units_inventory = 48;
+		repeated .alice.ps2.CMatchPlayerAbilityUpgrade ability_upgrades = 47;
+		repeated .alice.ps2.CMatchAdditionalUnitInventory additional_units_inventory = 48;
 	}
 
 	message BroadcasterInfo {
@@ -609,7 +610,7 @@ message CMsgDOTAMatch {
 	message BroadcasterChannel {
 		optional string country_code = 1;
 		optional string description = 2;
-		repeated .CMsgDOTAMatch.BroadcasterInfo broadcaster_infos = 3;
+		repeated .alice.ps2.CMsgDOTAMatch.BroadcasterInfo broadcaster_infos = 3;
 		optional string language_code = 4;
 	}
 
@@ -622,7 +623,7 @@ message CMsgDOTAMatch {
 	optional bool good_guys_win = 2;
 	optional uint32 duration = 3;
 	optional fixed32 startTime = 4;
-	repeated .CMsgDOTAMatch.Player players = 5;
+	repeated .alice.ps2.CMsgDOTAMatch.Player players = 5;
 	optional uint32 match_id = 6;
 	repeated uint32 tower_status = 8;
 	repeated uint32 barracks_status = 9;
@@ -646,10 +647,10 @@ message CMsgDOTAMatch {
 	optional uint32 dire_team_complete = 28;
 	optional uint32 positive_votes = 29;
 	optional uint32 negative_votes = 30;
-	optional .DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
-	repeated .CMatchHeroSelectEvent picks_bans = 32;
+	optional .alice.ps2.DOTA_GameMode game_mode = 31 [default = DOTA_GAMEMODE_NONE];
+	repeated .alice.ps2.CMatchHeroSelectEvent picks_bans = 32;
 	optional uint64 match_seq_num = 33;
-	optional .CMsgDOTAMatch.ReplayState replay_state = 34 [default = REPLAY_AVAILABLE];
+	optional .alice.ps2.CMsgDOTAMatch.ReplayState replay_state = 34 [default = REPLAY_AVAILABLE];
 	optional uint32 radiant_guild_id = 35;
 	optional uint32 dire_guild_id = 36;
 	optional string radiant_team_tag = 37;
@@ -657,7 +658,7 @@ message CMsgDOTAMatch {
 	optional uint32 series_id = 39;
 	optional uint32 series_type = 40;
 	optional uint64 custom_game_id = 42;
-	repeated .CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
+	repeated .alice.ps2.CMsgDOTAMatch.BroadcasterChannel broadcaster_channels = 43;
 }
 
 message CMsgDOTAPlayerMatchHistory {
@@ -689,20 +690,20 @@ message CMsgDOTARequestMatches {
 	optional bool tournament_games_only = 14;
 	optional uint32 account_id = 15;
 	optional uint32 league_id = 16;
-	optional .CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
+	optional .alice.ps2.CMsgDOTARequestMatches.SkillLevel skill = 17 [default = Any];
 	optional uint32 team_id = 18;
 	optional uint64 custom_game_id = 20;
 }
 
 message CMsgDOTARequestMatchesResponse {
 	message Series {
-		repeated .CMsgDOTAMatch matches = 1;
+		repeated .alice.ps2.CMsgDOTAMatch matches = 1;
 		optional uint32 series_id = 2;
 		optional uint32 series_type = 3;
 	}
 
-	repeated .CMsgDOTAMatch matches = 1;
-	repeated .CMsgDOTARequestMatchesResponse.Series series = 2;
+	repeated .alice.ps2.CMsgDOTAMatch matches = 1;
+	repeated .alice.ps2.CMsgDOTARequestMatchesResponse.Series series = 2;
 	optional uint32 request_id = 3;
 	optional uint32 total_results = 4;
 	optional uint32 results_remaining = 5;
@@ -762,7 +763,7 @@ message CMsgDOTAPopup {
 		TARGET_ENGINE_MISMATCH = 55;
 	}
 
-	optional .CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
+	optional .alice.ps2.CMsgDOTAPopup.PopupID id = 1 [default = KICKED_FROM_LOBBY];
 	optional string custom_text = 2;
 	optional sint32 int_data = 3;
 }
@@ -784,7 +785,7 @@ message CMsgDOTATeamMember {
 }
 
 message CMsgDOTATeam {
-	repeated .CMsgDOTATeamMember members = 1;
+	repeated .alice.ps2.CMsgDOTATeamMember members = 1;
 	optional uint32 team_id = 2;
 	optional string name = 3;
 	optional string tag = 4;
@@ -843,7 +844,7 @@ message CMsgDOTACreateTeamResponse {
 		CREATOR_INSUFFICIENT_LEVEL = 16;
 	}
 
-	repeated .CMsgDOTACreateTeamResponse.Result results = 1;
+	repeated .alice.ps2.CMsgDOTACreateTeamResponse.Result results = 1;
 	optional uint32 team_id = 2;
 	optional uint32 seconds_remaining = 3;
 	optional uint32 required_level = 4;
@@ -878,7 +879,7 @@ message CMsgDOTAEditTeamLogoResponse {
 		NO_LOGO = 12;
 	}
 
-	repeated .CMsgDOTAEditTeamLogoResponse.Result results = 1;
+	repeated .alice.ps2.CMsgDOTAEditTeamLogoResponse.Result results = 1;
 }
 
 message CMsgDOTAEditTeamDetails {
@@ -895,7 +896,7 @@ message CMsgDOTAEditTeamDetailsResponse {
 		UNSPECIFIED_ERROR = 10;
 	}
 
-	repeated .CMsgDOTAEditTeamDetailsResponse.Result results = 1;
+	repeated .alice.ps2.CMsgDOTAEditTeamDetailsResponse.Result results = 1;
 }
 
 message CMsgDOTADisbandTeam {
@@ -909,7 +910,7 @@ message CMsgDOTADisbandTeamResponse {
 		FAILURE_NOT_EMPTY = 2;
 	}
 
-	optional .CMsgDOTADisbandTeamResponse.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTADisbandTeamResponse.Result result = 1 [default = SUCCESS];
 	optional string team_name = 2;
 }
 
@@ -922,14 +923,14 @@ message CMsgDOTARequestTeamDataResponse {
 		FAILURE = 1;
 	}
 
-	optional .CMsgDOTARequestTeamDataResponse.Result result = 1 [default = SUCCESS];
-	repeated .CMsgDOTATeamData data = 2;
+	optional .alice.ps2.CMsgDOTARequestTeamDataResponse.Result result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTATeamData data = 2;
 }
 
 message CMsgDOTATeamData {
 	optional bool on_team = 1;
 	optional bool profile_team = 2;
-	optional .CMsgDOTATeam team = 3;
+	optional .alice.ps2.CMsgDOTATeam team = 3;
 }
 
 message CMsgDOTATeamProfileRequest {
@@ -951,7 +952,7 @@ message CMsgDOTATeamIDByNameResponse {
 
 message CMsgDOTATeamProfileResponse {
 	optional uint32 eresult = 1;
-	optional .CMsgDOTATeam team = 2;
+	optional .alice.ps2.CMsgDOTATeam team = 2;
 }
 
 message CMsgDOTAProTeamListRequest {
@@ -967,7 +968,7 @@ message CMsgDOTAProTeamListResponse {
 		optional uint32 member_count = 6;
 	}
 
-	repeated .CMsgDOTAProTeamListResponse.TeamEntry teams = 1;
+	repeated .alice.ps2.CMsgDOTAProTeamListResponse.TeamEntry teams = 1;
 	optional uint32 eresult = 2;
 }
 
@@ -988,7 +989,7 @@ message CMsgDOTATeamInvite_GCImmediateResponseToInviter {
 		INVITEE_INSUFFICIENT_LEVEL = 7;
 	}
 
-	optional .CMsgDOTATeamInvite_GCImmediateResponseToInviter.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTATeamInvite_GCImmediateResponseToInviter.Result result = 1 [default = SUCCESS];
 	optional string invitee_name = 2;
 	optional uint32 required_level = 3;
 }
@@ -1007,7 +1008,7 @@ message CMsgDOTATeamInvite_InviteeResponseToGC {
 		TIMEOUT = 2;
 	}
 
-	optional .CMsgDOTATeamInvite_InviteeResponseToGC.Result result = 1 [default = JOIN];
+	optional .alice.ps2.CMsgDOTATeamInvite_InviteeResponseToGC.Result result = 1 [default = JOIN];
 }
 
 message CMsgDOTATeamInvite_GCResponseToInviter {
@@ -1018,7 +1019,7 @@ message CMsgDOTATeamInvite_GCResponseToInviter {
 		UNSPECIFIED_ERROR = 3;
 	}
 
-	optional .CMsgDOTATeamInvite_GCResponseToInviter.Result result = 1 [default = JOINED];
+	optional .alice.ps2.CMsgDOTATeamInvite_GCResponseToInviter.Result result = 1 [default = JOINED];
 	optional string invitee_name = 2;
 }
 
@@ -1028,7 +1029,7 @@ message CMsgDOTATeamInvite_GCResponseToInvitee {
 		FAILURE = 1;
 	}
 
-	optional .CMsgDOTATeamInvite_GCResponseToInvitee.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTATeamInvite_GCResponseToInvitee.Result result = 1 [default = SUCCESS];
 	optional string team_name = 2;
 }
 
@@ -1048,7 +1049,7 @@ message CMsgDOTAKickTeamMemberResponse {
 		FAILURE = 1;
 	}
 
-	optional .CMsgDOTAKickTeamMemberResponse.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAKickTeamMemberResponse.Result result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTATransferTeamAdmin {
@@ -1065,7 +1066,7 @@ message CMsgDOTATransferTeamAdminResponse {
 		UNSPECIFIED_ERROR = 4;
 	}
 
-	optional .CMsgDOTATransferTeamAdminResponse.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTATransferTeamAdminResponse.Result result = 1 [default = SUCCESS];
 	optional string invitee_name = 2;
 }
 
@@ -1079,7 +1080,7 @@ message CMsgDOTALeaveTeamResponse {
 		FAILURE = 1;
 	}
 
-	optional .CMsgDOTALeaveTeamResponse.Result result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTALeaveTeamResponse.Result result = 1 [default = SUCCESS];
 	optional string team_name = 2;
 }
 
@@ -1089,7 +1090,7 @@ message CMsgDOTABetaParticipation {
 
 message CMsgDOTAJoinChatChannel {
 	optional string channel_name = 2;
-	optional .DOTAChatChannelType_t channel_type = 4 [default = DOTAChannelType_Regional];
+	optional .alice.ps2.DOTAChatChannelType_t channel_type = 4 [default = DOTAChannelType_Regional];
 }
 
 message CMsgDOTALeaveChatChannel {
@@ -1122,12 +1123,12 @@ message CMsgDOTAJoinChatChannelResponse {
 	optional string channel_name = 2;
 	optional fixed64 channel_id = 3;
 	optional uint32 max_members = 4;
-	repeated .CMsgDOTAChatMember members = 5;
+	repeated .alice.ps2.CMsgDOTAChatMember members = 5;
 }
 
 message CMsgDOTAChatChannelFullUpdate {
 	optional fixed64 channel_id = 1;
-	repeated .CMsgDOTAChatMember members = 2;
+	repeated .alice.ps2.CMsgDOTAChatMember members = 2;
 }
 
 message CMsgDOTAOtherJoinedChatChannel {
@@ -1149,7 +1150,7 @@ message CMsgDOTAChatChannelMemberUpdate {
 
 	optional fixed64 channel_id = 1;
 	repeated fixed64 left_steam_ids = 2;
-	repeated .CMsgDOTAChatChannelMemberUpdate.JoinedMember joined_members = 3;
+	repeated .alice.ps2.CMsgDOTAChatChannelMemberUpdate.JoinedMember joined_members = 3;
 }
 
 message CMsgDOTARequestChatChannelList {
@@ -1159,10 +1160,10 @@ message CMsgDOTARequestChatChannelListResponse {
 	message ChatChannel {
 		optional string channel_name = 1;
 		optional uint32 num_members = 2;
-		optional .DOTAChatChannelType_t channel_type = 3 [default = DOTAChannelType_Regional];
+		optional .alice.ps2.DOTAChatChannelType_t channel_type = 3 [default = DOTAChannelType_Regional];
 	}
 
-	repeated .CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
+	repeated .alice.ps2.CMsgDOTARequestChatChannelListResponse.ChatChannel channels = 1;
 }
 
 message CMsgDOTAChatGetUserList {
@@ -1176,7 +1177,7 @@ message CMsgDOTAChatGetUserListResponse {
 	}
 
 	optional fixed64 channel_id = 1;
-	repeated .CMsgDOTAChatGetUserListResponse.Member members = 2;
+	repeated .alice.ps2.CMsgDOTAChatGetUserListResponse.Member members = 2;
 }
 
 message CMsgDOTAGuildSDO {
@@ -1200,8 +1201,8 @@ message CMsgDOTAGuildSDO {
 	optional uint64 logo = 6;
 	optional uint64 base_logo = 7;
 	optional uint64 banner_logo = 8;
-	repeated .CMsgDOTAGuildSDO.Member members = 9;
-	repeated .CMsgDOTAGuildSDO.Invitation invitations = 10;
+	repeated .alice.ps2.CMsgDOTAGuildSDO.Member members = 9;
+	repeated .alice.ps2.CMsgDOTAGuildSDO.Invitation invitations = 10;
 	optional string message = 11;
 	optional bool incremental = 12;
 }
@@ -1218,7 +1219,7 @@ message CMsgDOTAGuildAuditSDO {
 	}
 
 	optional uint32 guild_id = 1;
-	repeated .CMsgDOTAGuildAuditSDO.Entry entries = 2;
+	repeated .alice.ps2.CMsgDOTAGuildAuditSDO.Entry entries = 2;
 }
 
 message CMsgDOTAAccountGuildMembershipsSDO {
@@ -1234,8 +1235,8 @@ message CMsgDOTAAccountGuildMembershipsSDO {
 	}
 
 	optional uint32 account_id = 1;
-	repeated .CMsgDOTAAccountGuildMembershipsSDO.Membership memberships = 2;
-	repeated .CMsgDOTAAccountGuildMembershipsSDO.Invitation invitations = 3;
+	repeated .alice.ps2.CMsgDOTAAccountGuildMembershipsSDO.Membership memberships = 2;
+	repeated .alice.ps2.CMsgDOTAAccountGuildMembershipsSDO.Invitation invitations = 3;
 }
 
 message CMsgDOTAGuildCreateRequest {
@@ -1261,7 +1262,7 @@ message CMsgDOTAGuildCreateResponse {
 	}
 
 	optional uint32 guild_id = 1;
-	repeated .CMsgDOTAGuildCreateResponse.EError errors = 2;
+	repeated .alice.ps2.CMsgDOTAGuildCreateResponse.EError errors = 2;
 }
 
 message CMsgDOTAGuildSetAccountRoleRequest {
@@ -1280,7 +1281,7 @@ message CMsgDOTAGuildSetAccountRoleResponse {
 		ERROR_GUILD_TOO_MANY_MEMBERS = 5;
 	}
 
-	optional .CMsgDOTAGuildSetAccountRoleResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAGuildSetAccountRoleResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAGuildInviteAccountRequest {
@@ -1300,7 +1301,7 @@ message CMsgDOTAGuildInviteAccountResponse {
 		ERROR_ACCOUNT_TOO_MANY_GUILDS = 7;
 	}
 
-	optional .CMsgDOTAGuildInviteAccountResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAGuildInviteAccountResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAGuildCancelInviteRequest {
@@ -1315,7 +1316,7 @@ message CMsgDOTAGuildCancelInviteResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAGuildCancelInviteResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAGuildCancelInviteResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAGuildUpdateDetailsRequest {
@@ -1332,7 +1333,7 @@ message CMsgDOTAGuildUpdateDetailsResponse {
 		ERROR_NO_PERMISSION = 2;
 	}
 
-	optional .CMsgDOTAGuildUpdateDetailsResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAGuildUpdateDetailsResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAGCToGCUpdateOpenGuildPartyRequest {
@@ -1365,7 +1366,7 @@ message CMsgDOTAPartySetOpenGuildResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgDOTAPartySetOpenGuildResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAPartySetOpenGuildResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAJoinOpenGuildPartyRequest {
@@ -1378,7 +1379,7 @@ message CMsgDOTAJoinOpenGuildPartyResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgDOTAJoinOpenGuildPartyResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAJoinOpenGuildPartyResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgDOTAGuildOpenPartyRefresh {
@@ -1390,7 +1391,7 @@ message CMsgDOTAGuildOpenPartyRefresh {
 	}
 
 	optional uint32 guild_id = 1;
-	repeated .CMsgDOTAGuildOpenPartyRefresh.OpenParty open_parties = 2;
+	repeated .alice.ps2.CMsgDOTAGuildOpenPartyRefresh.OpenParty open_parties = 2;
 }
 
 message CMsgDOTARequestGuildData {
@@ -1426,7 +1427,7 @@ message CMsgDOTAGuildEditLogoResponse {
 	}
 
 	optional uint32 guild_id = 1;
-	optional .CMsgDOTAGuildEditLogoResponse.EResult result = 2 [default = SUCCESS];
+	optional .alice.ps2.CMsgDOTAGuildEditLogoResponse.EResult result = 2 [default = SUCCESS];
 }
 
 message CMsgDOTAReportsRemainingRequest {
@@ -1464,7 +1465,7 @@ message CMsgDOTAReportCountsResponse {
 }
 
 message CMsgDOTAKickedFromMatchmakingQueue {
-	optional .MatchType match_type = 1 [default = MATCH_TYPE_CASUAL];
+	optional .alice.ps2.MatchType match_type = 1 [default = MATCH_TYPE_CASUAL];
 }
 
 message CMsgDOTARequestSaveGames {
@@ -1473,7 +1474,7 @@ message CMsgDOTARequestSaveGames {
 
 message CMsgDOTARequestSaveGamesResponse {
 	optional fixed64 steam_id = 1;
-	repeated .CDOTASaveGame save_games = 2;
+	repeated .alice.ps2.CDOTASaveGame save_games = 2;
 }
 
 message CMsgWatchGame {
@@ -1498,7 +1499,7 @@ message CMsgWatchGameResponse {
 		LOBBYNOTFOUND = 7;
 	}
 
-	optional .CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
+	optional .alice.ps2.CMsgWatchGameResponse.WatchGameResult watch_game_result = 1 [default = PENDING];
 	optional uint32 source_tv_public_addr = 2;
 	optional uint32 source_tv_private_addr = 3;
 	optional uint32 source_tv_port = 4;
@@ -1517,8 +1518,8 @@ message CMsgGCMatchDetailsRequest {
 
 message CMsgGCMatchDetailsResponse {
 	optional uint32 result = 1;
-	optional .CMsgDOTAMatch match = 2;
-	optional .DOTAMatchVote vote = 3 [default = DOTAMatchVote_INVALID];
+	optional .alice.ps2.CMsgDOTAMatch match = 2;
+	optional .alice.ps2.DOTAMatchVote vote = 3 [default = DOTAMatchVote_INVALID];
 }
 
 message CMsgDOTAProfileRequest {
@@ -1553,19 +1554,19 @@ message CMsgDOTAProfileResponse {
 	}
 
 	optional uint32 result = 1;
-	optional .CSODOTAGameAccountClient game_account_client = 2;
-	repeated .CMsgDOTAMatch latest_matches = 3;
-	repeated .CMsgDOTAProfileResponse.PlayedHero heroes = 4;
+	optional .alice.ps2.CSODOTAGameAccountClient game_account_client = 2;
+	repeated .alice.ps2.CMsgDOTAMatch latest_matches = 3;
+	repeated .alice.ps2.CMsgDOTAProfileResponse.PlayedHero heroes = 4;
 	optional string player_name = 5;
 	optional string team_name = 6;
 	optional string team_tag = 7;
 	optional uint64 team_logo = 8;
-	optional .CMsgDOTAProfileResponse.ShowcaseHero showcase_hero = 9;
-	repeated .CMsgDOTAProfileResponse.LeaguePass league_passes = 10;
-	repeated .CMsgDOTAProfileResponse.EventTicket event_tickets = 11;
+	optional .alice.ps2.CMsgDOTAProfileResponse.ShowcaseHero showcase_hero = 9;
+	repeated .alice.ps2.CMsgDOTAProfileResponse.LeaguePass league_passes = 10;
+	repeated .alice.ps2.CMsgDOTAProfileResponse.EventTicket event_tickets = 11;
 	optional uint32 team_id = 12;
 	optional bool has_passport = 13;
-	repeated .CMsgDOTAProfileResponse.FeaturedItem featured_items = 14;
+	repeated .alice.ps2.CMsgDOTAProfileResponse.FeaturedItem featured_items = 14;
 	optional uint32 abandon_percent = 15;
 }
 
@@ -1586,7 +1587,7 @@ message CMsgDOTAWelcome {
 	optional uint32 store_item_hash = 5;
 	optional uint32 timeplayedconsecutively = 6;
 	optional bool allow_3rd_party_match_history = 7;
-	optional .PartnerAccountType partner_account_type = 8 [default = PARTNER_NONE];
+	optional .alice.ps2.PartnerAccountType partner_account_type = 8 [default = PARTNER_NONE];
 	optional uint32 banned_word_list_word_id = 9;
 	optional uint32 partner_account_state = 11;
 	optional uint32 last_time_played = 12;
@@ -1641,7 +1642,7 @@ message CLeague {
 }
 
 message CMsgResponseLeagueInfo {
-	repeated .CLeague leagues = 1;
+	repeated .alice.ps2.CLeague leagues = 1;
 }
 
 message CMsgDOTAMatchVotes {
@@ -1651,12 +1652,12 @@ message CMsgDOTAMatchVotes {
 	}
 
 	optional uint32 match_id = 1;
-	repeated .CMsgDOTAMatchVotes.PlayerVote votes = 2;
+	repeated .alice.ps2.CMsgDOTAMatchVotes.PlayerVote votes = 2;
 }
 
 message CMsgCastMatchVote {
 	optional uint32 match_id = 1;
-	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
+	optional .alice.ps2.DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 }
 
 message CMsgRetrieveMatchVote {
@@ -1666,7 +1667,7 @@ message CMsgRetrieveMatchVote {
 
 message CMsgMatchVoteResponse {
 	optional uint32 eresult = 1 [default = 2];
-	optional .DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
+	optional .alice.ps2.DOTAMatchVote vote = 2 [default = DOTAMatchVote_INVALID];
 	optional uint32 positive_votes = 3;
 	optional uint32 negative_votes = 4;
 }
@@ -1687,8 +1688,8 @@ message CMsgDOTAHallOfFame {
 	}
 
 	optional uint32 week = 1;
-	repeated .CMsgDOTAHallOfFame.FeaturedPlayer featured_players = 2;
-	optional .CMsgDOTAHallOfFame.FeaturedFarmer featured_farmer = 3;
+	repeated .alice.ps2.CMsgDOTAHallOfFame.FeaturedPlayer featured_players = 2;
+	optional .alice.ps2.CMsgDOTAHallOfFame.FeaturedFarmer featured_farmer = 3;
 }
 
 message CMsgDOTAHallOfFameRequest {
@@ -1696,7 +1697,7 @@ message CMsgDOTAHallOfFameRequest {
 }
 
 message CMsgDOTAHallOfFameResponse {
-	optional .CMsgDOTAHallOfFame hall_of_fame = 1;
+	optional .alice.ps2.CMsgDOTAHallOfFame hall_of_fame = 1;
 	optional uint32 eresult = 2 [default = 2];
 }
 
@@ -1706,7 +1707,7 @@ message CMsgDOTAHalloweenHighScoreRequest {
 
 message CMsgDOTAHalloweenHighScoreResponse {
 	optional uint32 score = 1;
-	optional .CMsgDOTAMatch match = 2;
+	optional .alice.ps2.CMsgDOTAMatch match = 2;
 	optional uint32 eresult = 3;
 	optional int32 round = 4;
 }
@@ -1722,7 +1723,7 @@ message CMsgDOTAStorePromoPagesResponse {
 		optional string url = 3;
 	}
 
-	repeated .CMsgDOTAStorePromoPagesResponse.PromoPage pages = 1;
+	repeated .alice.ps2.CMsgDOTAStorePromoPagesResponse.PromoPage pages = 1;
 }
 
 message CMsgLeagueScheduleBlockTeamInfo {
@@ -1736,12 +1737,12 @@ message CMsgLeagueScheduleBlock {
 	optional uint32 start_time = 2;
 	optional bool finals = 4;
 	optional string comment = 5;
-	repeated .CMsgLeagueScheduleBlockTeamInfo teams = 6;
+	repeated .alice.ps2.CMsgLeagueScheduleBlockTeamInfo teams = 6;
 }
 
 message CMsgDOTALeague {
 	optional uint32 league_id = 1;
-	repeated .CMsgLeagueScheduleBlock schedule = 2;
+	repeated .alice.ps2.CMsgLeagueScheduleBlock schedule = 2;
 }
 
 message CMsgDOTALeagueScheduleRequest {
@@ -1749,18 +1750,18 @@ message CMsgDOTALeagueScheduleRequest {
 }
 
 message CMsgDOTALeagueScheduleResponse {
-	optional .CMsgDOTALeague league = 1;
+	optional .alice.ps2.CMsgDOTALeague league = 1;
 	optional uint32 eresult = 2 [default = 2];
 }
 
 message CMsgDOTALeagueScheduleEdit {
 	optional uint32 league_id = 1;
-	optional .CMsgLeagueScheduleBlock schedule = 2;
+	optional .alice.ps2.CMsgLeagueScheduleBlock schedule = 2;
 	optional bool delete_block = 3;
 }
 
 message CMsgDOTALeagueScheduleEditResponse {
-	optional .CMsgDOTALeague league = 1;
+	optional .alice.ps2.CMsgDOTALeague league = 1;
 	optional uint32 eresult = 2 [default = 2];
 }
 
@@ -1774,7 +1775,7 @@ message CMsgDOTALeaguesInMonthResponse {
 	optional uint32 eresult = 1 [default = 2];
 	optional uint32 month = 2;
 	optional uint32 year = 3;
-	repeated .CMsgDOTALeague leagues = 4;
+	repeated .alice.ps2.CMsgDOTALeague leagues = 4;
 }
 
 message CMsgSockAddrList {
@@ -1783,7 +1784,7 @@ message CMsgSockAddrList {
 }
 
 message CMsgMatchmakingGroupServerSample {
-	repeated .CMsgSockAddrList servers_by_group = 1;
+	repeated .alice.ps2.CMsgSockAddrList servers_by_group = 1;
 	optional uint32 servers_to_ping = 2;
 	optional uint32 reply_odds = 3;
 	optional uint32 reply_detailed_odds = 4;
@@ -1797,7 +1798,7 @@ message CMsgClientGameserverPings {
 	}
 
 	repeated uint32 average_ping_by_group = 1;
-	repeated .CMsgClientGameserverPings.PingDetail ping_details = 2;
+	repeated .alice.ps2.CMsgClientGameserverPings.PingDetail ping_details = 2;
 }
 
 message CMsgDOTAMatchmakingStatsRequest {
@@ -1807,8 +1808,8 @@ message CMsgDOTAMatchmakingStatsResponse {
 	repeated uint32 wait_times_by_group = 1;
 	repeated uint32 searching_players_by_group = 2;
 	optional uint32 disabled_groups = 3;
-	optional .CMsgMatchmakingGroupServerSample gameserver_sample = 4;
-	optional .CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
+	optional .alice.ps2.CMsgMatchmakingGroupServerSample gameserver_sample = 4;
+	optional .alice.ps2.CMsgMatchmakingGroupServerSample gameserver_sample_source2 = 6;
 	optional bool maintenance_alerts = 5;
 }
 
@@ -1843,7 +1844,7 @@ message CMsgUpgradeLeagueItemResponse {
 
 message CMsgGCWatchDownloadedReplay {
 	optional uint64 match_id = 1;
-	optional .DOTA_WatchReplayType watch_type = 2 [default = DOTA_WATCH_REPLAY_NORMAL];
+	optional .alice.ps2.DOTA_WatchReplayType watch_type = 2 [default = DOTA_WATCH_REPLAY_NORMAL];
 }
 
 message CMsgSetMapLocationState {
@@ -1890,9 +1891,9 @@ message CMsgDOTAFriendRecruitsResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgDOTAFriendRecruitsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruits = 2;
-	repeated .CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruiters = 3;
+	optional .alice.ps2.CMsgDOTAFriendRecruitsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruits = 2;
+	repeated .alice.ps2.CMsgDOTAFriendRecruitsResponse.FriendRecruitStatus recruiters = 3;
 }
 
 message CMsgDOTAFriendRecruitInviteAcceptDecline {
@@ -1907,7 +1908,7 @@ message CMsgDOTAPassportVoteTeamGuess {
 }
 
 message CMsgDOTAPassportVoteGenericSelection {
-	optional .DOTA_2013PassportSelectionIndices selection_index = 1 [default = PP13_SEL_ALLSTAR_PLAYER_0];
+	optional .alice.ps2.DOTA_2013PassportSelectionIndices selection_index = 1 [default = PP13_SEL_ALLSTAR_PLAYER_0];
 	optional uint32 selection = 2;
 }
 
@@ -1921,10 +1922,10 @@ message CMsgDOTAPassportPlayerCardChallenge {
 }
 
 message CMsgDOTAPassportVote {
-	repeated .CMsgDOTAPassportVoteTeamGuess team_votes = 1;
-	repeated .CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
-	repeated .CMsgDOTAPassportStampedPlayer stamped_players = 3;
-	repeated .CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
+	repeated .alice.ps2.CMsgDOTAPassportVoteTeamGuess team_votes = 1;
+	repeated .alice.ps2.CMsgDOTAPassportVoteGenericSelection generic_selections = 2;
+	repeated .alice.ps2.CMsgDOTAPassportStampedPlayer stamped_players = 3;
+	repeated .alice.ps2.CMsgDOTAPassportPlayerCardChallenge player_card_challenges = 4;
 }
 
 message CMsgPassportDataRequest {
@@ -1934,11 +1935,11 @@ message CMsgPassportDataRequest {
 message CMsgPassportDataResponse {
 	optional uint32 account_id = 1;
 	optional uint32 result = 2 [default = 2];
-	optional .CMsgDOTATournament international = 5;
+	optional .alice.ps2.CMsgDOTATournament international = 5;
 	optional uint32 east_qualifiers_predict_end_time = 7;
 	optional uint32 west_qualifiers_predict_end_time = 8;
 	optional uint32 allstar_match_end_time = 9;
-	optional .CMsgDOTAPassportVote league_guesses = 6;
+	optional .alice.ps2.CMsgDOTAPassportVote league_guesses = 6;
 	optional uint32 east_qualifiers_winner_team_id = 10;
 	optional uint32 east_qualifiers_runner_up_team_id = 11;
 	optional uint32 west_qualifiers_winner_team_id = 12;
@@ -1972,7 +1973,7 @@ message CMsgHeroPickStatsResponse {
 	optional uint32 total_wins = 3;
 	optional uint32 team_picks = 4;
 	optional uint32 team_wins = 5;
-	repeated .CMsgHeroPickStatPlayer player_pick = 6;
+	repeated .alice.ps2.CMsgHeroPickStatPlayer player_pick = 6;
 }
 
 message CMsgRequestLeaguePrizePool {
@@ -1994,7 +1995,7 @@ message CMsgGCGetHeroStandingsResponse {
 		optional uint32 losses = 3;
 	}
 
-	repeated .CMsgGCGetHeroStandingsResponse.Hero standings = 1;
+	repeated .alice.ps2.CMsgGCGetHeroStandingsResponse.Hero standings = 1;
 }
 
 message CMsgGCItemEditorReservationsRequest {
@@ -2006,7 +2007,7 @@ message CMsgGCItemEditorReservation {
 }
 
 message CMsgGCItemEditorReservationsResponse {
-	repeated .CMsgGCItemEditorReservation reservations = 1;
+	repeated .alice.ps2.CMsgGCItemEditorReservation reservations = 1;
 }
 
 message CMsgGCItemEditorReserveItemDef {
@@ -2072,7 +2073,7 @@ message CMsgDOTARedeemEventPrizeResponse {
 		InsufficientPoints = 2;
 	}
 
-	optional .CMsgDOTARedeemEventPrizeResponse.ResultCode result = 1 [default = Success];
+	optional .alice.ps2.CMsgDOTARedeemEventPrizeResponse.ResultCode result = 1 [default = Success];
 	optional uint32 remaining_points = 2;
 	optional uint32 remaining_premium_points = 3;
 	optional uint32 event_id = 4;
@@ -2094,7 +2095,7 @@ message CMsgDOTAGetEventPointsResponse {
 	optional uint32 event_id = 3;
 	optional uint32 points = 4;
 	optional uint32 premium_points = 5;
-	repeated .CMsgDOTAGetEventPointsResponse.Action completed_actions = 6;
+	repeated .alice.ps2.CMsgDOTAGetEventPointsResponse.Action completed_actions = 6;
 	optional uint32 account_id = 7;
 }
 
@@ -2121,11 +2122,11 @@ message CMsgDOTACompendiumSelection {
 
 message CMsgDOTACompendiumSelectionResponse {
 	optional uint32 eresult = 1 [default = 2];
-	repeated .CMsgDOTACompendiumSelection extra_selections = 2;
+	repeated .alice.ps2.CMsgDOTACompendiumSelection extra_selections = 2;
 }
 
 message CMsgDOTACompendiumData {
-	repeated .CMsgDOTACompendiumSelection selections = 1;
+	repeated .alice.ps2.CMsgDOTACompendiumSelection selections = 1;
 }
 
 message CMsgDOTACompendiumDataRequest {
@@ -2137,7 +2138,7 @@ message CMsgDOTACompendiumDataResponse {
 	optional uint32 account_id = 1;
 	optional uint32 leagueid = 2;
 	optional uint32 result = 3 [default = 2];
-	optional .CMsgDOTACompendiumData compendium_data = 4;
+	optional .alice.ps2.CMsgDOTACompendiumData compendium_data = 4;
 }
 
 message CMsgDOTAGetPlayerMatchHistory {
@@ -2162,7 +2163,7 @@ message CMsgDOTAGetPlayerMatchHistoryResponse {
 		optional bool abandon = 10;
 	}
 
-	repeated .CMsgDOTAGetPlayerMatchHistoryResponse.Match matches = 1;
+	repeated .alice.ps2.CMsgDOTAGetPlayerMatchHistoryResponse.Match matches = 1;
 	optional uint32 request_id = 2;
 }
 
@@ -2198,8 +2199,8 @@ message CMsgGCNotificationsResponse {
 		ERROR_UNSPECIFIED = 1;
 	}
 
-	optional .CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
-	repeated .CMsgGCNotificationsResponse.Notification notifications = 2;
+	optional .alice.ps2.CMsgGCNotificationsResponse.EResult result = 1 [default = SUCCESS];
+	repeated .alice.ps2.CMsgGCNotificationsResponse.Notification notifications = 2;
 }
 
 message CMsgGCNotificationsMarkReadRequest {
@@ -2216,7 +2217,7 @@ message CMsgGCLeagueAdminState {
 	}
 
 	repeated uint32 leagues = 1;
-	repeated .CMsgGCLeagueAdminState.PrivateLeagueKeys keys = 2;
+	repeated .alice.ps2.CMsgGCLeagueAdminState.PrivateLeagueKeys keys = 2;
 }
 
 message CMsgGCPlayerInfoRequest {
@@ -2238,7 +2239,7 @@ message CMsgGCPlayerInfoSubmitResponse {
 		ERROR_INFO_LOCKED = 2;
 	}
 
-	optional .CMsgGCPlayerInfoSubmitResponse.EResult result = 1 [default = SUCCESS];
+	optional .alice.ps2.CMsgGCPlayerInfoSubmitResponse.EResult result = 1 [default = SUCCESS];
 }
 
 message CMsgSerializedSOCache {
@@ -2256,12 +2257,12 @@ message CMsgSerializedSOCache {
 
 		optional uint32 type = 1;
 		optional uint64 id = 2;
-		repeated .CMsgSerializedSOCache.Cache.Version versions = 3;
-		repeated .CMsgSerializedSOCache.TypeCache type_caches = 4;
+		repeated .alice.ps2.CMsgSerializedSOCache.Cache.Version versions = 3;
+		repeated .alice.ps2.CMsgSerializedSOCache.TypeCache type_caches = 4;
 	}
 
 	optional uint32 file_version = 1;
-	repeated .CMsgSerializedSOCache.Cache caches = 2;
+	repeated .alice.ps2.CMsgSerializedSOCache.Cache caches = 2;
 	optional uint32 gc_socache_file_version = 3;
 }
 
@@ -2275,7 +2276,7 @@ message CMsgWeekendTourneySchedule {
 		optional uint32 time_window_close = 3;
 	}
 
-	repeated .CMsgWeekendTourneySchedule.Division divisions = 1;
+	repeated .alice.ps2.CMsgWeekendTourneySchedule.Division divisions = 1;
 }
 
 message CMsgClientProvideSurveyResult {
@@ -2284,7 +2285,7 @@ message CMsgClientProvideSurveyResult {
 		optional uint32 survey_value = 2;
 	}
 
-	repeated .CMsgClientProvideSurveyResult.Response responses = 1;
+	repeated .alice.ps2.CMsgClientProvideSurveyResult.Response responses = 1;
 	optional uint64 survey_key = 2;
 }
 
@@ -2297,7 +2298,7 @@ message CMsgClientToGCEmoticonDataRequest {
 }
 
 message CMsgGCToClientEmoticonData {
-	optional .CMsgDOTAEmoticonAccessSDO emoticon_access = 1;
+	optional .alice.ps2.CMsgDOTAEmoticonAccessSDO emoticon_access = 1;
 }
 
 message CMsgClientToGCTrackDialogResult {
@@ -2311,14 +2312,14 @@ message CMsgGCToClientTournamentItemDrop {
 }
 
 message CMsgClientToGCSetAdditionalEquips {
-	repeated .CAdditionalEquipSlot equips = 1;
+	repeated .alice.ps2.CAdditionalEquipSlot equips = 1;
 }
 
 message CMsgClientToGCGetAdditionalEquips {
 }
 
 message CMsgClientToGCGetAdditionalEquipsResponse {
-	repeated .CAdditionalEquipSlot equips = 1;
+	repeated .alice.ps2.CAdditionalEquipSlot equips = 1;
 }
 
 message CMsgClientToGCGetAllHeroProgress {
@@ -2358,7 +2359,7 @@ message CMsgClientToGCGetTrophyListResponse {
 	}
 
 	optional uint32 account_id = 1;
-	repeated .CMsgClientToGCGetTrophyListResponse.Trophy trophies = 2;
+	repeated .alice.ps2.CMsgClientToGCGetTrophyListResponse.Trophy trophies = 2;
 	optional string profile_name = 3;
 }
 
@@ -2377,4 +2378,3 @@ message CMsgClientToGCSetProfileCardSlot {
 	optional uint32 slot_type = 2;
 	optional uint64 slot_value = 3;
 }
-

@@ -1,3 +1,4 @@
+package alice.ps1;
 import "google/protobuf/descriptor.proto";
 
 option cc_generic_services = false;
@@ -62,4 +63,3 @@ enum ENetworkDisconnectionReason {
 	NETWORK_DISCONNECT_NO_PEER_GROUP_HANDLERS = 52 [(network_connection_token) = "#GameUI_Disconnect_NoPeerGroupHandlers"];
 	NETWORK_DISCONNECT_RECONNECTION = 53;
 }
-

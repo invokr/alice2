@@ -1,3 +1,4 @@
+package alice.ps2;
 import "steammessages.proto";
 
 option optimize_for = SPEED;
@@ -228,7 +229,7 @@ message CMsgEconPlayerStrangeCountAdjustment {
 	}
 
 	optional uint32 account_id = 1;
-	repeated .CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment strange_count_adjustments = 2;
+	repeated .alice.ps2.CMsgEconPlayerStrangeCountAdjustment.CStrangeCountAdjustment strange_count_adjustments = 2;
 }
 
 message CMsgRequestItemPurgatory_FinalizePurchase {
@@ -262,7 +263,7 @@ message CMsgGCRequestStoreSalesDataResponse {
 		optional uint32 price = 2;
 	}
 
-	repeated .CMsgGCRequestStoreSalesDataResponse.Price sale_price = 1;
+	repeated .alice.ps2.CMsgGCRequestStoreSalesDataResponse.Price sale_price = 1;
 	optional uint32 version = 2;
 	optional uint32 expiration_time = 3;
 }
@@ -305,7 +306,7 @@ message CMsgLookupMultipleAccountNamesResponse {
 		optional string persona = 2;
 	}
 
-	repeated .CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
+	repeated .alice.ps2.CMsgLookupMultipleAccountNamesResponse.Account accounts = 1;
 }
 
 message CMsgGCToGCGetUserPCBangNo {
@@ -383,13 +384,13 @@ message CMsgGCToGCGrantAccountRolledItems {
 		repeated string loot_lists = 2;
 		optional bool ignore_limit = 3;
 		optional uint32 origin = 4;
-		repeated .CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
-		repeated .CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
+		repeated .alice.ps2.CMsgGCToGCGrantAccountRolledItems.Item.DynamicAttribute dynamic_attributes = 5;
+		repeated .alice.ps2.CMsgGCToGCGrantAccountRolledItems.Item.AdditionalAuditEntry additional_audit_entries = 6;
 		optional uint32 inventory_token = 7;
 	}
 
 	optional uint32 account_id = 1;
-	repeated .CMsgGCToGCGrantAccountRolledItems.Item items = 2;
+	repeated .alice.ps2.CMsgGCToGCGrantAccountRolledItems.Item items = 2;
 	optional uint32 audit_action = 3;
 	optional uint32 audit_data = 4;
 }
@@ -410,14 +411,14 @@ message CMsgUseItem {
 
 message CMsgServerUseItem {
 	optional uint32 initiator_account_id = 1;
-	optional .CMsgUseItem use_item_msg = 2;
+	optional .alice.ps2.CMsgUseItem use_item_msg = 2;
 }
 
 message CMsgGCPartnerBalanceRequest {
 }
 
 message CMsgGCPartnerBalanceResponse {
-	optional .EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
+	optional .alice.ps2.EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
 	optional uint32 balance = 2;
 }
 
@@ -426,7 +427,7 @@ message CMsgGCPartnerRechargeRedirectURLRequest {
 }
 
 message CMsgGCPartnerRechargeRedirectURLResponse {
-	optional .EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
+	optional .alice.ps2.EGCPartnerRequestResponse result = 1 [default = k_EPartnerRequestOK];
 	optional string url = 2;
 }
 
@@ -460,4 +461,3 @@ message CMsgDevNewItemRequest {
 message CMsgDevNewItemRequestResponse {
 	optional bool success = 1;
 }
-

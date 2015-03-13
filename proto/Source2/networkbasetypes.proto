@@ -1,3 +1,4 @@
+package alice.ps2;
 import "google/protobuf/descriptor.proto";
 import "network_connection.proto";
 
@@ -52,7 +53,7 @@ message CMsg_CVars {
 		optional string value = 2;
 	}
 
-	repeated .CMsg_CVars.CVar cvars = 1;
+	repeated .alice.ps2.CMsg_CVars.CVar cvars = 1;
 }
 
 message CNETMsg_NOP {
@@ -63,7 +64,7 @@ message CNETMsg_SplitScreenUser {
 }
 
 message CNETMsg_Disconnect {
-	optional .ENetworkDisconnectionReason reason = 2 [default = NETWORK_DISCONNECT_INVALID];
+	optional .alice.ps2.ENetworkDisconnectionReason reason = 2 [default = NETWORK_DISCONNECT_INVALID];
 }
 
 message CNETMsg_File {
@@ -88,7 +89,7 @@ message CNETMsg_StringCmd {
 }
 
 message CNETMsg_SetConVar {
-	optional .CMsg_CVars convars = 1;
+	optional .alice.ps2.CMsg_CVars convars = 1;
 }
 
 message CNETMsg_SignonState {
@@ -113,16 +114,16 @@ message CSVCMsg_GameEvent {
 
 	optional string event_name = 1;
 	optional int32 eventid = 2;
-	repeated .CSVCMsg_GameEvent.key_t keys = 3;
+	repeated .alice.ps2.CSVCMsg_GameEvent.key_t keys = 3;
 }
 
 message CSVCMsgList_GameEvents {
 	message event_t {
 		optional int32 tick = 1;
-		optional .CSVCMsg_GameEvent event = 2;
+		optional .alice.ps2.CSVCMsg_GameEvent event = 2;
 	}
 
-	repeated .CSVCMsgList_GameEvents.event_t events = 1;
+	repeated .alice.ps2.CSVCMsgList_GameEvents.event_t events = 1;
 }
 
 message CSVCMsg_UserMessage {
@@ -133,10 +134,10 @@ message CSVCMsg_UserMessage {
 message CSVCMsgList_UserMessages {
 	message usermsg_t {
 		optional int32 tick = 1;
-		optional .CSVCMsg_UserMessage msg = 2;
+		optional .alice.ps2.CSVCMsg_UserMessage msg = 2;
 	}
 
-	repeated .CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
+	repeated .alice.ps2.CSVCMsgList_UserMessages.usermsg_t usermsgs = 1;
 }
 
 message CNETMsg_SpawnGroup_Load {
@@ -145,8 +146,8 @@ message CNETMsg_SpawnGroup_Load {
 	optional string entityfiltername = 3;
 	optional uint32 spawngrouphandle = 4;
 	optional uint32 spawngroupownerhandle = 5;
-	optional .CMsgVector world_offset_pos = 6;
-	optional .CMsgQAngle world_offset_angle = 7;
+	optional .alice.ps2.CMsgVector world_offset_pos = 6;
+	optional .alice.ps2.CMsgQAngle world_offset_angle = 7;
 	optional bytes spawngroupmanifest = 8;
 	optional uint32 flags = 9;
 	optional uint32 tickcount = 10;
@@ -196,4 +197,3 @@ message CSVCMsg_GameSessionConfiguration {
 	optional string server_ip_address = 13;
 	optional bytes data = 14;
 }
-
