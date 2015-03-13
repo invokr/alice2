@@ -26,7 +26,7 @@
 using namespace alice;
 
 TEST_CASE( "varint", "[util/varint.hpp]" ) {
-    uint32_t read;
+    std::size_t read;
 
     // Try reading from a char array
     unsigned char c[] = {0x9E, 0xA7, 0x05};
@@ -38,6 +38,6 @@ TEST_CASE( "varint", "[util/varint.hpp]" ) {
     // Try reading from a std::string
     std::string av2 = {(char)0x8E, 0x02};
 
-    REQUIRE(readVarUInt32(av2, read) == 270);
-    REQUIRE(read == 2); 
+    REQUIRE(readVarUInt64(av2, read) == 270);
+    REQUIRE(read == 2);
 }
