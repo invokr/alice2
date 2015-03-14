@@ -21,10 +21,14 @@
  */
 
 #include <fstream>
+#include <cstdint>
+
+#include "proto/source2/demo.pb.h"
 
 #include "util/constexpr_hash.hpp"
 #include "util/delegate.hpp"
 #include "util/noncopyable.hpp"
+#include "util/varint.hpp"
 
 #include "config.hpp"
 #include "parser.hpp"
@@ -84,6 +88,24 @@ namespace alice {
             delete[] dataSnappy;
     }
 
+    dem_message parser::get() {
+        uint32_t packet_type = read_varint();
+        bool packet_compressed = packet_type & ps2::DEM_IsCompressed;
+        packet_type = (packet_type & ~ps2::DEM_IsCompressed);
+
+        uint32_t tick = read_varint();
+        uint32_t size = read_varint();
+        
+        // @todo: Decompress, parse, etc.
+
+        dataPos += size;
+        return dem_message{tick, packet_type, size, nullptr};
+    }
+
+    bool parser::good() {
+        return (dataPos != dataSize);
+    }
+
     void parser::parse_header() {
         // load header
         dem_header head;
@@ -106,5 +128,12 @@ namespace alice {
 
         // increase position
         dataPos += sizeof(dem_header);
+    }
+
+    uint32_t parser::read_varint() {
+        uint8_t bytes_read = 0;
+        const uint32_t ret = readVarUInt32(data, bytes_read, dataSize, dataPos);
+        dataPos += bytes_read;
+        return ret;
     }
 }

@@ -53,6 +53,11 @@ namespace alice {
 
         /** Destructor */
         ~parser();
+
+        /** Returns a single dem packet */
+        dem_message get();
+        /** Whether there is still data left to read */
+        bool good();
     private:
         /** Data buffer */
         char* data;
@@ -73,6 +78,8 @@ namespace alice {
 
         /** Verifies the file signature and detects the correct engine */
         void parse_header();
+        /** Reads a single integer from the buffer */
+        uint32_t read_varint();
     };
 }
 
