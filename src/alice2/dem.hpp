@@ -32,8 +32,9 @@
 namespace alice {
     /** Engine the replay was played in */
     enum class engine {
-        sone = 1,
-        stwo
+        one = 1,
+        two,
+        unkown
     };
 
     /** DEM file header, used for verification purposes */
