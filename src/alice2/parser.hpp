@@ -68,6 +68,9 @@ namespace alice {
         /** Offset of summary packet */
         uint32_t offset;
 
+        /** Whether we own the underlying buffer */
+        bool ownsBuffer;
+
         /** Verifies the file signature and detects the correct engine */
         void parse_header();
     };

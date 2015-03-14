@@ -31,7 +31,7 @@
 
 namespace alice {
     parser::parser(const char* path)
-        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr)
+        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr), ownsBuffer(true)
     {
         std::ifstream input(path, std::ios::in | std::ios::binary);
 
@@ -64,19 +64,20 @@ namespace alice {
     }
 
     parser::parser(char* data, std::size_t size)
-        : data(data), dataSize(size), dataPos(0), dataSnappy(new char[ALICE_SNAPPY_BUFFER_SIZE])
+        : data(data), dataSize(size), dataPos(0), dataSnappy(new char[ALICE_SNAPPY_BUFFER_SIZE]),
+          ownsBuffer(false)
     {
         // verify header
         parse_header();
 
         if (source_version == engine::unkown) {
-            delete[] dataSnappy; 
+            delete[] dataSnappy;
             ALICE_THROW(ParserInvalid, "Construction from buffer");
         }
     }
 
     parser::~parser() {
-        if (data)
+        if (data && ownsBuffer)
             delete[] data;
 
         if (dataSnappy)
