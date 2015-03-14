@@ -26,10 +26,18 @@
 #include <string>
 #include <cstddef>
 
+#include "util/exception.hpp"
 #include "util/noncopyable.hpp"
 #include "dem.hpp"
 
 namespace alice {
+    /// Thrown when the parser fails to open the specified file
+    ALICE_CREATE_EXCEPTION(ParserFileIO, "Unable to open file");
+    /// Thrown when the file being parsed is to small
+    ALICE_CREATE_EXCEPTION(ParserFileSize, "File to small");
+    /// Invalid file format
+    ALICE_CREATE_EXCEPTION(ParserInvalid, "Invalid file format or header corrupt");
+
     /** */
     class parser : private noncopyable {
     public:
@@ -40,7 +48,6 @@ namespace alice {
 
         /** Loads specified file into memory to be parsed */
         parser(const char* path);
-
         /** Read from the provided buffer */
         parser(char* data, std::size_t size);
 

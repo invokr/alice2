@@ -31,20 +31,20 @@
 
 namespace alice {
     parser::parser(const char* path)
-        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(new char[ALICE_SNAPPY_BUFFER_SIZE])
+        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr)
     {
         std::ifstream input(path, std::ios::in | std::ios::binary);
 
         if (!input.is_open())
-            throw 1;
+            ALICE_THROW(ParserFileIO, path);
 
         const std::streampos fstart = input.tellg();
         input.seekg (0, std::ios::end);
         dataSize = input.tellg() - fstart;
         input.seekg(fstart);
 
-        if (dataSize < 12)
-            throw 2;
+        if (dataSize < sizeof(dem_header))
+            ALICE_THROW(ParserFileSize, path);
 
         // read everything into the buffer
         data = new char[dataSize];
@@ -53,6 +53,14 @@ namespace alice {
 
         // verify header
         parse_header();
+
+        if (source_version == engine::unkown) {
+            delete[] data;
+            ALICE_THROW(ParserInvalid, path);
+        }
+
+        // create buffer for snappy
+        dataSnappy = new char[ALICE_SNAPPY_BUFFER_SIZE];
     }
 
     parser::parser(char* data, std::size_t size)
@@ -60,6 +68,11 @@ namespace alice {
     {
         // verify header
         parse_header();
+
+        if (source_version == engine::unkown) {
+            delete[] dataSnappy; 
+            ALICE_THROW(ParserInvalid, "Construction from buffer");
+        }
     }
 
     parser::~parser() {
@@ -80,13 +93,14 @@ namespace alice {
 
         switch (constexpr_hash_rt(head.headerid)) {
             case ALICE_S1_HEADER:
-                source_version = engine::sone;
+                source_version = engine::one;
                 break;
             case ALICE_S2_HEADER:
-                source_version = engine::stwo;
+                source_version = engine::two;
                 break;
             default:
-                throw 3;
+                source_version = engine::unkown;
+                break;
         }
 
         // increase position
