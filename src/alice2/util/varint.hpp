@@ -65,7 +65,19 @@ namespace alice {
         }
 
         template<>
+        char varIntBuffer<char*&>::get() {
+            assert(mPos != mSize); // Trying to read past buffer boundaries
+            return mBuffer[mPos++];
+        }
+
+        template<>
         char varIntBuffer<const unsigned char*&>::get() {
+            assert(mPos != mSize); // Trying to read past buffer boundaries
+            return mBuffer[mPos++];
+        }
+
+        template<>
+        char varIntBuffer <unsigned char*&>::get() {
             assert(mPos != mSize); // Trying to read past buffer boundaries
             return mBuffer[mPos++];
         }
@@ -85,7 +97,7 @@ namespace alice {
 
     /** Reads an uint32_t, encoded by protobuf */
     template <typename T>
-    uint32_t readVarUInt32(T&& t, std::size_t& read, std::size_t size = 0, std::size_t position = 0) {
+    uint32_t readVarUInt32(T&& t, uint8_t& read, std::size_t size = 0, std::size_t position = 0) {
         uint32_t result = 0; // result
         char tmp;            // holds last read value
         read = 0;            // make sure read is zeroed
@@ -106,7 +118,7 @@ namespace alice {
 
     /** Reads an uint64_t, encoded by protobuf */
     template <typename T>
-    uint64_t readVarUInt64(T&& t, std::size_t& read, std::size_t size = 0, std::size_t position = 0) {
+    uint64_t readVarUInt64(T&& t, uint8_t& read, std::size_t size = 0, std::size_t position = 0) {
         uint64_t result = 0; // result
         char tmp;            // holds last read value
         read = 0;            // make sure read is zeroed

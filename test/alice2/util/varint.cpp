@@ -26,7 +26,7 @@
 using namespace alice;
 
 TEST_CASE( "varint", "[util/varint.hpp]" ) {
-    std::size_t read;
+    uint8_t read;
 
     // Try reading from a char array
     unsigned char c[] = {0x9E, 0xA7, 0x05};
