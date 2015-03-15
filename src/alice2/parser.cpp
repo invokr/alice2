@@ -22,6 +22,9 @@
 
 #include <fstream>
 #include <cstdint>
+#include <cassert>
+
+#include <snappy.h>
 
 #include "proto/source2/demo.pb.h"
 
@@ -89,21 +92,33 @@ namespace alice {
     }
 
     dem_message parser::get() {
+        assert(dataPos <= dataSize);
+
         uint32_t packet_type = read_varint();
         bool packet_compressed = packet_type & ps2::DEM_IsCompressed;
         packet_type = (packet_type & ~ps2::DEM_IsCompressed);
 
         uint32_t tick = read_varint();
         uint32_t size = read_varint();
-        
-        // @todo: Decompress, parse, etc.
+
+        dem_message ret{tick, packet_type, size};
+        if (packet_compressed) {
+            std::size_t size_uncompressed = 0;
+
+            assert(snappy::IsValidCompressedBuffer(data+dataPos, size));
+            assert(snappy::GetUncompressedLength(data+dataPos, size, &size_uncompressed));
+            assert(ALICE_SNAPPY_BUFFER_SIZE > size_uncompressed);
+            assert(snappy::RawUncompress(data+dataPos, size, dataSnappy));
+        }
+
+        // @todo: Parse, etc.
 
         dataPos += size;
         return dem_message{tick, packet_type, size, nullptr};
     }
 
     bool parser::good() {
-        return (dataPos != dataSize);
+        return (dataPos <= dataSize);
     }
 
     void parser::parse_header() {
