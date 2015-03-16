@@ -27,7 +27,10 @@
 #include <cstring>
 #include <cstdint>
 
+#include <snappy.h>
+
 #include "util/varint.hpp"
+#include "proto/source2/demo.pb.h"
 
 namespace alice {
     /** Engine the replay was played in */
@@ -46,7 +49,7 @@ namespace alice {
     };
 
     /** A single dem message */
-    struct dem_message {
+    struct dem_packet {
         /** Tick this messages was emitted at */
         uint32_t tick;
         /** Message type */
@@ -55,6 +58,84 @@ namespace alice {
         std::size_t size;
         /** Points to start of message */
         const char* data;
+
+        /** Compresses given message, require you to free msg.data memory */
+        inline static void compress(dem_packet& msg) {
+            // compress
+            std::string compressed;
+            snappy::Compress(msg.data, msg.size, &compressed);
+
+            // assign data to msg
+            char* nbuffer = new char[compressed.size()];
+            memcpy(nbuffer, compressed.data(), compressed.size());
+            msg.data = nbuffer;
+            msg.size = compressed.size();
+            msg.type = msg.type | ps2::DEM_IsCompressed;
+        }
+
+        /** Decompresses given message */
+        inline static void uncompress(dem_packet& msg, char* buffer, size_t buffer_size) {
+            size_t size_uncompressed = 0;
+
+            const char* data = msg.data;
+            msg.data = nullptr;
+
+            if (!snappy::IsValidCompressedBuffer(data, msg.size))
+                return;
+
+            if (!snappy::GetUncompressedLength(data, msg.size, &size_uncompressed))
+                return;
+
+            if (buffer_size < size_uncompressed)
+                return;
+
+            if (!snappy::RawUncompress(data, msg.size, buffer))
+                return;
+
+            msg.type = msg.type & ~ps2::DEM_IsCompressed;
+            msg.data = buffer;
+            msg.size = size_uncompressed;
+        }
+
+        /** Reads data from buffer into msg and returns bytes read */
+        inline static size_t from_buffer(dem_packet& msg, char* buffer, size_t buffer_size) {
+            if (buffer_size > 15) { // fast version
+                uint8_t* data = reinterpret_cast<uint8_t*>(buffer);
+
+                data = readVarUInt32_fast(data, msg.type);
+                data = readVarUInt32_fast(data, msg.tick);
+                data = readVarUInt64_fast(data, msg.size);
+
+                msg.data = reinterpret_cast<const char*>(data);
+                return (msg.data - buffer) + msg.size;
+            } else { // slow version
+                uint8_t r;
+                char* buf = buffer;
+                msg.type = readVarUInt32(buf, r, buffer_size); buf += r;
+                msg.tick = readVarUInt32(buf, r, buffer_size); buf += r;
+                msg.size = readVarUInt32(buf, r, buffer_size); buf += r;
+                msg.data = buf;
+
+               return (buf - buffer) + msg.size;
+            }
+        }
+
+        /** Writes data in msg to given buffer */
+        inline static size_t to_buffer(dem_packet& msg, char* buffer, size_t buffer_size, bool pack = false) {
+            if (pack)
+                compress(msg);
+
+            // Account for the maximum serialization length instead of asserting twice
+            assert(buffer_size >= (msg.size+15));
+
+            uint8_t* buf = reinterpret_cast<uint8_t*>(buffer);
+            buf = writeVarUInt32(buf, msg.type);
+            buf = writeVarUInt32(buf, msg.tick);
+            buf = writeVarUInt32(buf, msg.size);
+            memcpy(buf, msg.data, msg.size);
+
+            return ((buf+msg.size) - reinterpret_cast<uint8_t*>(buffer));
+        }
     };
 }
 
