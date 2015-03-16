@@ -95,6 +95,7 @@ ADD_EXECUTABLE ( alice_test
     ${CMAKE_SOURCE_DIR}/test/test.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/constexpr_hash.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/delegate.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/util/dict.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/exception.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/noncopyable.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/varint.cpp
