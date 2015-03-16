@@ -99,4 +99,9 @@ ADD_EXECUTABLE ( alice_test
     ${CMAKE_SOURCE_DIR}/test/alice2/util/noncopyable.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/varint.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/ztime.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/dem.cpp
+)
+
+TARGET_LINK_LIBRARIES ( alice_test
+    ${SNAPPY_LIBRARIES}
 )
