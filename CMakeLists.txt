@@ -44,7 +44,6 @@ INCLUDE_DIRECTORIES(
     ${CMAKE_SOURCE_DIR}/vendors/sparsehash/src/
 )
 
-
 #------------------------------------------------------------
 # Generate protobuffer files and target
 #------------------------------------------------------------
@@ -79,13 +78,25 @@ FOREACH ( PROTO ${PROTO_S2} )
     LIST(APPEND PROTO_HEADERS_2 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source2/${PROTO}.pb.h)
 ENDFOREACH()
 
-ADD_LIBRARY( alice_proto1 SHARED ${PROTO_SOURCES_1} )
-ADD_LIBRARY( alice_proto1_static STATIC ${PROTO_SOURCES_1} )
-SET_TARGET_PROPERTIES(alice_proto1_static PROPERTIES OUTPUT_NAME alice_proto1)
+ADD_LIBRARY( alice2_proto1 SHARED ${PROTO_SOURCES_1} )
+ADD_LIBRARY( alice2_proto1_static STATIC ${PROTO_SOURCES_1} )
+SET_TARGET_PROPERTIES(alice2_proto1_static PROPERTIES OUTPUT_NAME alice2_proto1)
 
-ADD_LIBRARY( alice_proto2 SHARED ${PROTO_SOURCES_2} )
-ADD_LIBRARY( alice_proto2_static STATIC ${PROTO_SOURCES_2} )
-SET_TARGET_PROPERTIES(alice_proto2_static PROPERTIES OUTPUT_NAME alice_proto2)
+ADD_LIBRARY( alice2_proto2 SHARED ${PROTO_SOURCES_2} )
+ADD_LIBRARY( alice2_proto2_static STATIC ${PROTO_SOURCES_2} )
+SET_TARGET_PROPERTIES(alice2_proto2_static PROPERTIES OUTPUT_NAME alice2_proto2)
+
+#------------------------------------------------------------
+# Build alice
+#------------------------------------------------------------
+
+SET ( ALICE_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/alice2/parser.cpp
+)
+
+ADD_LIBRARY( alice2 SHARED ${ALICE_SOURCES} )
+ADD_LIBRARY( alice2_static STATIC ${ALICE_SOURCES} )
+SET_TARGET_PROPERTIES(alice2_static PROPERTIES OUTPUT_NAME alice2)
 
 #------------------------------------------------------------
 # Build unit test
@@ -105,4 +116,6 @@ ADD_EXECUTABLE ( alice_test
 
 TARGET_LINK_LIBRARIES ( alice_test
     ${SNAPPY_LIBRARIES}
+    alice2_static
+    alice2_proto2_static
 )
