@@ -55,7 +55,7 @@ namespace alice {
         ~parser();
 
         /** Returns a single dem packet */
-        dem_message get();
+        dem_packet get();
         /** Whether there is still data left to read */
         bool good();
     private:

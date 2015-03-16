@@ -91,34 +91,20 @@ namespace alice {
             delete[] dataSnappy;
     }
 
-    dem_message parser::get() {
+    dem_packet parser::get() {
         assert(dataPos <= dataSize);
 
-        uint32_t packet_type = read_varint();
-        bool packet_compressed = packet_type & ps2::DEM_IsCompressed;
-        packet_type = (packet_type & ~ps2::DEM_IsCompressed);
+        dem_packet ret;
+        dataPos += dem_packet::from_buffer(ret, data+dataPos, dataSize-dataPos);
 
-        uint32_t tick = read_varint();
-        uint32_t size = read_varint();
+        if (ret.type & ps2::DEM_IsCompressed)
+            dem_packet::uncompress(ret, dataSnappy, ALICE_SNAPPY_BUFFER_SIZE); 
 
-        dem_message ret{tick, packet_type, size};
-        if (packet_compressed) {
-            std::size_t size_uncompressed = 0;
-
-            assert(snappy::IsValidCompressedBuffer(data+dataPos, size));
-            assert(snappy::GetUncompressedLength(data+dataPos, size, &size_uncompressed));
-            assert(ALICE_SNAPPY_BUFFER_SIZE > size_uncompressed);
-            assert(snappy::RawUncompress(data+dataPos, size, dataSnappy));
-        }
-
-        // @todo: Parse, etc.
-
-        dataPos += size;
-        return dem_message{tick, packet_type, size, nullptr};
+        return ret;
     }
 
     bool parser::good() {
-        return (dataPos <= dataSize);
+        return (dataPos < dataSize);
     }
 
     void parser::parse_header() {
