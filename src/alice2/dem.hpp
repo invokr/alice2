@@ -23,7 +23,7 @@
 #ifndef _DEM_MESSAGE_HPP_
 #define _DEM_MESSAGE_HPP_
 
-#include <cstddef> 
+#include <cstddef>
 #include <cstdint>
 
 namespace alice {

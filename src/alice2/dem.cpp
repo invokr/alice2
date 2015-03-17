@@ -26,6 +26,7 @@
 
 #include <snappy.h>
 
+#include "util/expect.hpp"
 #include "util/varint.hpp"
 #include "proto/source2/demo.pb.h"
 
@@ -69,7 +70,7 @@ namespace alice {
     }
 
     size_t dem_packet::from_buffer(dem_packet& msg, char* buffer, size_t buffer_size) {
-        if (buffer_size > 15) { // fast version
+        if (expect(buffer_size > 15)) { // fast version
             uint8_t* data = reinterpret_cast<uint8_t*>(buffer);
 
             data = readVarUInt32_fast(data, msg.type);
