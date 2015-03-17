@@ -91,7 +91,8 @@ SET_TARGET_PROPERTIES(alice2_proto2_static PROPERTIES OUTPUT_NAME alice2_proto2)
 #------------------------------------------------------------
 
 SET ( ALICE_SOURCES
-    ${CMAKE_SOURCE_DIR}/src/alice2/parser.cpp
+    ${CMAKE_SOURCE_DIR}/src/alice2/dem.cpp
+    ${CMAKE_SOURCE_DIR}/src/alice2/dem_file.cpp
 )
 
 ADD_LIBRARY( alice2 SHARED ${ALICE_SOURCES} )
