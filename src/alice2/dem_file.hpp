@@ -1,5 +1,5 @@
 /**
- * @file parser.hpp
+ * @file dem_file.hpp
  * @author Robin Dietrich <me (at) invokr (dot) org>
  * @version 1.0
  *
@@ -20,8 +20,8 @@
  *    limitations under the License.
  */
 
-#ifndef _ALICE_PARSER_HPP_
-#define _ALICE_PARSER_HPP_
+#ifndef _ALICE_DEM_FILE_HPP_
+#define _ALICE_DEM_FILE_HPP_
 
 #include <string>
 #include <cstddef>
@@ -32,27 +32,27 @@
 
 namespace alice {
     /// Thrown when the parser fails to open the specified file
-    ALICE_CREATE_EXCEPTION(ParserFileIO, "Unable to open file");
+    ALICE_CREATE_EXCEPTION(DemFileIO, "Unable to open file");
     /// Thrown when the file being parsed is to small
-    ALICE_CREATE_EXCEPTION(ParserFileSize, "File to small");
+    ALICE_CREATE_EXCEPTION(DemFileSize, "File to small");
     /// Invalid file format
-    ALICE_CREATE_EXCEPTION(ParserInvalid, "Invalid file format or header corrupt");
+    ALICE_CREATE_EXCEPTION(DemInvalid, "Invalid file format or header corrupt");
 
-    /** */
-    class parser : private noncopyable {
+    /** Class representation of a single demo file */
+    class dem_file : private noncopyable {
     public:
         /** Default move constructor */
-        parser(parser&&) = default;
+        dem_file(dem_file&&) = default;
         /** Default move assignment operator */
-        parser& operator=(parser&&) = default;
+        dem_file& operator=(dem_file&&) = default;
 
         /** Loads specified file into memory to be parsed */
-        parser(const char* path);
+        dem_file(const char* path);
         /** Read from the provided buffer */
-        parser(char* data, std::size_t size);
-
+        dem_file(char* data, std::size_t size);
+ 
         /** Destructor */
-        ~parser();
+        ~dem_file();
 
         /** Returns a single dem packet */
         dem_packet get();
@@ -83,4 +83,4 @@ namespace alice {
     };
 }
 
-#endif /* _ALICE_PARSER_HPP_ */
+#endif /* _ALICE_DEM_FILE_HPP_ */

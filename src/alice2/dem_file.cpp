@@ -1,5 +1,5 @@
 /**
- * @file parser.cpp
+ * @file dem_file.cpp
  * @author Robin Dietrich <me (at) invokr (dot) org>
  * @version 1.0
  *
@@ -34,16 +34,16 @@
 #include "util/varint.hpp"
 
 #include "config.hpp"
-#include "parser.hpp"
+#include "dem_file.hpp"
 
 namespace alice {
-    parser::parser(const char* path)
+    dem_file::dem_file(const char* path)
         : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr), ownsBuffer(true)
     {
         std::ifstream input(path, std::ios::in | std::ios::binary);
 
         if (!input.is_open())
-            ALICE_THROW(ParserFileIO, path);
+            ALICE_THROW(DemFileIO, path);
 
         const std::streampos fstart = input.tellg();
         input.seekg (0, std::ios::end);
@@ -51,7 +51,7 @@ namespace alice {
         input.seekg(fstart);
 
         if (dataSize < sizeof(dem_header))
-            ALICE_THROW(ParserFileSize, path);
+            ALICE_THROW(DemFileSize, path);
 
         // read everything into the buffer
         data = new char[dataSize];
@@ -63,14 +63,14 @@ namespace alice {
 
         if (source_version == engine::unkown) {
             delete[] data;
-            ALICE_THROW(ParserInvalid, path);
+            ALICE_THROW(DemInvalid, path);
         }
 
         // create buffer for snappy
         dataSnappy = new char[ALICE_SNAPPY_BUFFER_SIZE];
     }
 
-    parser::parser(char* data, std::size_t size)
+    dem_file::dem_file(char* data, std::size_t size)
         : data(data), dataSize(size), dataPos(0), dataSnappy(new char[ALICE_SNAPPY_BUFFER_SIZE]),
           ownsBuffer(false)
     {
@@ -79,11 +79,11 @@ namespace alice {
 
         if (source_version == engine::unkown) {
             delete[] dataSnappy;
-            ALICE_THROW(ParserInvalid, "Construction from buffer");
+            ALICE_THROW(DemInvalid, "Construction from buffer");
         }
     }
 
-    parser::~parser() {
+    dem_file::~dem_file() {
         if (data && ownsBuffer)
             delete[] data;
 
@@ -91,23 +91,33 @@ namespace alice {
             delete[] dataSnappy;
     }
 
-    dem_packet parser::get() {
+    dem_packet dem_file::get() {
         assert(dataPos <= dataSize);
 
         dem_packet ret;
         dataPos += dem_packet::from_buffer(ret, data+dataPos, dataSize-dataPos);
 
         if (ret.type & ps2::DEM_IsCompressed)
-            dem_packet::uncompress(ret, dataSnappy, ALICE_SNAPPY_BUFFER_SIZE); 
+            dem_packet::uncompress(ret, dataSnappy, ALICE_SNAPPY_BUFFER_SIZE);
+
+        switch (ret.type)  {
+            case ps2::DEM_ClassInfo:
+                break;
+            case ps2::DEM_SignonPacket:
+            case ps2::DEM_Packet:
+                break;
+            case ps2::DEM_SendTables:
+                break;
+        }
 
         return ret;
-    }
+    } 
 
-    bool parser::good() {
+    bool dem_file::good() {
         return (dataPos < dataSize);
     }
 
-    void parser::parse_header() {
+    void dem_file::parse_header() {
         // load header
         dem_header head;
         memcpy((char*) &head, data, sizeof(dem_header));
@@ -131,7 +141,7 @@ namespace alice {
         dataPos += sizeof(dem_header);
     }
 
-    uint32_t parser::read_varint() {
+    uint32_t dem_file::read_varint() {
         uint8_t bytes_read = 0;
         const uint32_t ret = readVarUInt32(data, bytes_read, dataSize, dataPos);
         dataPos += bytes_read;
