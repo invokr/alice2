@@ -42,9 +42,46 @@ namespace alice {
             /** Value */
             Value value;
         };
+    private:
+        typedef std::unordered_map<std::string, std::size_t> map_t;
+        typedef std::vector<entry_t> vector_t;
+    public:
+        /** Value type */
+        typedef entry_t value_type;
+        /** Size type */
+        typedef typename vector_t::size_type size_type;
+        /** Iterator */
+        typedef typename vector_t::iterator iterator;
+        /** Const iterattor */
+        typedef typename vector_t::const_iterator const_iterator;
+
+        /** Returns iterator to beginning of entry list */
+        iterator begin() {
+            return entries.begin();
+        }
+
+        /** Returns iterator to end of entry list */
+        iterator end() {
+            return entries.end();
+        }
+
+        /** Returns const pointer to begining of entry list */
+        const_iterator cbegin() {
+            return entries.cbegin();
+        }
+
+        /** Returns const pointer to end of entry list */
+        const_iterator cend() {
+            return entries.cend();
+        }
+
+        /** Returns size of list */
+        size_t size() {
+            return entries.size();
+        }
 
         /** Reserves memory for a certain number of entries */
-        void reserve(uint32_t size) {
+        void reserve(const size_type size) {
             entries.reserve(size);
         }
 

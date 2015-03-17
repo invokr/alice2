@@ -41,4 +41,5 @@ TEST_CASE( "dict", "[util/dict.hpp]" ) {
     REQUIRE(MyDict.by_index(1).value == 1);
     REQUIRE(MyDict.has_key("V3"));
     REQUIRE(MyDict.by_key("V3").value == 2);
+    REQUIRE(MyDict.size() == 11); // [10] is V3, 2-9 is filled with garbage
 }
