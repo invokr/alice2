@@ -106,14 +106,14 @@ namespace alice {
     };
 
     /** Registers all source 1 packets */
-    void packet_register_s1() {
+    inline void packet_register_s1() {
         // There are still some linking issues
         // packet_list* p = packet_list::instance();
         // #include "packets.s1.hpp.inline"
     }
 
     /** Registers all source 2 packets */
-    void packet_register_s2() {
+    inline void packet_register_s2() {
         packet_list* p = packet_list::instance();
         #include "packets.s2.hpp.inline"
     }
