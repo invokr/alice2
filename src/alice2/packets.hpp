@@ -28,6 +28,18 @@
 #include <functional>
 #include <iostream>
 
+// Source 1 files containing packets
+#include "proto/source1/netmessages.pb.h"
+#include "proto/source1/dota_usermessages.pb.h"
+#include "proto/source1/demo.pb.h"
+#include "proto/source1/netmessages.pb.h"
+
+// Source 2 files containing packets
+#include "proto/source2/netmessages.pb.h"
+#include "proto/source2/dota_usermessages.pb.h"
+#include "proto/source2/demo.pb.h"
+#include "proto/source2/netmessages.pb.h"
+
 namespace alice {
     /** Different possible packet types */
     enum packet_i {
@@ -47,7 +59,6 @@ namespace alice {
     class packet_list {
     public:
         /** Resizes a packet slot to given number */
-        template <typename Obj>
         void resize(unsigned type, size_t size) {
             auto &v = list[type];
             if (v.size() < size)
@@ -90,9 +101,22 @@ namespace alice {
         std::array<
             std::vector<
                 std::function<void* (const char* data, size_t size)>
-            >, 10 // default to 10 packet slots
+            >, 3 // default to 3 packet slots
         > list;
     };
+
+    /** Registers all source 1 packets */
+    void packet_register_s1() {
+        // There are still some linking issues
+        // packet_list* p = packet_list::instance();
+        // #include "packets.s1.hpp.inline"
+    }
+
+    /** Registers all source 2 packets */
+    void packet_register_s2() {
+        packet_list* p = packet_list::instance();
+        #include "packets.s2.hpp.inline"
+    }
 }
 
 #endif /* _ALICE_PACKETS_HPP_ */
