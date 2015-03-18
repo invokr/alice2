@@ -45,7 +45,7 @@ namespace alice {
     }
 
     /** Computes the same hash as constexpr_hash at runtime */
-    unsigned long long constexpr_hash_rt( const char* str ) {
+    inline unsigned long long constexpr_hash_rt( const char* str ) {
         unsigned long long hash = detail::constexpr_hash_basis;
 
         while (*str != 0) {
@@ -58,7 +58,7 @@ namespace alice {
     }
 
     /** User defined literal to allow "str"_chash-style invocation */
-    constexpr unsigned long long operator"" _chash( const char* str, size_t n ) {
+    inline constexpr unsigned long long operator"" _chash( const char* str, size_t n ) {
         return constexpr_hash(str);
     }
 }
