@@ -30,15 +30,19 @@
 
 // Source 1 files containing packets
 #include "proto/source1/netmessages.pb.h"
+#include "proto/source1/networkbasetypes.pb.h"
 #include "proto/source1/dota_usermessages.pb.h"
 #include "proto/source1/demo.pb.h"
 #include "proto/source1/netmessages.pb.h"
+#include "proto/source1/usermessages.pb.h"
 
 // Source 2 files containing packets
 #include "proto/source2/netmessages.pb.h"
+#include "proto/source2/networkbasetypes.pb.h"
 #include "proto/source2/dota_usermessages.pb.h"
 #include "proto/source2/demo.pb.h"
 #include "proto/source2/netmessages.pb.h"
+#include "proto/source2/usermessages.pb.h"
 
 namespace alice {
     /** Different possible packet types */

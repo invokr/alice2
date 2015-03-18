@@ -15,6 +15,9 @@ declare -A PACKETS=(
     ['CDemo']="demo.proto"
     ['CCLCMsg_']="netmessages.proto"
     ['CSVCMsg_']="netmessages.proto"
+    ['CNETMsg_']="networkbasetypes.proto"
+    ['CUserMessage']="usermessages.proto"
+    ['CUserMsg_']="usermessages.proto"
     ['CDOTAUserMsg_']="dota_usermessages.proto"
 )
 
@@ -22,6 +25,9 @@ declare -A PACKET_TYPE=(
     ['CDemo']="PACKET_DEM"
     ['CCLCMsg_']="PACKET_NET"
     ['CSVCMsg_']="PACKET_NET"
+    ['CNETMsg_']="PACKET_NET"
+    ['CUserMessage']="PACKET_USR"
+    ['CUserMsg_']="PACKET_USR"
     ['CDOTAUserMsg_']="PACKET_USR"
 )
 
@@ -29,6 +35,9 @@ declare -A ENUMS=(
     ['CDemo']="DEM_"
     ['CCLCMsg_']="clc_"
     ['CSVCMsg_']="svc_"
+    ['CNETMsg_']="net_"
+    ['CUserMessage']="UM_"
+    ['CUserMsg_']="UM_"
     ['CDOTAUserMsg_']="DOTA_UM_"
 )
 
@@ -125,7 +134,7 @@ gen_proto() {
             ENUM=$(perl -nle "${REGEX2}" $PROTODIR/Source1/${PACKETS[$packet]})
 
             if [ $ENUM ]; then
-                if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
+                #if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
                 echo "p->add<ps1::$packet$object>(${PACKET_TYPE[$packet]}, $ENUM);" >> ${SRCDIR}/packets.s1.hpp.inline
             else
                 if [ ${verbose} == 1 ]; then echo "Can't find enum for $object"; fi
@@ -144,7 +153,7 @@ gen_proto() {
             ENUM=$(perl -nle "${REGEX2}" $PROTODIR/Source2/${PACKETS[$packet]})
 
             if [ $ENUM ]; then
-                if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
+                #if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
                 echo "p->add<ps2::$packet$object>(${PACKET_TYPE[$packet]}, $ENUM);" >> ${SRCDIR}/packets.s2.hpp.inline
             else
                 if [ ${verbose} == 1 ]; then echo "Can't find enum for $object"; fi
@@ -152,6 +161,10 @@ gen_proto() {
             fi
         done
     done
+
+    # Add additional packets that don't fit the common format
+    echo "p->add<ps1::CDemoPacket>(PACKET_DEM, ps1::DEM_SignonPacket);" >> ${SRCDIR}/packets.s1.hpp.inline
+    echo "p->add<ps2::CDemoPacket>(PACKET_DEM, ps2::DEM_SignonPacket);" >> ${SRCDIR}/packets.s2.hpp.inline
 
     echo "Packages added: [ $S1PACKETS | $S2PACKETS ]";
 }
