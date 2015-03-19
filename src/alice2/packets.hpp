@@ -29,12 +29,12 @@
 #include <iostream>
 
 // Source 1 files containing packets
-#include "proto/source1/netmessages.pb.h"
-#include "proto/source1/networkbasetypes.pb.h"
-#include "proto/source1/dota_usermessages.pb.h"
-#include "proto/source1/demo.pb.h"
-#include "proto/source1/netmessages.pb.h"
-#include "proto/source1/usermessages.pb.h"
+#include "proto/source1/netmessages_s1.pb.h"
+#include "proto/source1/networkbasetypes_s1.pb.h"
+#include "proto/source1/dota_usermessages_s1.pb.h"
+#include "proto/source1/demo_s1.pb.h"
+#include "proto/source1/netmessages_s1.pb.h"
+#include "proto/source1/usermessages_s1.pb.h"
 
 // Source 2 files containing packets
 #include "proto/source2/netmessages.pb.h"
@@ -112,8 +112,8 @@ namespace alice {
     /** Registers all source 1 packets */
     inline void packet_register_s1() {
         // There are still some linking issues
-        // packet_list* p = packet_list::instance();
-        // #include "packets.s1.hpp.inline"
+        packet_list* p = packet_list::instance();
+        #include "packets.s1.hpp.inline"
     }
 
     /** Registers all source 2 packets */
