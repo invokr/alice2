@@ -20,7 +20,7 @@ MESSAGE ( STATUS "Compiler identified as " ${CMAKE_CXX_COMPILER_ID} )
 # Compiler Setup
 #------------------------------------------------------------
 
-SET ( CMAKE_CXX_FLAGS "-O3 --std=c++11 -fPIC -Wall" )
+SET ( CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer --std=c++11 -fPIC -Wall" )
 
 #------------------------------------------------------------
 # Include and configure all libraries
@@ -49,7 +49,7 @@ INCLUDE_DIRECTORIES(
 #------------------------------------------------------------
 
 SET ( PROTO_S1 ai_activity demo dota_broadcastmessages dota_clientmessages dota_commonmessages dota_modifiers
-    dota_usermessages gcsdk_gcmessages netmessages network_connection networkbasetypes usermessages steammessages
+    dota_usermessages gcsdk_gcmessages netmessages networkbasetypes usermessages steammessages
 )
 
 SET ( PROTO_S2 demo dota_broadcastmessages dota_clientmessages dota_commonmessages dota_modifiers
@@ -58,13 +58,13 @@ SET ( PROTO_S2 demo dota_broadcastmessages dota_clientmessages dota_commonmessag
 
 FOREACH ( PROTO ${PROTO_S1} )
     EXECUTE_PROCESS ( COMMAND ${PROTOC}
-        ${CMAKE_SOURCE_DIR}/proto/Source1/${PROTO}.proto
+        ${CMAKE_SOURCE_DIR}/proto/Source1/${PROTO}_s1.proto
         --cpp_out=${CMAKE_SOURCE_DIR}/src/alice2/proto/source1
         --proto_path=${CMAKE_SOURCE_DIR}/proto/Source1/
     )
 
-    LIST(APPEND PROTO_SOURCES_1 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source1/${PROTO}.pb.cc)
-    LIST(APPEND PROTO_HEADERS_1 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source1/${PROTO}.pb.h)
+    LIST(APPEND PROTO_SOURCES_1 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source1/${PROTO}_s1.pb.cc)
+    LIST(APPEND PROTO_HEADERS_1 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source1/${PROTO}_s1.pb.h)
 ENDFOREACH()
 
 FOREACH ( PROTO ${PROTO_S2} )
@@ -77,6 +77,9 @@ FOREACH ( PROTO ${PROTO_S2} )
     LIST(APPEND PROTO_SOURCES_2 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source2/${PROTO}.pb.cc)
     LIST(APPEND PROTO_HEADERS_2 ${CMAKE_SOURCE_DIR}/src/alice2/proto/source2/${PROTO}.pb.h)
 ENDFOREACH()
+
+# This command fixed the header guards so that we can include s1 and s2 files
+EXECUTE_PROCESS ( COMMAND ${CMAKE_SOURCE_DIR}/bin/alice fix-proto-includes )
 
 ADD_LIBRARY( alice2_proto1 SHARED ${PROTO_SOURCES_1} )
 ADD_LIBRARY( alice2_proto1_static STATIC ${PROTO_SOURCES_1} )
@@ -113,10 +116,13 @@ ADD_EXECUTABLE ( alice_test
     ${CMAKE_SOURCE_DIR}/test/alice2/util/varint.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/util/ztime.cpp
     ${CMAKE_SOURCE_DIR}/test/alice2/dem.cpp
+    ${CMAKE_SOURCE_DIR}/test/alice2/packets.cpp
 )
 
 TARGET_LINK_LIBRARIES ( alice_test
     ${SNAPPY_LIBRARIES}
+    ${PROTOBUF_LIBRARY}
     alice2_static
+    alice2_proto1_static
     alice2_proto2_static
 )
