@@ -35,6 +35,7 @@
 
 #include "config.hpp"
 #include "dem_file.hpp"
+#include "packets.hpp"
 
 namespace alice {
     dem_file::dem_file(const char* path)
@@ -111,7 +112,7 @@ namespace alice {
         }
 
         return ret;
-    } 
+    }
 
     bool dem_file::good() {
         return (dataPos < dataSize);
@@ -128,9 +129,11 @@ namespace alice {
         switch (constexpr_hash_rt(head.headerid)) {
             case ALICE_S1_HEADER:
                 source_version = engine::one;
+                packet_register_s1();
                 break;
             case ALICE_S2_HEADER:
                 source_version = engine::two;
+                packet_register_s2();
                 break;
             default:
                 source_version = engine::unkown;
