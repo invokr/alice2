@@ -73,14 +73,20 @@ update_proto() {
         echo "Resources/Protobufs/dota_s2/" >> .git/info/sparse-checkout
     fi
 
-    #git pull origin master
+    git pull origin master
+    rm $PROTODIR/Source1/*.proto
     cp -pa Resources/Protobufs/dota/*.proto "$PROTODIR/Source1"
     for f in "$PROTODIR/Source1/"*.proto; do
+        mv $f "${f%.*}_s1.proto"
+        f="${f%.*}_s1.proto"
         echo 'package alice.ps1;'$'\n'"$(cat $f)" > $f
 
         # To make this work under *bsd and linux, we need to use a tmp file
         sed -E "s/^(.[	]{0,}[repeated|optional|required]{1,}.\.)/\1alice\.ps1\./g" $f > $f.tmp
-        rm $f && mv $f.tmp $f
+        sed -E "s/^(import.\"[a-zA-Z0-9_]+)\.proto/\1_s1.proto/g" $f.tmp > $f
+        sed -E "s/^.*\.alice\.ps1\.ENetworkDisconnectionReason.*$/optional uint32 reason = 2;/g" $f > $f.tmp
+        sed -E "s/^import.\"network_connection_s1.proto\";//g" $f.tmp > $f
+        rm $f.tmp
     done
 
     cp -pa Resources/Protobufs/dota_s2/client/*.proto "$PROTODIR/Source2"
@@ -108,7 +114,7 @@ fix_proto_includes() {
 
 # Generates proto includes
 gen_proto() {
-    if [ ! -e "$PROTODIR/Source1/demo.proto" ]; then
+    if [ ! -e "$PROTODIR/Source1/demo_s1.proto" ]; then
         echo "Error: Can't find demo.proto, did you run update-proto?"
         exit 1
     fi
@@ -153,7 +159,7 @@ gen_proto() {
             ENUM=$(perl -nle "${REGEX2}" $PROTODIR/Source2/${PACKETS[$packet]})
 
             if [ $ENUM ]; then
-                #if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
+                if [ ${verbose} == 1 ]; then echo "Adding $object - $ENUM"; fi
                 echo "p->add<ps2::$packet$object>(${PACKET_TYPE[$packet]}, $ENUM);" >> ${SRCDIR}/packets.s2.hpp.inline
             else
                 if [ ${verbose} == 1 ]; then echo "Can't find enum for $object"; fi
