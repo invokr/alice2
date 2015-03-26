@@ -48,7 +48,7 @@ TEST_CASE( "dem_packet", "[util/dem.hpp]" ) {
     REQUIRE(bytes_written == 13); // 1 bytes for tick, type and size, 10 bytes for data
 
     dem_packet p2;
-    auto bytes_read = dem_packet::from_buffer(p2, buf, 1024);
+    auto bytes_read = dem_packet::from_buffer(p2, buf, 1024, true);
 
     REQUIRE(p2.tick == p.tick);
     REQUIRE(p2.type == p.type);
