@@ -69,21 +69,27 @@ namespace alice {
         msg.size = size_uncompressed;
     }
 
-    size_t dem_packet::from_buffer(dem_packet& msg, char* buffer, size_t buffer_size) {
+    size_t dem_packet::from_buffer(dem_packet& msg, char* buffer, size_t buffer_size, bool read_tick) {
         if (expect(buffer_size > 15)) { // fast version
             uint8_t* data = reinterpret_cast<uint8_t*>(buffer);
 
             data = readVarUInt32_fast(data, msg.type);
-            data = readVarUInt32_fast(data, msg.tick);
+
+            if (read_tick)
+                data = readVarUInt32_fast(data, msg.tick);
+
             data = readVarUInt64_fast(data, msg.size);
 
-            msg.data = reinterpret_cast<const char*>(data);
+            msg.data = reinterpret_cast<char*>(data);
             return (msg.data - buffer) + msg.size;
         } else { // slow version
             uint8_t r;
             char* buf = buffer;
             msg.type = readVarUInt32(buf, r, buffer_size); buf += r;
-            msg.tick = readVarUInt32(buf, r, buffer_size); buf += r;
+
+            if (read_tick)
+                msg.tick = readVarUInt32(buf, r, buffer_size); buf += r;
+
             msg.size = readVarUInt32(buf, r, buffer_size); buf += r;
             msg.data = buf;
 
@@ -100,7 +106,10 @@ namespace alice {
 
         uint8_t* buf = reinterpret_cast<uint8_t*>(buffer);
         buf = writeVarUInt32(buf, msg.type);
-        buf = writeVarUInt32(buf, msg.tick);
+
+        if (msg.tick != 0)
+            buf = writeVarUInt32(buf, msg.tick);
+
         buf = writeVarUInt32(buf, msg.size);
         memcpy(buf, msg.data, msg.size);
 

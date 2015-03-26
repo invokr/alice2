@@ -51,7 +51,7 @@ namespace alice {
         /** Size of data */
         std::size_t size;
         /** Points to start of message */
-        const char* data;
+        char* data;
 
         /** Compresses given message, require you to free msg.data memory */
         static void compress(dem_packet& msg);
@@ -60,7 +60,7 @@ namespace alice {
         static void uncompress(dem_packet& msg, char* buffer, size_t buffer_size);
 
         /** Reads data from buffer into msg and returns bytes read */
-        static size_t from_buffer(dem_packet& msg, char* buffer, size_t buffer_size);
+        static size_t from_buffer(dem_packet& msg, char* buffer, size_t buffer_size, bool read_tick = false);
 
         /** Writes data in msg to given buffer */
         static size_t to_buffer(dem_packet& msg, char* buffer, size_t buffer_size, bool pack = false);
