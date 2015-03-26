@@ -20,7 +20,7 @@ MESSAGE ( STATUS "Compiler identified as " ${CMAKE_CXX_COMPILER_ID} )
 # Compiler Setup
 #------------------------------------------------------------
 
-SET ( CMAKE_CXX_FLAGS "-O3 -fomit-frame-pointer --std=c++11 -fPIC -Wall" )
+SET ( CMAKE_CXX_FLAGS "-O3 -g --std=c++11 -fPIC -Wall" )
 
 #------------------------------------------------------------
 # Include and configure all libraries
@@ -96,6 +96,8 @@ SET_TARGET_PROPERTIES(alice2_proto2_static PROPERTIES OUTPUT_NAME alice2_proto2)
 SET ( ALICE_SOURCES
     ${CMAKE_SOURCE_DIR}/src/alice2/dem.cpp
     ${CMAKE_SOURCE_DIR}/src/alice2/dem_file.cpp
+    ${CMAKE_SOURCE_DIR}/src/alice2/packets.cpp
+    ${CMAKE_SOURCE_DIR}/src/alice2/util/bitstream.cpp
 )
 
 ADD_LIBRARY( alice2 SHARED ${ALICE_SOURCES} )
