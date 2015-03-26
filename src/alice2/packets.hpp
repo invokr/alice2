@@ -90,7 +90,8 @@ namespace alice {
         Obj* get(unsigned type, unsigned subtype, const char* data, size_t size) {
             try {
                 return reinterpret_cast<Obj*>(list[type][subtype](data, size));
-            } catch (...) { // if subtype() is undefined, will throw
+            } catch (std::exception &e) { // if subtype() is undefined, will throw
+                std::cout << e.what() << std::endl;
                 return nullptr;
             }
         }
@@ -110,17 +111,10 @@ namespace alice {
     };
 
     /** Registers all source 1 packets */
-    inline void packet_register_s1() {
-        // There are still some linking issues
-        packet_list* p = packet_list::instance();
-        #include "packets.s1.hpp.inline"
-    }
+    void packet_register_s1();
 
     /** Registers all source 2 packets */
-    inline void packet_register_s2() {
-        packet_list* p = packet_list::instance();
-        #include "packets.s2.hpp.inline"
-    }
+    void packet_register_s2();
 }
 
 #endif /* _ALICE_PACKETS_HPP_ */
