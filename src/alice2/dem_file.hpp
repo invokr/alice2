@@ -26,9 +26,11 @@
 #include <string>
 #include <cstddef>
 
+#include "util/bitstream.hpp"
 #include "util/exception.hpp"
 #include "util/noncopyable.hpp"
 #include "dem.hpp"
+#include "packets.hpp"
 
 namespace alice {
     /// Thrown when the parser fails to open the specified file
@@ -50,7 +52,7 @@ namespace alice {
         dem_file(const char* path);
         /** Read from the provided buffer */
         dem_file(char* data, std::size_t size);
- 
+
         /** Destructor */
         ~dem_file();
 
@@ -67,6 +69,8 @@ namespace alice {
         std::size_t dataPos;
         /** Buffer for uncompressed snappy data */
         char* dataSnappy;
+        /** Packet factory */
+        packet_list *packets;
 
         /** Engine this replay was created from */
         engine source_version;
@@ -78,8 +82,6 @@ namespace alice {
 
         /** Verifies the file signature and detects the correct engine */
         void parse_header();
-        /** Reads a single integer from the buffer */
-        uint32_t read_varint();
     };
 }
 

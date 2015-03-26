@@ -36,12 +36,14 @@
 #include "config.hpp"
 #include "dem_file.hpp"
 #include "packets.hpp"
+#include "util/varint.hpp"
 
 namespace alice {
     dem_file::dem_file(const char* path)
-        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr), ownsBuffer(true)
+        : data(nullptr), dataSize(0), dataPos(0), dataSnappy(nullptr),
+          packets(packet_list::instance()), ownsBuffer(true)
     {
-        std::ifstream input(path, std::ios::in | std::ios::binary);
+        std::ifstream input(path, std::ifstream::in | std::ifstream::binary);
 
         if (!input.is_open())
             ALICE_THROW(DemFileIO, path);
@@ -73,7 +75,7 @@ namespace alice {
 
     dem_file::dem_file(char* data, std::size_t size)
         : data(data), dataSize(size), dataPos(0), dataSnappy(new char[ALICE_SNAPPY_BUFFER_SIZE]),
-          ownsBuffer(false)
+          packets(packet_list::instance()), ownsBuffer(false)
     {
         // verify header
         parse_header();
@@ -96,17 +98,44 @@ namespace alice {
         assert(dataPos <= dataSize);
 
         dem_packet ret;
-        dataPos += dem_packet::from_buffer(ret, data+dataPos, dataSize-dataPos);
+        dataPos += dem_packet::from_buffer(ret, data+dataPos, dataSize-dataPos, true);
 
         if (ret.type & ps2::DEM_IsCompressed)
             dem_packet::uncompress(ret, dataSnappy, ALICE_SNAPPY_BUFFER_SIZE);
 
+        /** Reads type from the header */
+        static auto read_type = [](bitstream &b) {
+            uint32_t initial = b.read(6);
+            uint32_t header  = initial >> 4; // low 2 bits for header
+
+            if (header) {
+                uint32_t bits = header * 4 + (((2 - header) >> 31) & 16);
+                return (initial & 15) | (b.read( bits ) << 4);
+            } else {
+                return initial;
+            }
+        };
+
         switch (ret.type)  {
             case ps2::DEM_ClassInfo:
                 break;
+            case ps2::DEM_Packet: {
             case ps2::DEM_SignonPacket:
-            case ps2::DEM_Packet:
-                break;
+                // Both types are wrapped in a CDemoPacket
+                ps2::CDemoPacket* packet = packets->get<ps2::CDemoPacket>(
+                    PACKET_DEM, ret.type, ret.data, ret.size
+                );
+
+                // Read the packet
+                bitstream stream(packet->data());
+                while (stream.left() > 10) {
+                    uint32_t type = read_type(stream);
+                    uint32_t size = stream.readVarUInt32();
+
+                    // create packet here
+                    stream.seekForward(size << 3);
+                }
+            } break;
             case ps2::DEM_SendTables:
                 break;
         }
@@ -142,12 +171,5 @@ namespace alice {
 
         // increase position
         dataPos += sizeof(dem_header);
-    }
-
-    uint32_t dem_file::read_varint() {
-        uint8_t bytes_read = 0;
-        const uint32_t ret = readVarUInt32(data, bytes_read, dataSize, dataPos);
-        dataPos += bytes_read;
-        return ret;
     }
 }
